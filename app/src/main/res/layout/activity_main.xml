@@ -21,24 +21,24 @@
 
         <RelativeLayout
             android:id="@+id/topLayout"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="310dp">
+            android:layout_height="200dp">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/view_pager"
+            <ImageView
+                android:id="@+id/main_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_home"/>
 
             <TextView
                 android:id="@+id/btn_slide"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginVertical="10dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/ic_icon_menu_circle"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/img_menu"/>
 
             <TextView
                 android:id="@+id/btn_refresh"
@@ -49,42 +49,41 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginVertical="20dp"
                 android:background="@drawable/img_refresh"/>
-
-            <LinearLayout
-                android:id="@+id/layoutDots"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/main_title"
+                style="@style/text_semibold"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:visibility="visible"></LinearLayout>
+                android:text=""
+                android:textSize="@dimen/text_size_title"
+                android:textColor="#ffffff"
+                android:layout_centerInParent="true"/>
         </RelativeLayout>
 
 
-      <!-- <com.google.android.material.bottomnavigation.BottomNavigationView
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp"
             android:background="@color/app_main_color_2"
             app:itemIconTint="@color/button_tab_selector_color"
             app:itemTextColor="@color/button_tab_selector_text_color"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_nav_menu" />-->
+            app:menu="@menu/bottom_nav_menu" />
 
         <fragment
             android:id="@+id/nav_host_fragment_activity_main"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:layout_above="@id/nav_view"
             android:layout_below="@id/topLayout"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="-1dp"
-            android:layout_marginBottom="0dp"
             app:defaultNavHost="true"
             app:navGraph="@navigation/mobile_navigation" />
-        <!--<RelativeLayout
+
+        <RelativeLayout
             android:id="@+id/btn_keyword_input"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -101,7 +100,7 @@
                 android:layout_centerInParent="true"
                 android:background="@drawable/ic_img_cloud"
                 />
-        </RelativeLayout>-->
+        </RelativeLayout>
 
 
     </RelativeLayout>

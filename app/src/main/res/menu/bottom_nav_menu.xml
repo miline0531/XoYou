@@ -2,25 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_forme"
         android:icon="@drawable/ic_tab_home"
-        android:title="@string/title_home" />
+        android:title="@string/title_forme" />
 
     <item
-        android:id="@+id/navigation_manage"
+        android:id="@+id/navigation_with"
         android:icon="@drawable/ic_tab_manage"
-        android:title="@string/title_manage" />
+        android:title="@string/title_with" />
 
     <item
-        android:id="@+id/navigation_store"
-        android:icon="@drawable/ic_tab_store"
-        android:title="@string/title_store" />
-
-
-    <item
-        android:id="@+id/navigation_find"
+        android:id="@+id/navigation_mylife"
         android:icon="@drawable/ic_tab_findme"
-        android:title="@string/title_find" />
+        android:title="@string/title_mylife" />
 
 <!--    <item-->
 <!--        android:id="@+id/navigation_recommend"-->

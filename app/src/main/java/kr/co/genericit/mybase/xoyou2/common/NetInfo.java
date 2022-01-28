@@ -94,5 +94,19 @@ public class NetInfo {
     public static final String API_CARD_IMAGE_UPLOAD = "/upload/single_file"; // 이미지업로드
     public static final String API_UPDATE_CERTIFY = "/mong/update_certify"; // 이미지업로드
 
+    //xoYou
+    public static final String API_SELECT_USER_LIST = "/v2/xoYouUserLoad"; // 나를위한사람들-관계인리스트
+    public static final String API_SELECT_QA_LIST = "/v2/xoYouUserQAList"; // 나를위한사람들-질문항목리스트
+    public static final String API_SELECT_QA_SIMRI_LIST = "/v2/xoYouUserQASimRiList"; // 나를위한사람들-질문선택 인연순리스트
+    public static final String API_SELECT_QA_SIMRI_DETAIL = "/v2/xoYouUserQASimRiDetail"; //나를위한사람들-관계인 질문항목분석
+    public static final String API_SELECT_SIMRI_MESSAGE = "/v2/xoYouUserSimRiMessage"; // 나를위한사람들-메시지분석
+
+    public static final String API_SELECT_WE_LIST = "/v2/xoYouWeLoad"; // 함께라면-좋은운/나쁜운 항목별순위리스트
+    public static final String API_SELECT_WE_UN_LIST = "/v2/xoYouWeYouUnDataList"; // 함께라면-선택운 관계인순위리스트
+    public static final String API_SELECT_WE_UN_DETAIL = "/v2/xoYouWeYouUnDataDetail"; // 함께라면- 관계인 관계분석
+
+    public static final String API_SELECT_MEET_LIST = "/v2/xoYouMeetLoad"; // 나만을위한약속- 강한약속/약한약속순위리스트
+    public static final String API_SELECT_MEET_NAME_LIST = "/v2/xoYouMeetNameList"; // 나만을위한약속- 약속항목 리스트
+    public static final String API_SELECT_MEET_YOU_MEET_LIST = "/v2/xoYouMeetYouMeetDataList"; // 나만을위한약속- 선택약속 관계인순위리스트
 
     }

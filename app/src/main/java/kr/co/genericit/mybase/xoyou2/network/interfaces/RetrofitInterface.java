@@ -35,6 +35,7 @@ import kr.co.genericit.mybase.xoyou2.network.model.UpdateRelationInfo;
 import kr.co.genericit.mybase.xoyou2.network.model.UpdateUserInfo;
 import kr.co.genericit.mybase.xoyou2.network.model.UserListInfo;
 import kr.co.genericit.mybase.xoyou2.network.model.VersionCheckInfo;
+import kr.co.genericit.mybase.xoyou2.network.modelxo.*;
 import kr.co.genericit.mybase.xoyou2.network.response.AddLocationResult;
 import kr.co.genericit.mybase.xoyou2.network.response.AddUserResult;
 import kr.co.genericit.mybase.xoyou2.network.response.BidMongResult;
@@ -223,5 +224,29 @@ public interface RetrofitInterface {
     @Multipart
     @POST(NetInfo.API_CARD_IMAGE_UPLOAD) //카드 이미지업로드 박스
     Call<ResponseBody> requestCardImageUpload(@Part MultipartBody.Part file);
+
+    //xoYou
+    @POST(NetInfo.API_SELECT_USER_LIST)
+    Call<DefaultResult> requestXoYouUserLoad(@Body ReqXoYouUserLoad data);
+    @POST(NetInfo.API_SELECT_QA_LIST)
+    Call<DefaultResult> requestXoYouUserQAList(@Body ReqXoYouUserQAList data);
+    @POST(NetInfo.API_SELECT_QA_SIMRI_LIST)
+    Call<DefaultResult> requestXoYouUserQASimRiList(@Body ReqXoYouUserQASimRiList data);
+    @POST(NetInfo.API_SELECT_QA_SIMRI_DETAIL)
+    Call<DefaultResult> requestXoYouUserQASimRiDetail(@Body ReqXoYouUserQASimRiDetail data);
+    @POST(NetInfo.API_SELECT_SIMRI_MESSAGE)
+    Call<DefaultResult> requestXoYouUserSimRiMessage(@Body ReqXoYouUserSimRiMessage data);
+    @POST(NetInfo.API_SELECT_WE_LIST)
+    Call<DefaultResult> requestXoYouWeLoad(@Body ReqXoYouWeLoad data);
+    @POST(NetInfo.API_SELECT_WE_UN_LIST) //꿈분석 적용기간 차트
+    Call<DefaultResult> requestXoYouWeYouUnDataList(@Body ReqXoYouWeYouUnDataList data);
+    @POST(NetInfo.API_SELECT_WE_UN_DETAIL)
+    Call<DefaultResult> requestXoYouWeYouUnDataDetail(@Body ReqXoYouWeYouUnDataDetail info);
+    @POST(NetInfo.API_SELECT_MEET_LIST)
+    Call<DefaultResult> requestXoYouMeetLoad(@Body ReqXoYouMeetLoad info);
+    @POST(NetInfo.API_SELECT_MEET_NAME_LIST)
+    Call<DefaultResult> requestXoYouMeetNameList(@Body ReqXoYouMeetNameList info);
+    @POST(NetInfo.API_SELECT_MEET_YOU_MEET_LIST)
+    Call<DefaultResult> requestXoYouMeetYouMeetDataList(@Body ReqXoYouMeetYouMeetDataList info);
 
 }

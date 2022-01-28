@@ -42,7 +42,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="50dp"
                 android:gravity="center"
-                android:text="@string/activity_login_0"
+                android:text="xoYou 로그인"
                 android:textColor="#ffffff"
                 android:textSize="24dp"/>
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:gravity="center"
-                android:text="@string/activity_login_1"
+                android:text="xoYou........."
                 android:textColor="#ffffff"
                 android:textSize="14dp"/>
 
@@ -75,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:hint="@string/activity_login_id"
+                    android:hint="아이디"
                     android:textColorHint="@color/white"
                     android:clickable="true"
                     android:enabled="true"
@@ -107,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:hint="@string/activity_login_pw"
+                    android:hint="비밀번호"
                     android:textColorHint="@color/white"
                     android:clickable="true"
                     android:enabled="true"
@@ -130,7 +130,7 @@
                 android:layout_marginTop="36dp"
                 android:gravity="center"
                 android:background="@drawable/button_square_maincolor2_shape"
-                android:text="@string/activity_login_login"
+                android:text="로그인"
                 android:textColor="#FFFFFF"
                 android:textSize="18dp"/>
 
@@ -148,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/text_size_tooltip"
-                    android:text="@string/activity_login_find_id" />
+                    android:text="아이디 찾기" />
 
                 <View
                     android:layout_width="1dp"
@@ -163,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/text_size_tooltip"
-                    android:text="@string/activity_login_find_pw"/>
+                    android:text="비밀번호 찾기"/>
 
             </LinearLayout>
 
@@ -186,7 +186,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/text_size_tooltip"
-                        android:text="@string/activity_login_2" />
+                        android:text="아직 회원이 아니신가요 ?" />
 
                     <TextView
                         style="@style/text_semibold"
@@ -205,14 +205,14 @@
                     android:gravity="center_horizontal"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_tooltip"
-                    android:text="@string/activity_login_3"/>
+                    android:text="Copyright RedRover. All rights reserved."/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_tooltip"
-                    android:text="@string/activity_login_4"/>
+                    android:text="프로버전 고객센터 : 02-2156-0137"/>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
@@ -233,7 +233,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="8dp"
-            android:text="@string/activity_login_5"
+            android:text="xoYou"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_title"
             android:layout_marginTop="15dp"/>

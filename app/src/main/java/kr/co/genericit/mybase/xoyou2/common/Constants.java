@@ -30,6 +30,8 @@ public class Constants {
     public static int MongCardPickIndex = -1;
     public static String MongCardPickText = "";
 
+    public static boolean isStartService = false;
+
     public static void setRootUserInit(){
         RootSEQ = "";
         RootNAME = "";

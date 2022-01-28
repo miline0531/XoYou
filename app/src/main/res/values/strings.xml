@@ -3,6 +3,11 @@
     <string name="default_progress">0%</string>
     <string name="dream">꿈</string>
 
+    <string name="title_forme">나를 위한 사람들</string>
+    <string name="title_with">함께라면</string>
+    <string name="title_promise">나만을 위한약속</string>
+    <string name="title_mylife">나의 생활</string>
+
     <!-- MainTab -->
     <string name="title_manage">몽매니저</string>
     <string name="title_home">꿈등록</string>
