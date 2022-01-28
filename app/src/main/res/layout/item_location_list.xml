@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="20dp">
+
+
+
+    <ImageView
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/icon_close_w"/>
+
+    <ImageView
+        android:id="@+id/btn_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@id/btn_delete"
+        android:background="@drawable/ic_location_write"/>
+
+    <LinearLayout
+        android:id="@+id/layout_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/btn_write"
+        android:orientation="vertical"
+        android:paddingLeft="20dp">
+
+        <TextView
+            android:id="@+id/txt_title"
+            style="@style/text_semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My company"
+            android:textColor="#5ed3e1"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/txt_sub_title"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="Redrover.TX"
+            android:textColor="#96a1ae"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/txt_floor"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="층수: 12"
+            android:textColor="#96a1ae"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/txt_addr"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="충청북도 청주시 흥덕구 복대동 3225"
+            android:textColor="#96a1ae"
+            android:textSize="14dp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/layout_item"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/dotted_line_horizontal"/>
+
+
+</RelativeLayout>

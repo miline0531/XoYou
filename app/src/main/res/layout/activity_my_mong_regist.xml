@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:id="@+id/scrollView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_main_color"
+    tools:context=".activity.detail.MyMongRegistActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_main_color"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="15dp">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_arrow_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/gowunbatang_bold"
+                android:text="@string/activity_mong_regist_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_title"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_round_10dp_2e1230"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_icon_tabbar_find_inactive" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:text="@string/activity_mong_regist_title2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_body" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/txt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gowunbatang_regular"
+                android:text="@string/activity_mong_regist_title"
+                android:textSize="@dimen/text_size_title"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_round_10dp_6b5e6c"
+                android:paddingHorizontal="20dp"
+                android:maxLines="1"
+                android:layout_marginTop="5dp"
+                android:paddingVertical="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_round_10dp_2e1230"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_icon_tabbar_find_inactive" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:text="@string/activity_mong_regist_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_body" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gowunbatang_regular"
+                android:text="@string/activity_mong_regist_content"
+                android:textSize="@dimen/text_size_title"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="20dp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_pyeongga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_round_10dp_2e1230"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_icon_tabbar_find_inactive" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:text="@string/activity_mong_regist_assess"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_body" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edt_pyeongga"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:fontFamily="@font/gowunbatang_regular"
+                android:text=""
+                android:textSize="18dp"
+                android:hint="@string/activity_mong_regist_impression"
+                android:gravity="top"
+                android:background="@drawable/bg_round_10dp_6b5e6c"
+                android:layout_marginVertical="5dp"
+                android:textColorHint="@color/grey"
+                android:paddingVertical="20dp"
+                android:textColor="@color/white"
+                android:paddingHorizontal="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_round_10dp_2e1230"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_icon_tabbar_find_inactive" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:text="@string/activity_mong_regist_0"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_body" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/btn_gallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_round_10dp_fe9700"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        android:text="@string/activity_mong_regist_gallery"
+                        android:textSize="@dimen/text_size_body"
+                        android:textColor="@color/white"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/save_image_layout"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="15dp"
+                android:layout_height="150dp">
+
+                <ImageView
+                    android:id="@+id/save_card_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:layout_centerInParent="true"/>
+                <TextView
+                    android:id="@+id/dummyivew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" "
+                    android:layout_toRightOf="@id/save_card_image"/>
+                <ImageView
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/icon_close_w"
+                    android:layout_toLeftOf="@id/dummyivew"
+                    android:layout_margin="10dp"/>
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_mymong_regist_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="5dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_select_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_round_10dp_2e1230"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_icon_tabbar_find_inactive" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:text="@string/activity_mong_regist_1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_body" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_cb_1_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp">
+                <CheckBox
+                    android:id="@+id/cb_1_1"
+                    android:enabled="false"
+                    android:background="@drawable/bg_checkbox"
+                    android:button="@android:color/transparent"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+                <TextView
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_mong_regist_2"
+                    android:textSize="18dp"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn_cb_1_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp">
+                <CheckBox
+                    android:id="@+id/cb_1_2"
+                    android:enabled="false"
+                    android:background="@drawable/bg_checkbox"
+                    android:button="@android:color/transparent"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+                <TextView
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_mong_regist_3"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn_cb_1_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp">
+                <CheckBox
+                    android:id="@+id/cb_1_3"
+                    android:enabled="false"
+                    android:background="@drawable/bg_checkbox"
+                    android:button="@android:color/transparent"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+                <TextView
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_mong_regist_4"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_select_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_round_10dp_6b5e6c"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/txt_select_color"
+            android:fontFamily="@font/gowunbatang_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="@string/activity_mong_regist_5"
+            android:textColorHint="#C6C6C6"
+            android:textSize="18dp"
+            android:textColor="@color/white"
+            android:gravity="center_vertical"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic__3_icon_24_arrow_d_white" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_select_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_round_10dp_6b5e6c"
+            android:orientation="horizontal"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/txt_select_sound"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/gowunbatang_regular"
+                android:hint="@string/activity_mong_regist_6"
+                android:textSize="18dp"
+                android:textColorHint="#C6C6C6"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic__3_icon_24_arrow_d_white" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btn_select_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_round_10dp_6b5e6c"
+            android:orientation="horizontal"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/txt_select_year"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/gowunbatang_regular"
+                android:hint="@string/activity_mong_regist_7"
+                android:textSize="18dp"
+                android:textColorHint="#C6C6C6"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic__3_icon_24_arrow_d_white" />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/layout_sign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_round_10dp_2e1230"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_icon_tabbar_find_inactive" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:text="@string/activity_mong_regist_8"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_body" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_essential1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp">
+                <CheckBox
+                    android:id="@+id/cb_essential1"
+                    android:enabled="false"
+                    android:background="@drawable/bg_checkbox"
+                    android:button="@android:color/transparent"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:textSize="18dp"
+                    android:text="@string/activity_mong_regist_9"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_essential2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp">
+                <CheckBox
+                    android:id="@+id/cb_essential2"
+                    android:enabled="false"
+                    android:background="@drawable/bg_checkbox"
+                    android:button="@android:color/transparent"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/activity_mong_regist_10"
+                    android:textSize="18dp"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn_essential3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/cb_essential3"
+                    android:enabled="false"
+                    android:background="@drawable/bg_checkbox"
+                    android:button="@android:color/transparent"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/activity_mong_regist_11"
+                    android:textSize="18dp"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="30dp"
+            android:background="@color/app_main_color">
+            <TextView
+                android:id="@+id/btn_mymong_regist"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/bg_round_10dp_fe9700"
+                android:fontFamily="@font/gowunbatang_regular"
+                android:text="@string/activity_mong_regist_12"
+                android:textSize="18dp"
+                android:textColor="@color/white"
+                android:gravity="center"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

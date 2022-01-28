@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_main_color">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/app_main_color_2"
+        android:elevation="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_vertical"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="20dp">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_arrow_back"/>
+
+        <TextView
+            android:id="@+id/activity_title"
+            style="@style/text_semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="장소(위치) 설정"
+            android:textColor="@color/white"
+            android:textSize="16dp"/>
+
+
+        <TextView
+            style="@style/text_semibold"
+            android:id="@+id/btn_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="목록"
+            android:textColor="@color/btn_ok_color"
+            android:textSize="14dp"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/btn_location_relation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_round_10dp_2e323b"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="25dp">
+
+        <EditText
+            style="@style/text_regular"
+            android:id="@+id/edt_location_relation"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingHorizontal="19dp"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:hint="장소와 관계"
+            android:textColorHint="#96a1ae"
+            />
+
+    </RelativeLayout>
+
+    <EditText
+        style="@style/text_regular"
+        android:id="@+id/edt_location_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="20dp"
+        android:paddingHorizontal="19dp"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:hint="장소명"
+        android:textColorHint="#96a1ae"
+        android:background="@drawable/bg_round_10dp_2e323b"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="20dp">
+
+        <TextView
+            style="@style/text_regular"
+            android:id="@+id/btn_space"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_round_10dp_stroke_fe9700"
+            android:layout_alignParentRight="true"
+            android:text="주소검색"
+            android:textSize="18dp"
+            android:textColor="@color/app_disable_text_color"
+            android:gravity="center"
+            android:paddingHorizontal="16dp"/>
+
+        <EditText
+            style="@style/text_regular"
+            android:id="@+id/edt_addr"
+            android:layout_toLeftOf="@id/btn_space"
+            android:layout_marginRight="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingHorizontal="19dp"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:hint="주소를 입력하세요"
+            android:textColorHint="#96a1ae"
+            android:background="@drawable/bg_round_10dp_2e323b"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_round_10dp_2e323b"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingHorizontal="19dp"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:text="층수"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/btn_minus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|right"
+                android:text="-"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:layout_weight="1"/>
+            <TextView
+                style="@style/text_regular"
+                android:id="@+id/txt_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="00"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:layout_weight="3"/>
+            <TextView
+                android:id="@+id/btn_plus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|left"
+                android:text="+"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_tooltip"
+        style="@style/text_regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:paddingHorizontal="20dp"
+        android:lineSpacingExtra="8dp"
+        android:textSize="16dp"
+        android:textColor="#96a1ae"
+        android:text="@string/str_cofirm"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/btn_cancel"
+                style="@style/text_regular"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_round_10dp_stroke_fe9700"
+                android:text="취소"
+                android:textSize="18dp"
+                android:textColor="@color/app_disable_text_color"
+                android:gravity="center"/>
+
+            <TextView
+                style="@style/text_regular"
+                android:id="@+id/btn_location_regist"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/bg_round_10dp_fe9700"
+                android:text="등록"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

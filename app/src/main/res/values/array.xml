@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="star_colors">
+        <!-- This is how you can configure the ratio of star colors-->
+        <item>@color/star_color_1</item>
+        <item>@color/star_color_1</item>
+        <item>@color/star_color_1</item>
+        <item>@color/star_color_1</item>
+        <item>@color/star_color_2</item>
+        <item>@color/star_color_3</item>
+    </integer-array>
+    <integer-array name="meteorites_colors">
+        <item>@color/star_color_2</item>
+        <item>@color/star_color_4</item>
+        <item>@color/star_color_3</item>
+    </integer-array>
+
+    <string-array name = "mong_detail_titles">
+        <item>기본분석</item>
+        <item>세부분석</item>
+        <item>연관분석</item>
+        <item>적용기간</item>
+        <item>장소분석</item>
+        <item>해소추천</item>
+    </string-array>
+
+    <string-array name = "mong_detail_sub_titles">
+        <item>꿈을 분석한 기본결과</item>
+        <item>꿈의 세부내용 분석</item>
+        <item>꿈과 영혼과의 관계분석</item>
+        <item>실생활의 꿈 적용기간</item>
+        <item>꿈속의 장소와 유사한 장소</item>
+        <item>꿈의 문제해결 추천</item>
+    </string-array>
+
+    <string-array name = "mong_detail_sheet_titles">
+        <item>무료등록</item>
+        <item>보관</item>
+        <item>인증등록</item>
+        <item>닫기</item>
+    </string-array>
+
+
+
+    <string-array name = "mong_detail_tab3_labels_1">
+        <item>영</item>
+        <item>혼</item>
+        <item>백</item>
+        <item>마</item>
+        <item>악</item>
+        <item>귀</item>
+    </string-array>
+
+    <string-array name = "mong_detail_tab3_labels_2">
+        <item>체</item>
+        <item>심</item>
+        <item>기</item>
+        <item>력</item>
+        <item>재</item>
+        <item>물</item>
+    </string-array>
+
+    <string-array name = "mong_detail_tab3_labels_3">
+        <item>권력욕</item>
+        <item>명예욕</item>
+        <item>물욕</item>
+        <item>색욕</item>
+        <item>소유욕</item>
+        <item>수면욕</item>
+        <item>승부욕</item>
+        <item>식욕</item>
+    </string-array>
+
+    <string-array name = "mong_detail_tab3_labels_4">
+        <item>기쁨</item>
+        <item>노여움</item>
+        <item>두려움</item>
+        <item>미움</item>
+        <item>사랑</item>
+        <item>슬픔</item>
+        <item>욕심</item>
+        <item>즐거움</item>
+    </string-array>
+
+    <string-array name = "str_week">
+        <item>일</item>
+        <item>월</item>
+        <item>화</item>
+        <item>수</item>
+        <item>목</item>
+        <item>금</item>
+        <item>토</item>
+    </string-array>
+
+    <string-array name = "str_belt">
+        <item>원숭이</item>
+        <item>닭</item>
+        <item>개</item>
+        <item>돼지</item>
+        <item>쥐</item>
+        <item>소</item>
+        <item>호랑이</item>
+        <item>토끼</item>
+        <item>용</item>
+        <item>뱀</item>
+        <item>말</item>
+        <item>양</item>
+    </string-array>
+
+
+</resources>

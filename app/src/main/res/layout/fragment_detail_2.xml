@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:seekcircle="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="30dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="80dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:fontFamily="@font/gowunbatang_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/md_yellow_A100"
+                android:gravity="center"
+                android:text="@string/fragment_detail_13"/>
+
+            <TextView
+                android:id="@+id/txt_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gowunbatang_regular"
+                android:layout_marginTop="8dp"
+                android:textSize="@dimen/text_size_body"
+                android:lineSpacingExtra="7dp"
+                android:textColor="@color/default_grey"
+                android:text="@string/fragment_detail_14"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/app_disable_text_color"
+                android:layout_marginVertical="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gowunbatang_regular"
+                android:layout_marginTop="8dp"
+                android:textSize="@dimen/text_size_body"
+                android:lineSpacingExtra="7dp"
+                android:textColor="#7D9C4B"
+                android:text="@string/fragment_detail_15"/>
+
+            <TextView
+                android:id="@+id/txt_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gowunbatang_regular"
+                android:layout_marginTop="8dp"
+                android:textSize="@dimen/text_size_body"
+                android:lineSpacingExtra="7dp"
+                android:textColor="#FFFFFF"
+                android:text="@string/fragment_detail_16"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

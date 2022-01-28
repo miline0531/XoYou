@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_main_color_2" >
+    
+    <RelativeLayout
+        android:id="@+id/topbar_cardedit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/app_main_color">
+
+        <TextView android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_10dp_fe9700"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="5dp"
+        android:fontFamily="@font/gowunbatang_regular"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_centerVertical="true"
+            android:textSize="@dimen/text_size_button"
+        android:text="@string/str_success"/>
+    
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/activit_card_edit_title"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/text_size_title"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/gowunbatang_bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout01"
+        android:layout_margin="10dp"
+        android:layout_below="@id/topbar_cardedit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img_01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_add_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gowunbatang_bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/activit_card_image_add_list"
+        android:textSize="@dimen/text_size_body"
+        android:textColor="@color/btn_ok_color"
+        android:layout_below="@id/layout01"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:id="@+id/rcv_card_image_add"
+        android:layout_below="@id/txt_add_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:id="@+id/text"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/bg_round_10dp_6b5e6c"
+    android:fontFamily="@font/gowunbatang_regular"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="10dp"
+    android:text="21 MVC"
+    android:textColor="@color/white"
+    android:textSize="14dp" />

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_main_color">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:elevation="5dp"
+        android:layout_marginBottom="5dp"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="20dp">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_arrow_back"/>
+
+        <TextView
+            android:id="@+id/activity_title"
+            style="@style/text_semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="관계인 설정"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/btn_relation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_round_10dp_2e323b"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="25dp">
+
+        <EditText
+            style="@style/text_regular"
+            android:id="@+id/edt_relation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:gravity="center_vertical"
+            android:hint="관계"
+            android:paddingHorizontal="19dp"
+            android:textColor="@color/white"
+            android:textColorHint="#96a1ae"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+    <EditText
+        style="@style/text_regular"
+        android:id="@+id/edt_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="20dp"
+        android:paddingHorizontal="19dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:hint="이름"
+        android:textColorHint="#96a1ae"
+        android:background="@drawable/bg_round_10dp_2e323b"/>
+
+    <EditText
+        style="@style/text_regular"
+        android:id="@+id/tv_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="20dp"
+        android:paddingHorizontal="19dp"
+        android:gravity="center_vertical"
+        android:maxLength="4"
+        android:inputType="phone"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:hint="출생년도"
+        android:textColorHint="#96a1ae"
+        android:background="@drawable/bg_round_10dp_2e323b"/>
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/btn_birthday"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:background="@drawable/bg_round_10dp_2e323b"-->
+<!--        android:layout_marginHorizontal="20dp"-->
+<!--        android:layout_marginTop="12dp">-->
+
+<!--        <TextView-->
+<!--            style="@style/text_regular"-->
+<!--            android:id="@+id/tv_birthday"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:hint="생일"-->
+<!--            android:paddingHorizontal="19dp"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textColorHint="#96a1ae"-->
+<!--            android:textSize="16dp" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/btn_set_birthday"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginRight="19dp"-->
+<!--            android:background="@android:drawable/arrow_down_float" />-->
+<!--    </RelativeLayout>-->
+
+    <TextView
+        style="@style/text_regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:paddingHorizontal="20dp"
+        android:lineSpacingExtra="8dp"
+        android:textSize="14dp"
+        android:textColor="#96a1ae"
+        android:text="꿈속으로는 세계 최초 꿈입력(자연어)의 입력과 문답식 방식으로 꿈과의 관계를 분석하며, 꿈적용일자, 꿈속의 장소, 꿈을 해소하는 행위 등으로 구성되어 있습니다.
+사용자의 꿈을 해석하기 위해 기본적인 정보를 입력하여야 꿈이 분석됩니다.\n1) 성과 이름은 본명으로 등록하여야 정확한 분석이 됩니다.\n2)* 항목은 꼭 입력하여야 합니다.\n3) 사용기기에만 등록됩니다. 등록된 정보를 재사용하거나 따로 저장하지 않습니다."
+    />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                style="@style/text_regular"
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_round_10dp_stroke_fe9700"
+                android:text="취소"
+                android:textColor="@color/app_disable_text_color"
+                android:textSize="14dp"
+                android:gravity="center"/>
+
+            <TextView
+                style="@style/text_regular"
+                android:id="@+id/btn_setup"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/bg_round_10dp_fe9700"
+                android:text="등록"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+
+    <TextView
+        android:id="@+id/item_day"
+        android:textSize="10dp"
+        android:fontFamily="@font/gowunbatang_regular"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tool:text="00" />
+
+    <TextView
+        android:layout_below="@id/item_day"
+        android:id="@+id/txt_schedule_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:textSize="8dp"
+        android:maxLines="1"
+        android:text="schedule1"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gowunbatang_regular"
+        android:paddingHorizontal="2dp"
+        android:background="#E91E63"
+        android:gravity="left"/>
+
+    <TextView
+        android:layout_below="@id/txt_schedule_1"
+        android:id="@+id/txt_schedule_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:textSize="8dp"
+        android:maxLines="1"
+        android:text="schedule2"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gowunbatang_regular"
+        android:paddingHorizontal="2dp"
+        android:background="#E3CA4C"
+        android:gravity="left"/>
+
+    <TextView
+        android:layout_below="@id/txt_schedule_2"
+        android:id="@+id/txt_schedule_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:textSize="8dp"
+        android:maxLines="1"
+        android:text="schedule3"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gowunbatang_regular"
+        android:paddingHorizontal="2dp"
+        android:background="#17BEDC"
+        android:gravity="left"/>
+
+</RelativeLayout>

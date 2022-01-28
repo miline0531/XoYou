@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_main_color">
+
+    <RelativeLayout
+        android:id="@+id/topLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="20dp">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_arrow_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="본인 가족 정보 설정"
+            android:textColor="@color/white"
+            android:textSize="16dp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/bg_round_10dp_fe9700"
+        android:gravity="center"
+        android:paddingVertical="10dp"
+        android:text="가족구성을 등록합니다"
+        android:textColor="@color/white"
+        android:textSize="14dp" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topLayout"
+        android:layout_above="@id/btn_save"
+        android:fillViewport="true">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="50dp"
+            android:paddingHorizontal="20dp">
+            
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:textColor="#ececec"
+                android:textSize="16dp"
+                android:text="가족을 선택하세요" />
+            
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_family1"
+                android:paddingTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <!-- ************친가************ -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:textColor="#ececec"
+                android:textSize="16dp"
+                android:text="친가를 선택하세요" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_family2"
+                android:paddingTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <!-- ************외가************ -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:textColor="#ececec"
+                android:textSize="16dp"
+                android:text="외가를 선택하세요" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_family3"
+                android:paddingTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+
+            <!-- ************결혼 후 집안************ -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:textColor="#ececec"
+                android:textSize="16dp"
+                android:text="결혼 후 집안을 선택하세요" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_family4"
+                android:paddingTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+
+            <!-- ************직업************ -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:textColor="#ececec"
+                android:textSize="16dp"
+                android:text="직업을 선택하세요" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_family5"
+                android:paddingTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

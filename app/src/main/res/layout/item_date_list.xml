@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/item_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="15dp"
+        android:paddingHorizontal="20dp">
+
+        <TextView
+            style="@style/text_semibold"
+            android:id="@+id/txt_dateformat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="1111"
+            android:textSize="@dimen/text_size_body"/>
+
+        <TextView
+            style="@style/text_regular"
+            android:id="@+id/txt_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/mong_grey_default"
+            android:layout_marginTop="15dp"
+            android:text="1111"
+            android:textSize="@dimen/text_size_tooltip"/>
+    </LinearLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:layout_below="@id/item_bg"
+        android:visibility="gone"
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="151dp" />
+</RelativeLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#2e323b</color>
+    <color name="purple_500">#20232a</color>
+    <color name="purple_700">#20232a</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="grey">#C5C5C5</color>
+    <color name="transparent_white">#CBFFFFFF</color>
+    <color name="progress_off">#B3CDCDCD</color>
+    <color name="progress_divider">#99FFFFFF</color>
+    <color name="progress_on">#CCFF3F7B</color>
+    <color name="transparent">#00000000</color>
+    <color name="default_color">#CCFF3F7B</color>
+    <color name="color_b4b4b4">#b4b4b4</color>
+
+    <color name="map_good">#4D018BEA</color>
+    <color name="map_bad">#4DE40101</color>
+
+    <color name="progress_level1">#FF3F7B</color>
+    <color name="progress_level2">#CCE8CE27</color>
+    <color name="progress_level3">#B3AFAFAF</color>
+
+    <color name="progress_circle_1">#CC3F95FF</color>
+    <color name="progress_circle_2">#CCFF3F7B</color>
+    <color name="progress_circle_3">#CC2BAC78</color>
+    <color name="progress_circle_4">#CCFFCF3F</color>
+    <color name="progress_circle_bg_1">#803F95FF</color>
+    <color name="progress_circle_bg_2">#80FF3F7B</color>
+    <color name="progress_circle_bg_3">#802BAC78</color>
+    <color name="progress_circle_bg_4">#80FFCF3F</color>
+
+<!--    201122-->
+    <color name="app_main_color_bg">#E64F3651</color>
+    <color name="app_main_color">#000000</color>
+    <color name="app_sub_color">#1F1920</color>
+    <color name="app_main_color_2">#2E1230</color>
+    <color name="app_select_color">#E62A162C</color>
+    <color name="app_unselect_color">#99272727</color>
+    <color name="app_slide_bg">#25262f</color>
+    <color name="btn_ok_color">#E91E63</color>
+    <color name="app_disable_text_color">#CACACA</color>
+    <color name="color_grey_9e9e9e">#9e9e9e</color>
+
+    <color name="detail_menu1_root_bg1">#806f0000</color>
+    <color name="detail_menu1_root_bg2">#801a237e</color>
+    <color name="detail_menu1_root_bg3">#806f0000</color>
+    <color name="detail_menu1_root_bg4">#800d5302</color>
+    <color name="default_grey">#9E9E9E</color>
+
+    <color name="mong_dou_color1">#602a36b1</color>
+    <color name="mong_dou_color2">#605677fc</color>
+    <color name="mong_dou_color3">#60ffffff</color>
+    <color name="mong_dou_color4">#60e51c23</color>
+    <color name="mong_dou_color5">#60b0120a</color>
+
+    <color name="mong_dou_color_g1">#5677fc</color>
+    <color name="mong_dou_color_g2">#5677fc</color>
+    <color name="mong_dou_color_g3">#259b24</color>
+    <color name="mong_dou_color_g4">#e91e63</color>
+
+    <color name="detail_menu1_graph1_bg1">#EF356F</color>
+    <color name="detail_menu1_graph1_bg3">#DA245D</color>
+    <color name="detail_menu1_graph1_bg2">#3FBCFF</color>
+    <color name="detail_menu1_graph1_bg4">#209F44</color>
+
+    <color name="detail_menu1_graph2_good">#CC1773A5</color>
+    <color name="detail_menu1_graph2_bad">#CCA51728</color>
+
+    <color name="txt_good">#638AD8</color>
+    <color name="txt_bad">#D86363</color>
+    <color name="txt_disable">#66D6D6D6</color>
+
+
+    <array name="array_dot_active">
+        <item>@color/app_main_color</item>
+        <item>@color/app_main_color</item>
+        <item>@color/app_main_color</item>
+        <item>@color/app_main_color</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/app_main_color_2</item>
+        <item>@color/app_main_color_2</item>
+        <item>@color/app_main_color_2</item>
+        <item>@color/app_main_color_2</item>
+    </array>
+
+    <color name="colorPrimary">#20232a</color>
+    <color name="colorPrimaryDark">#2e323b</color>
+    <color name="colorAccent">#E91E63</color>
+    <color name="star_color_1">#ffffff</color>
+    <color name="star_color_2">#25Adff</color>
+    <color name="star_color_3">#FFC100</color>
+    <color name="star_color_4">#FF3800</color>
+
+    <color name="list_bg_0">#00000000</color>
+    <color name="list_bg_1">#1AFFFFFF</color>
+
+    <color name="mong_grey_default">#8A8686</color>
+
+    <color name="bilnd_black">#80000000</color>
+</resources>

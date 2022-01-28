@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_manage"
+        android:name="kr.co.genericit.mybase.xoyou2.activity.main.ManageFragment"
+        android:label="@string/title_manage"
+        tools:layout="@layout/fragment_manage" />
+
+    <fragment
+        android:id="@+id/navigation_store"
+        android:name="kr.co.genericit.mybase.xoyou2.activity.main.StoreFragment"
+        android:label="@string/title_store"
+        tools:layout="@layout/fragment_store" />
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="kr.co.genericit.mybase.xoyou2.activity.main.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_find"
+        android:name="kr.co.genericit.mybase.xoyou2.activity.main.FindFragment"
+        android:label="@string/title_find"
+        tools:layout="@layout/fragment_find" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_recommend"-->
+<!--        android:name="kr.co.genericit.mybase.mymong.activity.main.MyRecommendFragment"-->
+<!--        android:label="@string/title_recommend"-->
+<!--        tools:layout="@layout/fragment_recommend" />-->
+
+</navigation>

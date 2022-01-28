@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_root"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+    android:paddingHorizontal="30dp">
+    <LinearLayout
+        android:id="@+id/btn_slide_menu"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingVertical="10dp"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/img_slide_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/slide_icon"/>
+
+        <TextView
+            style="@style/text_regular"
+            android:id="@+id/txt_slide_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="#c3d0df"
+            android:textSize="15dp"
+            android:text=""/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_slide_count"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingVertical="10dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/img_slide_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textColor="#c3d0df"
+            android:textSize="@dimen/text_size_title"/>
+
+        <TextView
+            style="@style/text_regular"
+            android:id="@+id/txt_slide_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="#c3d0df"
+            android:textSize="15dp"
+            android:text=""/>
+    </LinearLayout>
+</LinearLayout>

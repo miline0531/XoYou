@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemLayout"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/layout_store"
+        android:layout_width="70sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingRight="10dp"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txt_sell_count"
+            style="@style/text_semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_title"
+            android:text="0"
+            android:textColor="@color/mong_grey_default"/>
+        <TextView
+            android:id="@+id/txt_sell_status"
+            style="@style/text_semibold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_title"
+            android:text="미거래"
+            android:textColor="@color/mong_grey_default"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/layout_store"
+        android:layout_centerVertical="true"
+        android:paddingVertical="5dp">
+        <RelativeLayout
+            android:id="@+id/cardView"
+            android:layout_width="92dp"
+            android:layout_height="92dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/bg_round_10dp_stroke_ffffff">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_centerInParent="true"
+                app:cardCornerRadius="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_round_10dp_stroke_ffffff">
+
+                    <ImageView
+                        android:id="@+id/manage_image_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_centerVertical="true"
+                        android:background="#55000000">
+                        <TextView
+                            android:id="@+id/text_mong_kind"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_yellow"
+                            android:text="인연꿈"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/text_mong_auth"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="12dp"
+                            android:textColor="@color/white"
+                            android:text="무료등록"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/cardView"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/text_regular"
+                    android:id="@+id/text_sell_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
+                    android:text=""
+                    android:textColor="@color/md_yellow_600"
+                    android:textSize="@dimen/text_size_12sp" />
+                <TextView
+                    style="@style/text_regular"
+                    android:id="@+id/text_top_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/manage_list_item_date"
+                    android:textColor="@color/mong_grey_default"
+                    android:textSize="@dimen/text_size_12sp" />
+
+                <TextView
+                    style="@style/text_regular"
+                    android:id="@+id/text_top_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/manage_list_item_date2"
+                    android:textColor="@color/mong_grey_default"
+                    android:textSize="@dimen/text_size_12sp"/>
+
+            </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp">
+
+
+
+            <TextView
+                android:visibility="gone"
+                style="@style/text_regular"
+                android:id="@+id/text_mong_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:paddingRight="3dp"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
+                style="@style/text_regular"
+                android:id="@+id/text_middle"
+                android:layout_toRightOf="@id/text_mong_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:paddingRight="8dp"
+                android:maxLines="1"
+                android:text="@string/manage_list_item_title"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/white"/>
+
+        </RelativeLayout>
+
+
+            <TextView
+                android:visibility="gone"
+                style="@style/text_regular"
+                android:id="@+id/text_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/text_size_body"
+                android:text="@string/manage_list_item_bottom"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/price"
+                style="@style/text_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/text_size_18"
+                android:text="추천금액: 2000원"
+                android:textColor="@color/white" />
+
+            <TextView
+                style="@style/text_regular"
+                android:id="@+id/text_price"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/text_size_body"
+                android:text="웃다가 죽는 꿈, 재물, 길몽"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text_recommend"
+        style="@style/text_semibold"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/btn_ok_color"
+        android:gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:rotation="-40"
+        android:textSize="@dimen/text_size_tooltip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/manage_list_item_recommand"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#AFAFAF"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

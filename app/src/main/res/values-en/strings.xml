@@ -1,0 +1,590 @@
+<resources>
+    <string name="app_name">마이몽</string>
+    <string name="default_progress">0%</string>
+    <string name="dream">꿈</string>
+
+    <!-- MainTab -->
+    <string name="title_manage">몽매니저</string>
+    <string name="title_home">꿈등록</string>
+    <string name="title_store">스토어</string>
+    <string name="title_find">나의운</string>
+    <string name="title_recommend">Recommend</string>
+
+    <!--공통 문구 [Start]-->
+    <string name="str_success">완료</string>
+    <string name="str_cofirm">확인</string>
+    <string name="str_cancel">취소</string>
+    <string name="str_update">업데이트</string>
+    <string name="str_logout">로그아웃 하시겠습니까?</string>
+    <string name="str_version_check_dialog_message">최신 버전이 존재합니다. 업데이트를 진행해주세요.</string>
+    <string name="str_enroll">등록하기</string>
+    <string name="error_login_text">로그인 정보가 만료되었습니다.\n다시 로그인을 시도해주세요.</string>
+    <!--공통 문구 [End]-->
+
+    <!-- 네트워크 관련 공통 문구 [Start] -->
+    <string name="str_network_error_retry_msg">연결이 지연되고 있습니다. \n\n와이파이 또는 모바일 데이터 \n 연결상태를 확인해주세요.</string>
+    <string name="str_network_server_error">휴대전화의 와이파이나 통신망 등의\n네트워크 연결 상태가 불안정합니다.\n잠시 후 다시 시도 해주세요.</string>
+    <string name="str_error">오류가 발생하였습니다. \n 잠시 후에 다시 시도해주세요.</string>
+    <!-- 네트워크 관련 공통 문구 [End] -->
+
+    <string name="password_valid">비밀번호는 영문, 숫자, 특수문자를 포함하여 8 ~ 20자로 입력해주세요.</string>
+
+    <string name="main_keyword_input"><u>키워드 스타일 꿈 입력</u></string>
+
+
+    <string name="activit_calendar_title">Calendar</string>
+
+
+    <string name="activit_card_edit_title">꿈 바탕 이미지</string>
+    <string name="activit_card_image_edit_title">꿈 바탕 이미지 만들기</string>
+    <string name="activit_card_image_add_list">추가 이미지 리스트</string>
+
+
+    <string name="activit_bid_title">상세정보</string>
+
+
+    <string name="activit_tab_story">스토리 입력</string>
+
+    <!-- 종료 안내 문구 -->
+    <string name="str_guide_app_finish">\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.</string>
+    <string name="home_tooltip1">마이몽은 </string>
+    <string name="home_tooltip">님의 꿈을 분석하여 제공합니다.\n키워드 방식으로 꿈을 검색 후 분석 결과를 간단하게 제공되며, 보관되지 않습니다.\n스토리
+                    방식은 꿈의 내용을 생각나는데로 입력하여 정밀하게 분석되며, 꿈을 보관하여 관리됩니다.</string>
+
+    <!-- BidActivity -->
+    <string name="bid_error_empty_coin">보유 코인이 없습니다.</string>
+    <string name="bid_error_buy">구매 실패</string>
+    <string name="bid_error_buy_time_buy_invalid">판매기간이 종료되어 구매 할 수 없습니다.</string>
+    <string name="bid_error_bid">입찰 실패</string>
+    <string name="bid_error_buy_fail">구매중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.</string>
+    <string name="bid_error_bid_fail">입찰중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.</string>
+
+    <string name="add_location_tooltip">장소를 등록하면 _UserName님이 꾼 꿈과 장소와의 연관성을 분석할 수 있습니다.\n1) * 항목은 무도 입력하여야 등록됩니다.\n2) 충수 (지하: 음수, 지상: 양수) 미입력 시 1층으로 등록됩니다.</string>
+
+    <!-- 음성녹음 -->
+
+    <string name="record_status0">음성 녹음하기</string>
+    <string name="record_status1">음성 녹음중</string>
+    <string name="play_status0">음성재생</string>
+    <string name="play_status1">정지</string>
+
+
+    <string name="txt_common_error_soon">서비스 준비중입니다.</string>
+    <string name="txt_common_save">보관</string>
+    <string name="txt_common_login_fail">비밀번호가 일치하지 않습니다.</string>
+    <string name="txt_common_error_exception">오류가 발생했습니다.</string>
+
+    <!-- 11111 -->
+    <!-- Detail_Auth -->
+    <string name="mong_auth_price">꿈 추천금액 : </string>
+    <string name="mong_auth_price_won">원</string>
+    <string name="mong_auth_success">꿈 인증 완료</string>
+    <string name="mong_auth_success_finish">인증등록이 완료되었습니다.</string>
+    <string name="mong_auth_fail">인증등록에 실패했습니다.\n잠시 후 다시 시도해주세요.</string>
+    <!-- Detail_Regist -->
+    <string name="mong_regist_bg_select">꿈 바탕 이미지를 선택해 주세요!</string>
+    <string name="mong_regist_error_essential">필수항목을 확인하세요!</string>
+    <string name="mong_regist_record">음성녹음</string>
+    <!-- Detail_Tab1 -->
+    <string name="mong_detail_tab_1_real">현실율: </string>
+    <string name="mong_detail_tab_1_mong_type_1">흉몽</string>
+    <string name="mong_detail_tab_1_mong_type_2">길몽</string>
+    <string name="mong_detail_tab_1_mong_type_3">악몽</string>
+    <string name="mong_detail_tab_1_mong_type_4">영몽</string>
+    <!-- Detail_Tab3 -->
+    <string name="mong_detail_tab_3_category_1">영혼</string>
+    <string name="mong_detail_tab_3_category_2">인간</string>
+    <string name="mong_detail_tab_3_category_3">욕심</string>
+    <string name="mong_detail_tab_3_category_4">정</string>
+    <string name="mong_detail_tab_3_label_txt">] 은 꿈을 꾼 </string>
+    <string name="mong_detail_tab_3_label_end_1">후가 강합니다.</string>
+    <string name="mong_detail_tab_3_label_end_2">후가 약합니다.</string>
+    <string name="mong_detail_tab_3_label_end_3">후와 같습니다.</string>
+    <string name="mong_detail_tab_3_legend_label_1">꿈속에서 </string>
+    <string name="mong_detail_tab_3_legend_label_2">꿈꾼 후의 </string>
+
+
+    <!-- Login -->
+    <string name="mong_email_auth">인증코드를 입력해 주세요.</string>
+    <string name="mong_email_auth_error">인증번호가 일치하지 않습니다.</string>
+    <string name="mong_email_find_id">이메일을 입력하세요.</string>
+    <string name="mong_email_find_id_check">이메일을 확인해주세요.</string>
+    <string name="mong_email_find_id_result">아이디 : </string>
+    <string name="mong_email_find_id_pw_check">아이디와 이메일을 확인해주세요.</string>
+    <string name="mong_email_find_pw_change">변경할 비밀번호를 입력해주세요.</string>
+    <string name="mong_email_find_pw_error">비밀번호가 일치하지 않습니다.</string>
+    <string name="mong_email_find_pw_change_success">비밀번호 변경 완료</string>
+    <string name="mong_login_id_pw_input">아이디와 비밀번호를 입력해주세요.</string>
+    <string name="mong_login_update_download">업데이트파일 다운로드중..</string>
+    <string name="mong_login_update_download_error">파일을 다운받을 수 없습니다.</string>
+    <string name="mong_signup_email">이메일 형식을 확인해주세요.</string>
+    <string name="mong_signup_email_auth">인증번호를 입력하세요.</string>
+    <string name="mong_signup_email_auth_success">이메일 인증 완료</string>
+    <string name="mong_signup_error_essential">미입력 항목이 있습니다.</string>
+    <string name="mong_signup_error_name">이름은 두 글자 이상 이여야 합니다.</string>
+    <string name="mong_signup_error_pw">비밀번호가 일치하지않습니다.</string>
+    <string name="mong_signup_error_essential_check">필수 동의사항을 체크해주세요.</string>
+    <string name="mong_signup_error_id_dupl">중복된 아이디입니다.</string>
+    <string name="mong_signup_error_id_pass">사용가능한 아이디입니다.</string>
+    <string name="mong_signup_auth_code">인증코드 전송 완료</string>
+    <string name="mong_signup_success">회원가입 완료</string>
+
+    <string name="add_location_floor">층</string>
+    <string name="add_location_change">장소(위치) 수정</string>
+    <string name="add_location_change_btn">수정</string>
+    <string name="add_location_input_addr">주소를 입력해주세요.</string>
+    <string name="add_location_input_essential">입력사항을 모두 입력해주세요.</string>
+    <string name="add_location_change_success">장소(위치) 수정이 완료되었습니다.</string>
+    <string name="add_location_change_fail">장소(위치) 수정에 실패하였습니다.\n다시 시도 해주세요.</string>
+    <string name="add_location_reg_success">장소등록이 완료 되었습니다.</string>
+    <string name="add_location_reg_fail">장소등록에 실패하였습니다.\n다시 시도 해주세요.</string>
+    <string name="add_relation_change_success">관계인 수정이 완료되었습니다.</string>
+    <string name="add_relation_change_fail">관계인 수정에 실패하였습니다.\n다시 시도 해주세요.</string>
+    <string name="add_relation_reg_success">관계인 등록이 완료되었습니다.</string>
+    <string name="add_relation_reg_fail">관계인 등록에 실패하였습니다.\n다시 시도 해주세요.</string>
+    <string name="add_relation_change">관계인 수정</string>
+    <string name="add_user_change">사용자 수정</string>
+    <string name="add_user_change_success">사용자 수정에 성공했습니다.</string>
+    <string name="add_user_change_btn">수정</string>
+    <string name="add_user_reg_success">사용자 등록에 성공했습니다.</string>
+    <string name="family_load_fail">가족관계 불러오기에 실패했습니다.</string>
+    <string name="family_refresh_success">갱신에 성공 했습니다.</string>
+    <string name="family_refresh_fail">갱신에 실패 했습니다.</string>
+
+    <string name="location_list_place_delete">장소를 삭제 하시겠습니까?</string>
+    <string name="location_list_place_delete_success">장소삭제에 성공했습니다.</string>
+    <string name="location_list_place_delete_fail">장소삭제 실패.\n잠시 후 다시 시도해주세요.</string>
+    <string name="location_list_place_load_fail">장소가져오기 실패.\n잠시 후 다시 시도해주세요.</string>
+    <string name="main_coin_update">코인 정보가 업데이트 되었습니다.</string>
+    <string name="main_user_empty">등록된 사용자가 없습니다. 사용자를 등록해주세요.</string>
+
+    <string name="mong_store_save_agree">1. 꿈을 보관하려면 월구독 가입이 되어야 됩니다.\n
+2. 구독료에 따라 꿈보관의 수준이 다를 수 있습니다.\n
+3. 보관된 꿈은 _userName님의 필요에 따라 언제든지 마이몽스토어를 통해 거래가 가능합니다.\n
+4. 보관이나 등록을 하지 않고도 분석된 꿈을 볼 수 있습니다. 단 다시 볼 수는 없습니다.\n
+5. 구독하지 않아도 관계인이나 장소등 관련 자료를 등록할 수 있습니다.\n
+6. 보관된 꿈은 재생산하거나 별도 활용되지 않습니다.\n\n
+꿈을 사고 판다는 것은 꿈을 꾼 _userName님의 기운을 사고 판다는 것을 의미합니다. 일반적으로 좋은 꿈이 좋다고 생각하지만
+실제로는 어떤 꿈이라기 보다는 누가 어떤 꿈을 꾼것이 더 중요합니다. _userName님이 꿈을 통해 받은 기운을 거래하는 곳이 마이몽스토어 입니다.
+_userName님의 기운이 많은 사람들에게 도움이 될 수 있도록 마이몽은 꿈을 분석하고 마이몽스토어와 연동하여 모든 일상 생활에 활력이 되도록 최선을 다하여 연구 개발하고 있습니다.\n\n
+감사합니다. 마이몽 일동</string>
+
+    <string name="mong_bid_constant_price">고정가</string>
+    <string name="mong_bid_sell_price">판매가격:</string>
+    <string name="mong_bid_auction">경매</string>
+    <string name="mong_bid_action_start">시작가격:</string>
+    <string name="mong_bid_sell_recommend_price">추천가격:</string>
+    <string name="mong_bid_auth">인증</string>
+    <string name="mong_bid_status_permission_not">권한없음</string>
+    <string name="mong_bid_status_auth">인증하기</string>
+    <string name="mong_bid_status_sell">판매하기</string>
+    <string name="mong_bid_status_buy">구매하기</string>
+    <string name="mong_bid_status_auction">입찰하기</string>
+    <string name="mong_bid_auction_error_low">현재입찰가보다 낮습니다.</string>
+    <string name="mong_bid_cartegory">영혼</string>
+    <string name="mong_bid_result_text_1">해당꿈은 나에게 </string>
+    <string name="mong_bid_result_text_2">운을 가져다 줍니다.</string>
+    <string name="mong_bid_legend_1">꿈속에서 </string>
+    <string name="mong_bid_legend_2">꿈꾼 후의 </string>
+    <string name="mong_bid_year">년</string>
+    <string name="mong_bid_month">월</string>
+    <string name="mong_bid_day">일</string>
+    <string name="mong_bid_my_coin">보유 코인</string>
+    <string name="mong_relation_list_delete">관계인을 삭제 하시겠습니까?</string>
+    <string name="mong_sell_price">판매가격</string>
+    <string name="mong_sell_price_start">시작가격</string>
+    <string name="mong_sell_reg_success">판매 등록이 완료되었습니다.</string>
+    <string name="mong_sign_essential">확인서에 서명을 해주세요.</string>
+    <string name="mong_user_list_change">사용자를 변경하시겠습니까?</string>
+    <string name="mong_user_list_delete">사용자를 삭제 하시겠습니까?</string>
+    <string name="mong_user_list_delete_error_self">계정 사용자는 삭제 할 수 없습니다.</string>
+    <string name="mong_yourself_change_succss">사용자 정보가 변경되었습니다.</string>
+    <string name="mong_detail_adapter_legend_1">사고</string>
+    <string name="mong_detail_adapter_legend_2">재물</string>
+    <string name="mong_detail_adapter_legend_3">건강</string>
+    <string name="mong_manage_vertical_reg_date">등록일 : </string>
+    <string name="mong_manage_vertical_recommend">추천금액 : </string>
+    <string name="mong_relation_gender_m">남성</string>
+    <string name="mong_relation_gender_f">여성</string>
+    <string name="mong_relation_belt">띠</string>
+    <string name="mong_store_constant_price">고정가</string>
+    <string name="mong_store_sell_price">판매금액 : </string>
+    <string name="mong_store_auction">경매</string>
+    <string name="mong_store_auction_person">입찰자 : </string>
+    <string name="mong_store_person_count">명</string>
+    <string name="mong_store_current_price">현재가 : </string>
+    <string name="mong_store_auction_price_start">시작가</string>
+    <string name="mong_store_auction_price_end">낙찰가</string>
+
+    <string name="mong_dialog_input_price">입찰가격을 입력해주세요</string>
+    <string name="mong_dialog_input_pw">비밀번호를 입력해주세요</string>
+    <string name="mong_dialog_record_not_file">저장 할 파일이 없습니다.</string>
+
+    <string name="mong_detail_one_pick">1.한장의 카드를 선택하세요.</string>
+    <string name="mong_detail_and">관련&#160;</string>
+
+    <string name="mong_main_top_title1">마이몽풀이</string>
+    <string name="mong_main_top_title2">마이몽매니저</string>
+    <string name="mong_main_top_title3">마이몽스토어</string>
+    <string name="mong_main_top_title4">나의생활</string>
+    <string name="mong_findme_year">년</string>
+    <string name="mong_findme_month">월</string>
+    <string name="mong_findme_hour">시</string>
+    <string name="mong_findme_un">운 분석</string>
+    <string name="mong_findme_un_load1_year">님의 올해 운을 분석중...</string>
+    <string name="mong_findme_un_load1_month">님의 이달 운을 분석중...</string>
+    <string name="mong_findme_un_load1_day">님의 오늘 운을 분석중...</string>
+    <string name="mong_findme_un_load1_now">님의 지금 운을 분석중...</string>
+    <string name="mong_findme_un_load2">님의 생활 리듬을 분석중...</string>
+    <string name="mong_findme_hour_and">시~</string>
+
+    <string name="mong_store_bid1">미거래</string>
+    <string name="mong_store_bid2">거래중</string>
+
+
+    <!-- 22222 -->
+    <string name="title">title</string>
+    <string name="one_line_example">예시용텍스트입니다.</string>
+
+    <!--slideMenu-->
+    <string name="slide_menu_0">관계등록</string>
+    <string name="slide_menu_1">사용설명서</string>
+    <string name="slide_menu_2">로그아웃</string>
+
+    <!--registDialog2-->
+    <string name="regist_dialog2_0">인증등록비 내용</string>
+    <string name="regist_dialog2_1">인증등록비 2,000원</string>
+    <string name="regist_dialog2_2">1. 인증등록 비용은 결제 이후 결과가 만족하지 않을 시에는 돌려받을 수 있습니다.</string>
+    <string name="regist_dialog2_3">2.인증등록 비용증 분석 신청에 따라 차감하여 환급합니다.</string>
+    <string name="regist_dialog2_4">결제하기(테스트기간 무료)</string>
+    <string name="regist_dialog2_5">잠깐! 생각좀 더해보고....</string>
+
+    <!--registDialog-->
+    <string name="regist_dialog_0">인증등록</string>
+    <string name="regist_dialog_1">\n본 꿈을 마이몽스토어에 인증등록을 하려면 등록비를 2,000원 납부하여야 진행됩니다.
+\n\n인증등록비는 _userName님의 꿈을 NFT로 전환하고 등록된 다른 꿈과 비교 분석하여 보다 가치있게 관리하기 위한 비용입니다.
+\n\n인증등록 할까요 ?</string>
+    <string name="regist_dialog_no">아니오</string>
+    <string name="regist_dialog_yes">예</string>
+
+    <!--pwauth_dialog-->
+    <string name="pwauth_dialog_title">사용자 인증을 진행합니다</string>
+    <string name="pwauth_dialog_hint">비밀번호를 입력하세요</string>
+
+    <!--bid_dialog-->
+    <string name="bid_dialog_title">입찰가격을 입력하세요</string>
+    <string name="bid_dialog_price">입찰가</string>
+    <string name="bid_dialog_bid">입찰</string>
+
+    <!--notice_dialog-->
+    <string name="notice_dialog_title">알림</string>
+    <string name="notice_dialog_message">개인정보보호를 위하여 \'추가\' 버튼을 눌러</string>
+    <string name="notice_dialog_message2">반드시 주민번호 뒷자리를 마스킹</string>
+    <string name="notice_dialog_message3">&#160;하여주시기 바랍니다.</string>
+
+    <!--notice_layout-->
+    <string name="notice_layout_0">1.꿈을 보관하려면 월 구독 가입이 되어야 됩니다.
+        \n2.구독료에따라 꿈보관의 수준이 다를 수 있습니다.
+        \n3.보관된 꿈은 박홍진님의 필요에 따라 언제든지 마이몽스토어를 통해 거래가 가능합니다.
+        \n4.꿈을 보관하는 창고인 마이몽하우스는 박홍진님의 취향에 따라 꾸밀 수가 있습니다.
+        \n5.보관이나 등록을 하지 않고도 분석된 꿈을 볼 수 있습니다. 단 다시 볼 수는 없습니다.
+        \n6.구독하지 않아도 관계인이나 장소등 관련 자료를 등록할 수 있습니다.
+        \n7.보관된 꿈은 재생산하거나 별도 활용되지 않습니다.</string>
+    <string name="notice_layout_1">꿈을 사고 판다는 것은 꿈을 꾼 박홍진님의 기운을 사고 판다는 것을 의미합니다.
+일반적으로 좋은 꿈이 좋다고 생각하지만 실제로는 어떤 꿈이라기 보다는 누가 어떤 꿈을 꾼것이 더 중요합니다.
+박홍진님의 꿈을 통해 받은 기운을 거래하는 곳이 마이몽스토어 입니다. 박홍진님의 기운이 많은 사람들에게 도움이 될 수 있도록
+마이몽은 꿈을 분석하고 마이몽스토어와 연동하여 모든 일상 생활에 활력이 되도록 최선을 다하여 연구 개발하고 있습니다.
+\n\n감사합니다. 마이몽 일동</string>
+    <string name="notice_layout_2">꿈을 보관하는데 동의합니다.</string>
+    <string name="notice_layout_3">나가기</string>
+    <string name="notice_layout_4">꿈 분석</string>
+
+    <!--item_manage_list_vertical_bak-->
+    <string name="manage_list_item_date">등록일 : </string>
+    <string name="manage_list_item_date2">2022&#8211;01&#8211;12(수)</string>
+    <string name="manage_list_item_title">title</string>
+    <string name="manage_list_item_bottom">웃다가 죽는 꿈, 재물, 길몽</string>
+    <string name="manage_list_item_recommand">매도추천</string>
+
+
+    <!--home_fragment-->
+    <string name="fragment_home_bottom_left">마이몽방식</string>
+    <string name="fragment_home_bottom_right">마이몽들</string>
+    <string name="fragment_home_frag_title">제목: </string>
+    <string name="fragment_home_frag_recommend">추천금액: </string>
+    <string name="fragment_home_frag_regdate">등록일: </string>
+
+    <!--store_fragment-->
+    <string name="fragment_store_title">스토어</string>
+    <string name="fragment_store_0">길몽 : 2\n영몽 : 2\n평몽 : 1\n악몽 : 2\n흉몽 : 3</string>
+    <string name="fragment_store_1">스토어입장 : 20,234명\n거래수: 3,452개\n경매수: 1259개\n\n신규등록수: 4,234개\n최고가: 1,309,231원\n최저가: 4620원</string>
+    <string name="fragment_store_2">이벤트</string>
+    <string name="fragment_store_3">경매중</string>
+    <string name="fragment_store_4">마이몽 스토어</string>
+    <string name="fragment_store_5">날짜 검색</string>
+    <string name="fragment_store_price">거래금액: </string>
+
+    <!--recommand_fragment-->
+    <string name="fragment_recommend_title">Recommend</string>
+    <string name="fragment_recommend_0">보관된 꿈중에 2021년 11월 19일(금)에는 꿈\n 적용기간에 없습니다.</string>
+
+
+    <!--manage_fragment-->
+    <string name="fragment_manage_title">몽매니저</string>
+    <string name="fragment_manage_0">2022년 1월 6일 화요일\n행운 운이 좋고 건강 운이 나쁩니다.</string>
+    <string name="fragment_manage_1">소유한 꿈</string>
+    <string name="fragment_manage_2">판매 중인 꿈</string>
+    <string name="fragment_manage_3">경매 중인 꿈</string>
+    <string name="fragment_manage_4">판매된 꿈</string>
+
+    <!--home_fragment-->
+    <string name="fragment_home_result">마이몽은 name님의 꿈을 분석하여 제공합니다.\n꿈을 검색 후 분석 결과를 간단하게 제공되며, 꿈을 보관하여 관리됩니다.</string>
+    <string name="fragment_home_result_2">마이몽은 name님의 꿈을 분석하여 제공합니다.\n꿈을 검색 후 분석 결과를 간단하게 제공되며, 꿈을 보관하여 관리됩니다.</string>
+    <string name="fragment_home_title">꿈등록</string>
+    <string name="fragment_home_keyword">키워드 선택</string>
+    <string name="fragment_home_keyword_2">꿈꾼 내용을 생각나는 대로 20글자 이상 입력하세요.\n(분석후에는 새로 수정할 수 없습니다.)</string>
+    <string name="fragment_home_hint">꿈속에서의 환경</string>
+    <string name="fragment_home_hint_2">꿈속에서 장소</string>
+    <string name="fragment_home_hint_3">무엇을</string>
+    <string name="fragment_home_hint_4">하였나</string>
+    <string name="fragment_home_submit">마이몽 속으로 들어갑니다</string>
+
+    <!--find_fragment-->
+    <string name="fragment_find_title">나의운</string>
+    <string name="fragment_find_0">2021 12월 21일(월)</string>
+    <string name="fragment_find_1">미팅시간: 08:07 ~ 08:43(35분간)</string>
+    <string name="fragment_find_2">좋음</string>
+    <string name="fragment_find_3">지금은 \'젠장 괜히 나왔어 그리고 기대했던 연락은 오지 않고 오히려 안좋은 소식이 들린다.\'라는 신중하는 듯한 기분을 느낄 수 있습니다.
+\'역시 말이라고 하면 이 순신님이지 푸하하하! 안 넘어오는 사람이 없어 ㅎㅎㅎ\'\nㅉㅉ 말이라도 못하면… 매를 버는 시간인가 봅니다.</string>
+
+    <!--detail_fragment-->
+    <string name="fragment_detail_0">꿈의 기운 해소 추천</string>
+
+    <string name="fragment_detail_1">꿈의 좋은 장소</string>
+    <string name="fragment_detail_2">꿈의 나쁜 장소</string>
+
+    <string name="fragment_detail_3">2022</string>
+    <string name="fragment_detail_4">재능 관련 꿈 적용기간</string>
+    <string name="fragment_detail_5">"0개의 과거 적용기간이 있습니다.\n앞으로 남은 0개의 적용기간이 있습니다.\n총 0개의 적용기간이 있습니다.</string>
+
+
+    <string name="fragment_detail_6">꿈으로 인한 인간과 영혼에 대한 분석</string>
+    <string name="fragment_detail_7">꿈은 인간이 경험하는 환경이 아닙니다. 그래서 인간이 아닌 영혼에 대해서 꿈꾼후에 영혼의 변화와 인간의 상호관계 변화를 분석합니다.</string>
+    <string name="fragment_detail_8">영: 인간의 육체와 같은 형태를 가집니다.\n혼: 인간의 정신과 같은 형태를 가집니다.\n백: 인간의 체력과 같은 형태를 가집니다.\n마: 인간의 본성과 같은 형태를 가집니다.\n악: 인간의 욕망과 같은 형태를 가집니다.\n귀: 인간의 행동과 같은 형태를 가집니다.\n</string>
+    <string name="fragment_detail_9">권력욕은 꿈을 꾼 후가 약합니다.\n명예욕은 꿈을 꾼 후가 강합니다.\n물욕은 꿈을 꾼 후가 약합니다.\n색욕은 꿈을 꾼 후가 약합니다.\n소유욕은 꿈을 꾼 후가 약합니다.\n승부욕은 꿈을 꾼 후가 강합니다.\n수면욕은 꿈을 꾼 후가 강합니다.\n식욕은 꿈을 꾼후가 약합니다.</string>
+    <string name="fragment_detail_10">꿈을 꾼 후에는 욕심이 생기는 마음이 약합니다.</string>
+    <string name="fragment_detail_11">체: 인간의 외형과 건강을 의미합니다.\n심: 인간의 생각과 정신을 의미합니다.\n기: 인간의 가치와 철학을 의미합니다.\n력: 인간의 근성과 근력을 의미합니다.\n재: 인간의 재능과 개발을 의미합니다.\n물: 인간의 재물과 능력을 의미합니다.\n</string>
+    <string name="fragment_detail_12">권력욕은 꿈을 꾼 후가 약합니다.\n명예욕은 꿈을 꾼 후가 강합니다.\n물욕은 꿈을 꾼 후가 약합니다.\n색욕은 꿈을 꾼 후가 약합니다.\n소유욕은 꿈을 꾼 후가 약합니다.\n승부욕은 꿈을 꾼 후가 강합니다.\n수면욕은 꿈을 꾼 후가 강합니다.\n식욕은 꿈을 꾼후가 약합니다.</string>
+
+    <string name="fragment_detail_13">악몽</string>
+    <string name="fragment_detail_14">재능과 관련성이 있는 일이나 생각에 대한 현실율이 조금 강한 기운이라서 실생활에 적용될 가능성이 있습니다.
+꿈은 \'길몽\', \'영몽\', \'평몽\', \'악몽\', \'흉몽\'으로 분류합니다.
+길몽과 흉몽은 기운의 좋고 나쁨을 의미하고, 영몽과 악몽은 심리적으로 좋고 나쁨을 기준으로 분석합니다.</string>
+    <string name="fragment_detail_15">길몽과 흉몽은 기운의 좋고 나쁨을 의미하고 영몽과 악몽은 심리적으로 좋고 나쁨을 기준으로 분석합니다.</string>
+    <string name="fragment_detail_16">화해가 부서지는 의미를 가지고 뻣뻣하고 싸늘함을 비유적으로 이르는듯한 꿈입니다.
+그리고 타인의 작품과 아이디어를 모방하는것도 재능인데, 그런 능력마저 없으면 빨리 포기하는게 낫다는 일이나 생각에 대한 현실율이 조금 강한 기운이라서 실생활에 적용될 가능성이 조금 있습니다. 또한 설계사 관련 직업의 사회이성이 도움을 될 수 있지만 의료원 관련 직업의 고향선배는 멀리하세요.
+그리고 남동쪽 방향에서 1999년 2월생 B형인 여성과 인연관련 인연이 될 것 같습니다. 갈비가 휘다 코에 문제가 생길 수 있고 특히 천식 관련 질병을 조심하세요. 기분 전환으로 발라드 장르의 음악을 듣거나 연극관람을 하는것도 좋습니다.
+오거리에서 주차위반을 조심하고, 약취 관련 사건 주의하세요. 적용 기간내에 10,28,30 로또 번호도 한번 맞춰보세요.계약 관련된 일로 인해 지금 운이 생길 수 있습니다.</string>
+
+    <string name="fragment_detail_17">명예와 관련된 좋은 영향을 주는 영몽 일 가능성이 높습니다.
+명예로 인해서 매우 좋은 일이 생길 수 있으며, 결혼 때문에 매우 나쁜 일이 생길 수 있습니다. 매우 조심하세요.</string>
+
+
+    <!--user_list_activity-->
+    <string name="activity_userlist_title">사용자 목록</string>
+
+    <!--sign_view_activity-->
+    <string name="activity_signview_title">서명</string>
+    <string name="activity_signview_reset">지우기</string>
+    <string name="activity_signview_submit">위 내용에 대해 인지하고 서명합니다.</string>
+
+    <!--sign_up_activity-->
+    <string name="activity_signup_title">회원가입</string>
+    <string name="activity_signup_id">아이디 *</string>
+    <string name="activity_signup_id_check">중복확인</string>
+    <string name="activity_signup_name">이름 *</string>
+    <string name="activity_signup_gender">성별 *</string>
+    <string name="activity_signup_male">남성</string>
+    <string name="activity_signup_female">여성</string>
+    <string name="activity_signup_email">이메일 *</string>
+    <string name="activity_signup_birth">생년월일 *</string>
+    <string name="activity_signup_birth2">생년월일을 입력해주세요</string>
+    <string name="activity_signup_pw">비밀번호 *</string>
+    <string name="activity_signup_pw_check">비밀번호 확인 *</string>
+    <string name="activity_signup_agree">약관동의</string>
+    <string name="activity_signup_agree_2">전체동의</string>
+    <string name="activity_signup_agree_3">서비스 이용약관(필수)</string>
+    <string name="activity_signup_agree_4">개인정보 수집 및 이용동의(필수)</string>
+    <string name="activity_signup_agree_5">위치기반서비스 이용약관(필수)</string>
+    <string name="activity_signup_agree_6">마케팅 정보 수신 동의(선택)</string>
+    <string name="activity_signup_submit">완료</string>
+
+    <!--mong_regist_activity-->
+    <string name="activity_mong_regist_title">몽스토어 꿈 인증등록</string>
+    <string name="activity_mong_regist_title2">제목</string>
+    <string name="activity_mong_regist_content">내용</string>
+    <string name="activity_mong_regist_assess">평가</string>
+    <string name="activity_mong_regist_impression">꿈 꾼 후의 소감 및 경험을 입력하세요</string>
+    <string name="activity_mong_regist_0">꿈 바탕 이미지 선택</string>
+    <string name="activity_mong_regist_gallery">갤러리</string>
+    <string name="activity_mong_regist_1">첨부 파일</string>
+    <string name="activity_mong_regist_2">음성으로 꿈을 녹음.(선택)</string>
+    <string name="activity_mong_regist_3">꿈꾼 후의 효과 및 경험을 음성녹음.(선택)</string>
+    <string name="activity_mong_regist_4">꿈에 맞는 배경음악을 첨부.(선택)</string>
+    <string name="activity_mong_regist_5">꿈속에서 느껴지는 색(선택)</string>
+    <string name="activity_mong_regist_6">꿈속에서 들은 소리(선택)</string>
+    <string name="activity_mong_regist_7">꿈을 꾼 년도(선택)</string>
+    <string name="activity_mong_regist_8">서명</string>
+    <string name="activity_mong_regist_9">위 꿈이 사실임을 서명합니다.(필수)</string>
+    <string name="activity_mong_regist_10">법적으로 책임짐을 서명합니다.(필수)</string>
+    <string name="activity_mong_regist_11">위 꿈이 사실임을 보증합니다.(선택)</string>
+    <string name="activity_mong_regist_12">마이몽스토어 인증등록</string>
+
+    <!--mong_auth_activity-->
+    <string name="activity_mong_auth_title">꿈 인증 절차</string>
+    <string name="activity_mong_auth_0">꿈 검증 시작</string>
+    <string name="activity_mong_auth_1">중복 단어검색, 중복 효과 및 경험 검색</string>
+    <string name="activity_mong_auth_2">꿈 유사꿈 검증</string>
+    <string name="activity_mong_auth_3">등록된 꿈중에서 유사꿈 검증</string>
+    <string name="activity_mong_auth_4">꿈 품질 검증</string>
+    <string name="activity_mong_auth_5">사용자의 선택에 따른 검증(색상, 소리, 날짜)</string>
+    <string name="activity_mong_auth_6">꿈 NFT 넘버 부여</string>
+    <string name="activity_mong_auth_7">NFT 전환에 따른 제반 사항 점검</string>
+    <string name="activity_mong_auth_8">꿈 가격 추천</string>
+    <string name="activity_mong_auth_9">희망 가격과 비교 분석 및 꿈의 전반적인 가치평가</string>
+    <string name="activity_mong_auth_10">꿈을 마이몽스토어에 등록하기 위한 절차를 진행합니다.
+        \n꿈 검증 시작 버튼을 누르면 검증이 시작됩니다.
+        \n_UserName님이 원하는 만큼 좋은 결과가 있기를 바랍니다.
+        \n이제 시작합니다.</string>
+    <string name="activity_mong_auth_11">꿈 검증 시작</string>
+
+    <!--mong_store_save_activity-->
+    <string name="activity_mongstore_save_title">꿈 보관 동의</string>
+    <string name="activity_mongstore_save_agree">꿈 보관에 동의합니다</string>
+
+    <!--login_activity-->
+    <string name="activity_login_0">마이몽 로그인</string>
+    <string name="activity_login_1">스토리텔링으로 꿈을 풀어주는 마이몽</string>
+    <string name="activity_login_id">아이디</string>
+    <string name="activity_login_pw">비밀번호</string>
+    <string name="activity_login_login">로그인</string>
+    <string name="activity_login_find_id">아이디 찾기</string>
+    <string name="activity_login_find_pw">비밀번호 찾기</string>
+    <string name="activity_login_2">아직 회원이 아니신가요 ?</string>
+    <string name="activity_login_3">Copyright RedRover. All rights reserved.</string>
+    <string name="activity_login_4">프로버전 고객센터 : 02&#8211;2156&#8211;0137</string>
+    <string name="activity_login_5">MYMONG</string>
+
+
+    <!--linechart_activity-->
+    <string name="activity_linechart_title">Dream analysis - location</string>
+    <string name="activity_linechart_date">1991년 11월 11일(월)</string>
+    <string name="activity_linechart_content">1911년 11월 11일 10시(월) 음식 추천\n다이어트 지수 : B\n소화순환 지수 : C</string>
+
+    <!--keyword_input_activity-->
+    <string name="activity_keyword_input_title">마이몽</string>
+    <string name="activity_keyword_input_submit">꿈속으로 시작합니다</string>
+    <string name="activity_keyword_input_keyword">키워드 선택</string>
+    <string name="activity_keyword_input_story">스토리 입력</string>
+    <string name="activity_keyword_input_0">꿈속에서의 환경</string>
+    <string name="activity_keyword_input_1">꿈속에서 장소</string>
+    <string name="activity_keyword_input_2">무엇을</string>
+    <string name="activity_keyword_input_3">하였나</string>
+
+    <!--finger_id_reg_activity-->
+    <string name="activity_finger_idreg_cancel">다음에 등록</string>
+    <string name="activity_finger_idreg_0">지문은 휴대폰에 미리 설정되어 있어야 등록할 수 있습니다.</string>
+    <string name="activity_finger_idreg_1">간편로그인은 지문으로 간편하게 로그인 할 수 있는 방법입니다.</string>
+    <string name="activity_finger_idreg_2">환영합니다!\n간편로그인을 등록하시겠어요?</string>
+    <string name="activity_finger_idreg_regist">지문 등록하기</string>
+
+    <!--find_pw_activity-->
+    <string name="activity_findpw_title">비밀번호 찾기</string>
+    <string name="activity_findpw_0">아이디 및 이메일 입력</string>
+    <string name="activity_findpw_1">비밀번호를 찾기 위해서 등록된 아이디 및 이메일 주소를 입력해 주세요.</string>
+    <string name="activity_findpw_id">아이디</string>
+    <string name="activity_findpw_id_hint">아이디를 입력해 주세요.</string>
+    <string name="activity_findpw_email">이메일</string>
+    <string name="activity_findpw_email_hint">이메일을 입력해주세요.</string>
+    <string name="activity_findpw_submit">인증메일 전송</string>
+    <string name="activity_findpw_pw">새 비밀번호</string>
+    <string name="activity_findpw_pw_hint">새 비밀번호를 입력해 주세요.</string>
+    <string name="activity_findpw_pw_hint_2">비밀번호는 8자이상 영어, 숫자, 특수문자를 포함해야합니다.</string>
+    <string name="activity_findpw_change_pw">비밀번호 변경하기</string>
+
+
+    <!--find_id_activity-->
+    <string name="activity_findid_title">아이디 찾기</string>
+    <string name="activity_findid_0">이메일 입력</string>
+    <string name="activity_findid_1">비밀번호를 찾기 위해서 등록된 이메일 주소를 입력해 주세요.</string>
+    <string name="activity_findid_email">이메일</string>
+    <string name="activity_findid_email_hint">이메일을 입력해주세요.</string>
+    <string name="activity_findid_submit">아이디 찾기</string>
+    <string name="activity_findid_example">예시</string>
+
+
+    <!--email_auth_activity-->
+    <string name="activity_email_auth_title">인증코드 확인하기</string>
+    <string name="activity_email_auth_0">인증코드 입력</string>
+    <string name="activity_email_auth_1">해당 이메일로 인증코드가 발송되었습니다. 이메일을 확인해 주시고 인증코드를 입력해 주세요</string>
+    <string name="activity_email_auth_code">인증코드</string>
+    <string name="activity_email_auth_code_hint">인증코드 입력</string>
+    <string name="activity_email_auth_submit">확인</string>
+
+    <!--circle_graph_map_activity-->
+    <string name="activity_circle_graph_map_time">미팅시간: 06:02~06:59(57분간)</string>
+
+    <!--circle_graph_activity-->
+    <string name="activity_circle_graph_0">재물</string>
+    <string name="activity_circle_graph_1">명예와 관련된 좋은 영향을 주는 영몽 일 가능성이 높습니다.
+명예로 인해서 매우 좋은 일이 생길 수 있으며, 결혼 때문에 매우 나쁜 일이 생길 수 있습니다. 매우 조심하세요.</string>
+
+    <!--cardedit_activity-->
+    <string name="activity_card_edit_title">카드 이미지</string>
+
+    <!--card_activity-->
+    <string name="activity_card_title">카드</string>
+    <string name="activity_card_0">기간분석</string>
+    <string name="activity_card_1">장소분석</string>
+    <string name="activity_card_2">해소추천</string>
+
+    <!--calendar_activity-->
+    <string name="activity_calendar_0">toDay</string>
+    <string name="activity_calendar_1">모두</string>
+    <string name="activity_calendar_2">일</string>
+    <string name="activity_calendar_3">월</string>
+    <string name="activity_calendar_4">화</string>
+    <string name="activity_calendar_5">수</string>
+    <string name="activity_calendar_6">목</string>
+    <string name="activity_calendar_7">금</string>
+    <string name="activity_calendar_8">토</string>
+
+    <!--bid_activity-->
+    <string name="activity_bid_type">경매</string>
+    <string name="activity_bid_0">꿈의 생성자는 </string>
+    <string name="activity_bid_1">님 입니다.</string>
+    <string name="activity_bid_2">현재 입찰가:</string>
+    <string name="activity_bid_3">시작 가격:</string>
+    <string name="activity_bid_4">시작일:</string>
+    <string name="activity_bid_5">종료일:</string>
+    <string name="activity_bid_6">꿈과 내 운 비교</string>
+    <string name="activity_bid_submit">입찰하기</string>
+
+    <!--adev_temp_activity-->
+    <string name="activity_adev_temp_0">첨부 파일</string>
+    <string name="activity_adev_temp_1">음성으로 꿈을 녹음.(선택)</string>
+    <string name="activity_adev_temp_2">꿈꾼 후의 효과 및 경험을 음성녹음.(선택)</string>
+    <string name="activity_adev_temp_3">꿈에 맞는 배경음악을 첨부.(선택)</string>
+
+    <!--add_user_activity-->
+    <string name="activity_add_user_title">사용자 생성</string>
+    <string name="activity_add_user_nickname">닉네임</string>
+    <string name="activity_add_user_name">이름</string>
+    <string name="activity_add_user_birth">태어난 년도</string>
+    <string name="activity_add_user_submit">등록</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+</resources>

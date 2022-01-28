@@ -1,0 +1,18 @@
+dependencyResolutionManagement {
+
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+
+
+
+    }
+}
+rootProject.name = "MyBaseJW"
+include ':app'

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/app_main_color">
+
+    <TextView
+        android:id="@+id/record_title"
+        style="@style/text_semibold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_title" />
+
+    <View
+        android:id="@+id/top_dummy"
+        android:layout_width="15dp"
+        android:layout_height="1dp"
+        android:layout_alignParentRight="true"/>
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icon_close_w"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@id/top_dummy"/>
+
+
+    <LinearLayout
+        android:id="@+id/btn_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:padding="10dp"
+        android:background="@drawable/bg_round_10dp_6b5e6c"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/record_title">
+        <ImageView
+            android:id="@+id/img_record_status"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/ic_mic"/>
+
+        <TextView
+            android:id="@+id/txt_record_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/record_status0"
+            android:textSize="@dimen/text_size_title"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/txt_record_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone"
+            android:text="0:00"
+            android:textSize="18dp"
+            android:textColor="#FFE400" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/submit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/btn_record"
+        android:layout_marginTop="40dp">
+
+        <LinearLayout
+            android:id="@+id/btn_play"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center"
+            android:background="#6b5e6c">
+            <ImageView
+                android:id="@+id/img_play_status"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@drawable/icon_top_play_w"/>
+            <TextView
+                android:id="@+id/txt_play_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/text_size_body"
+                android:textColor="@color/white"
+                android:text="음성재생"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/btn_submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_below="@id/btn_record"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:gravity="center"
+            android:background="@color/btn_ok_color"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/text_size_body"
+            android:textColor="@color/white"
+            android:text="@string/str_cofirm"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

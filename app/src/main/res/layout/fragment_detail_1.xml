@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    xmlns:seekcircle="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/root_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="60dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/graphLayout"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_margin="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+                            <com.github.mikephil.charting.charts.PieChart
+                                android:id="@+id/piechart"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:touchscreenBlocksFocus="true"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:weightSum="3"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:text="left"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2.2" >
+
+                                <kr.co.genericit.mybase.xoyou2.graph.CustomGauge
+                                    android:id="@+id/detail_graph2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingBottom="10dp"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
+                                    android:paddingTop="10dp"
+                                    app:gaugeEndValue="100"
+                                    app:gaugePointEndColor="@color/progress_on"
+                                    app:gaugePointStartColor="@color/progress_on"
+                                    app:gaugeStrokeColor="@color/progress_off"
+                                    app:gaugeDividerColor="@color/progress_divider"
+                                    app:gaugeStartAngle="135"
+                                    app:gaugeStartValue="0"
+                                    app:gaugeStrokeCap="BUTT"
+                                    app:gaugeStrokeWidth="16dp"
+                                    app:gaugeSweepAngle="270"
+                                    app:gaugeDividerSize="1"
+                                    app:gaugeDividerStep="5"
+                                    app:gaugeDividerDrawFirst="false"
+                                    app:gaugeDividerDrawLast="true"
+                                    />
+
+                                <LinearLayout
+                                    android:id="@+id/seekbarLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:weightSum="3">
+
+                                    <RelativeLayout
+                                        android:id="@+id/layout_3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="2.2">
+
+                                        <kr.co.genericit.mybase.xoyou2.graph.SeekCircle
+                                            android:id="@+id/seekCircle"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_centerInParent="true"
+                                            seekcircle:max="100"
+                                            seekcircle:min="0"
+                                            seekcircle:progress="25" />
+                                        <ImageView
+                                            android:id="@+id/center_circleview"
+                                            android:layout_width="140dp"
+                                            android:layout_height="140dp"
+                                            android:layout_centerInParent="true"
+                                            android:background="@drawable/mong_circle_color_good"/>
+                                        <TextView
+                                            android:id="@+id/textProgress"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerInParent="true"
+                                            android:fontFamily="@font/gowunbatang_regular"
+                                            android:text="@string/default_progress"
+                                            android:textAppearance="?android:attr/textAppearanceLarge"
+                                            android:textColor="@color/white" />
+
+
+
+                                    </RelativeLayout>
+                                </LinearLayout>
+                                <TextView
+                                    android:id="@+id/textView2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:paddingBottom="10dp"
+                                    android:layout_marginTop="3dp"
+                                    android:fontFamily="@font/gowunbatang_regular"
+                                    android:textColor="@color/white"
+                                    android:text="재물"
+                                    android:textSize="14dp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+                        </LinearLayout>
+                    </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/graphLayout"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+
+                <LinearLayout
+                    android:id="@+id/middleProgressLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="30dp"
+                    android:visibility="gone"
+                    android:paddingVertical="8dp"
+                    android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:layout_weight="1">
+
+                        <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                            android:id="@+id/progressView1"
+                            android:layout_centerInParent="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:animate="true"
+                            app:animateDuration="600"
+                            app:fillColor="@color/progress_circle_bg_1"
+                            app:progress="13"
+                            app:progressColor="@color/progress_circle_1"
+                            app:progressRoundCap="true"
+                            app:progressTextColor="#ffffff"
+                            app:progressTextEnabled="true"
+                            app:progressTextSize="13dp"
+                            app:progressTextType="progress"
+                            app:progressWidth="5dp"
+                            app:startAngle="270"
+                            app:total="100"
+                            app:totalColor="@color/progress_circle_bg_1"
+                            app:totalWidth="5dp" />
+                        <TextView
+                            android:id="@+id/progressTxt1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/gowunbatang_regular"
+                            android:textSize="11dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:layout_centerInParent="true"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:layout_weight="1">
+
+                        <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                            android:id="@+id/progressView2"
+                            android:layout_centerInParent="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:animate="true"
+                            app:animateDuration="600"
+                            app:fillColor="@color/progress_circle_bg_2"
+                            app:progress="43"
+                            app:progressColor="@color/progress_circle_2"
+                            app:progressRoundCap="true"
+                            app:progressTextColor="#ffffff"
+                            app:progressTextEnabled="true"
+                            app:progressTextSize="13dp"
+                            app:progressTextType="progress"
+                            app:progressWidth="5dp"
+                            app:startAngle="270"
+                            app:total="100"
+                            app:totalColor="@color/progress_circle_bg_2"
+                            app:totalWidth="5dp" />
+                        <TextView
+                            android:id="@+id/progressTxt2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/gowunbatang_regular"
+                            android:textSize="11dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:layout_centerInParent="true"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:layout_weight="1">
+
+                        <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                            android:id="@+id/progressView3"
+                            android:layout_centerInParent="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:animate="true"
+                            app:animateDuration="600"
+                            app:fillColor="@color/progress_circle_bg_3"
+                            app:progress="67"
+                            app:progressColor="@color/progress_circle_3"
+                            app:progressRoundCap="true"
+                            app:progressTextColor="#ffffff"
+                            app:progressTextEnabled="true"
+                            app:progressTextSize="13dp"
+                            app:progressTextType="progress"
+                            app:progressWidth="5dp"
+                            app:startAngle="270"
+                            app:total="100"
+                            app:totalColor="@color/progress_circle_bg_3"
+                            app:totalWidth="5dp" />
+                        <TextView
+                            android:id="@+id/progressTxt3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/gowunbatang_regular"
+                            android:textSize="11dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:layout_centerInParent="true"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:layout_weight="1">
+
+                        <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                            android:id="@+id/progressView4"
+                            android:layout_centerInParent="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:animate="true"
+                            app:animateDuration="600"
+                            app:fillColor="@color/progress_circle_bg_4"
+                            app:progress="100"
+                            app:progressColor="@color/progress_circle_4"
+                            app:progressRoundCap="true"
+                            app:progressTextColor="#ffffff"
+                            app:progressTextEnabled="true"
+                            app:progressTextSize="13dp"
+                            app:progressTextType="progress"
+                            app:progressWidth="5dp"
+                            app:startAngle="270"
+                            app:total="100"
+                            app:totalColor="@color/progress_circle_bg_4"
+                            app:totalWidth="5dp" />
+                        <TextView
+                            android:id="@+id/progressTxt4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/gowunbatang_regular"
+                            android:gravity="center"
+                            android:textSize="11dp"
+                            android:textColor="@color/white"
+                            android:layout_centerInParent="true"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_hae"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/middleProgressLayout"
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:lineSpacingExtra="9dp"
+                    android:paddingHorizontal="30dp"
+                    android:paddingTop="30dp"
+                    android:text="@string/fragment_detail_17"
+                    android:textColor="@color/md_yellow_A100"
+                    android:textSize="@dimen/text_size_body" />
+
+                <TextView
+                    android:id="@+id/txt_hyeon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_hae"
+                    android:fontFamily="@font/gowunbatang_regular"
+                    android:lineSpacingExtra="9dp"
+                    android:padding="30dp"
+                    android:text="@string/fragment_detail_17"
+                    android:textColor="@color/default_grey"
+                    android:textSize="@dimen/text_size_tooltip" />
+
+
+        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

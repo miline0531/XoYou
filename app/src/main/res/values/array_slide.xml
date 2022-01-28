@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name = "slide_menu_1">
+        <item>코인정보</item>
+
+    </string-array>
+
+    <string-array name = "slide_count_1">
+        <item>보유코인</item>
+
+    </string-array>
+
+    <string-array name = "slide_menu_2">
+        <item>관계인</item>
+        <item>관계장소</item>
+        <item>가족구성</item>
+    </string-array>
+
+    <string-array name = "slide_count_2">
+        <item>관계인등록수</item>
+        <item>장소등록수</item>
+        <item>가족등록유무</item>
+    </string-array>
+
+
+
+    <string-array name = "detail_menu_title">
+        <item>기본분석</item>
+        <item>세부분석</item>
+        <item>연관분석</item>
+
+        <item>적용기간</item>
+        <item>장소분석</item>
+        <item>해소추천</item>
+
+    </string-array>
+
+    <string-array name = "detail_menu_sub_title">
+        <item>꿈을 분석한 기본결과</item>
+        <item>꿈의 세부내용 분석</item>
+        <item>꿈과 영혼과의 관계분석</item>
+
+        <item>실생활의 꿈 적용기간</item>
+        <item>꿈속의 장소와 유사한 장소</item>
+        <item>꿈꿈의 문제 해결 추천</item>
+
+    </string-array>
+
+</resources>

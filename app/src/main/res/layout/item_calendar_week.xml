@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_cal_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gowunbatang_bold"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:textSize="16dp"
+            android:text="1"
+            android:textColor="@color/md_amber_900"
+            android:gravity="right"/>
+
+    <TextView
+        android:id="@+id/txt_schedule_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:text="schedule1"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gowunbatang_regular"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="10dp"
+        android:background="#E91E63"
+        android:gravity="left"/>
+
+    <TextView
+        android:id="@+id/txt_schedule_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:text="schedule2"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gowunbatang_regular"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="10dp"
+        android:background="#03A9F4"
+        android:gravity="left"/>
+    <TextView
+        android:id="@+id/txt_schedule_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:text="schedule3"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gowunbatang_regular"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="10dp"
+        android:background="#4CAF50"
+        android:gravity="left"/>
+
+
+</LinearLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name = "family_1">
+        <item>아버지</item>
+        <item>어머니</item>
+        <item>형</item>
+        <item>누나</item>
+        <item>남동생</item>
+        <item>여동생</item>
+        <item>반려동물</item>
+    </string-array>
+
+    <string-array name = "family_2">
+        <item>증조부</item>
+        <item>증조모</item>
+        <item>조부</item>
+        <item>조모</item>
+        <item>사촌</item>
+        <item>고모</item>
+        <item>고모부</item>
+        <item>조카</item>
+        <item>백부</item>
+        <item>백모</item>
+        <item>삼촌</item>
+        <item>숙모</item>
+    </string-array>
+
+    <string-array name = "family_3">
+        <item>외증조부</item>
+        <item>외증조모</item>
+        <item>외조부</item>
+        <item>외조모</item>
+        <item>외사촌</item>
+        <item>이모</item>
+        <item>이모부</item>
+        <item>외조카</item>
+    </string-array>
+
+    <string-array name = "family_4">
+        <item>배우자</item>
+        <item>아들</item>
+        <item>딸</item>
+        <item>none</item>
+        <item>장인</item>
+        <item>장모</item>
+        <item>처형</item>
+        <item>처제</item>
+        <item>형님</item>
+        <item>동서</item>
+        <item>처남</item>
+        <item>형수</item>
+    </string-array>
+
+    <string-array name = "family_5">
+        <item>학생</item>
+        <item>무직</item>
+        <item>직장인</item>
+        <item>사업자</item>
+    </string-array>
+</resources>
