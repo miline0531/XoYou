@@ -15,7 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -50,6 +53,7 @@ import kr.co.genericit.mybase.xoyou2.fregment.MainFragment2;
 import kr.co.genericit.mybase.xoyou2.fregment.MainFragment3;
 import kr.co.genericit.mybase.xoyou2.fregment.MainFragment4;
 import kr.co.genericit.mybase.xoyou2.interfaces.DialogClickListener;
+import kr.co.genericit.mybase.xoyou2.model.Message;
 import kr.co.genericit.mybase.xoyou2.model.SlideMenuData;
 import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
 import kr.co.genericit.mybase.xoyou2.network.interfaces.ActionResultListener;
@@ -129,7 +133,7 @@ public class MainActivity extends CommonActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        readSMSMessage();
         id = jwSharePreference.getString(JWSharePreference.PREFERENCE_LOGIN_ID,"");
 
         initView();
@@ -208,6 +212,56 @@ public class MainActivity extends CommonActivity {
             }
         }
     };
+
+    public int readSMSMessage() {
+        //Uri allMessage = Uri.parse("content://sms/inbox/");
+        Uri allMessage = Uri.parse("content://sms/sent/");
+        ContentResolver cr = getContentResolver();
+        Cursor c = cr.query(allMessage,
+                new String[]{"_id", "thread_id", "address", "person", "date", "body"},
+                "address=?", new String[]{"01063059929"},
+                "date DESC");
+
+        while (c.moveToNext()) {
+            Message msg = new Message(); // 따로 저는 클래스를 만들어서 담아오도록 했습니다.
+
+            long messageId = c.getLong(0);
+            msg.setMessageId(String.valueOf(messageId));
+
+            long threadId = c.getLong(1);
+            msg.setThreadId(String.valueOf(threadId));
+
+            String address = c.getString(2);
+            msg.setAddress(address);
+
+            long contactId = c.getLong(3);
+            msg.setContactId(String.valueOf(contactId));
+
+            String contactId_string = String.valueOf(contactId);
+            msg.setContactId_string(contactId_string);
+
+            long timestamp = c.getLong(4);
+            msg.setTimestamp(String.valueOf(timestamp));
+
+            String body = c.getString(5);
+            msg.setBody(body);
+
+            SkyLog.d("==============SMS==============");
+            SkyLog.d("messageId :: " + messageId);
+            SkyLog.d("threadId :: " + threadId);
+            SkyLog.d("address :: " + address);
+            SkyLog.d("contactId_string :: " + contactId_string);
+            SkyLog.d("timestamp :: " + timestamp);
+            SkyLog.d("body :: " + body);
+
+            SkyLog.d("==============SMS==============");
+
+
+            //arrayList.add(msg); //이부분은 제가 arraylist에 담으려고 하기떄문에 추가된부분이며 수정가능합니다.
+
+        }
+        return 0;
+    }
 
     public void MainOpenDrawer(){
         drawerLayout.openDrawer(drawerView);

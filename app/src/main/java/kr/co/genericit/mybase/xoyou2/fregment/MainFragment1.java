@@ -62,6 +62,15 @@ public class MainFragment1 extends Fragment {
     private RelativeLayout lb_slide3;
     private LinearLayout popview;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        SkyLog.d("-- onResume --");
+        lb_slide3.setVisibility(View.GONE);
+
+        getUserList();
+    }
+
     public static MainFragment1 newInstance(int number, Activity _ac) {
 
         MainFragment1 fragment2 = new MainFragment1(_ac);
@@ -76,7 +85,7 @@ public class MainFragment1 extends Fragment {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_main_top_1, container, false);
+        View view = inflater.inflate(R.layout.fragment_main_top_1, container, true);
 
         list = (ListView)view.findViewById(R.id.list);
         drawerLayout = view.findViewById(R.id.drawerLayout);
@@ -104,9 +113,7 @@ public class MainFragment1 extends Fragment {
         list.setOnItemClickListener(mItemClickListener);
         list.setAdapter(m_Adapter);
 
-        lb_slide3.setVisibility(View.GONE);
 
-        getUserList();
 
         view.findViewById(R.id.popview).setOnClickListener(btnListener);
         view.findViewById(R.id.btn_1).setOnClickListener(btnListener);
@@ -156,12 +163,21 @@ public class MainFragment1 extends Fragment {
 
     AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View view, int position, long id) {
-            SkyLog.d("position :: " + position);
+            SkyLog.d("mItemClickListener position :: " + position);
             //MainActivity.viewSlide2();
             lb_slide3.setVisibility(View.GONE);
             lb_slide.setVisibility(View.VISIBLE);
+            drawerLayout.closeDrawer(drawer2);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    lb_slide3.setVisibility(View.GONE);
+                    lb_slide.setVisibility(View.VISIBLE);
+                    drawerLayout.openDrawer(drawer2);
+                }
+            }, 300); //딜레이 타임 조절
 
-            drawerLayout.openDrawer(drawer2);
             //API 호출(API_SELECT_QA_LIST)
 
         }
@@ -170,7 +186,7 @@ public class MainFragment1 extends Fragment {
 
     AdapterView.OnItemClickListener mItemClickListener2 = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View view, int position, long id) {
-            SkyLog.d("position :: " + position);
+            SkyLog.d("mItemClickListener2 position :: " + position);
             //MainActivity.viewSlide2();
             drawerLayout.close();
             getQaList();
@@ -199,7 +215,7 @@ public class MainFragment1 extends Fragment {
                         JSONArray jsonObject_listSimRi = new JSONArray(jsonObject_data.getString("listSimRi"));
 
                         SkyLog.d("COUNT :: " + jsonObject_listSimRi.length());
-
+                        listSimRi.clear();
                         for (int i = 0; i < jsonObject_listSimRi.length(); i++) {
                             JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
 
@@ -232,16 +248,13 @@ public class MainFragment1 extends Fragment {
                 lb_slide3.setVisibility(View.GONE);
                 lb_slide.setVisibility(View.GONE);
 
-
-
-
                 try {
                     JSONObject jsonObject_succes = new JSONObject(res);                     //SUCCESS
                     if(jsonObject_succes.getString("success").equals("true")){
                         JSONArray jsonObject_listSimRi = new JSONArray(jsonObject_succes.getString("data"));
 
                         SkyLog.d("COUNT :: " + jsonObject_listSimRi.length());
-
+                        qrList.clear();
                         for (int i = 0; i < jsonObject_listSimRi.length(); i++) {
                             JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
                             qrList.add(new QaListObj(

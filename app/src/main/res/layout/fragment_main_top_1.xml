@@ -8,6 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/background_2"
         android:fitsSystemWindows="true">
 
         <RelativeLayout
@@ -43,23 +44,22 @@
         </RelativeLayout>
 
         <TextView
-            android:layout_width="match_parent"
             android:id="@+id/centerTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/topview"
-            android:background="#c3c3c3c3"
+            android:background="#DD696969"
+            android:gravity="center"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:gravity="center"
-            android:text="1월27일(목) 10시~11시 이별에 도움이 되는 등록인 순"
-            android:layout_height="wrap_content"/>
-
+            android:text="1월27일(목) 10시~11시 이별에 도움이 되는 등록인 순" />
 
 
         <ListView
             android:id="@+id/list"
-            android:layout_below="@+id/centerTxt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/centerTxt"
             android:divider="#c3c3c3"
             android:dividerHeight="1px" />
 
