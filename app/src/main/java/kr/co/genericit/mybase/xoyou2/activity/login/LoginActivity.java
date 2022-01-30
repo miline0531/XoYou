@@ -26,6 +26,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.biometric.BiometricPrompt;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
@@ -45,6 +46,7 @@ import kr.co.genericit.mybase.xoyou2.activity.MainActivity;
 import kr.co.genericit.mybase.xoyou2.common.CommonActivity;
 import kr.co.genericit.mybase.xoyou2.common.Constants;
 import kr.co.genericit.mybase.xoyou2.common.NetInfo;
+import kr.co.genericit.mybase.xoyou2.common.PermissionUtils;
 import kr.co.genericit.mybase.xoyou2.interfaces.DialogClickListener;
 import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
 import kr.co.genericit.mybase.xoyou2.network.interfaces.ActionResultListener;
@@ -72,6 +74,7 @@ public class LoginActivity extends CommonActivity {
     final JWSharePreference sharePreference = new JWSharePreference();
     private String id = "";
     private String pw = "";
+    private int time = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +145,47 @@ public class LoginActivity extends CommonActivity {
             init();
             auth();
         }
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {   // 롤리팝보다 버전이 높으면 추가 마진
+            if (!PermissionUtils.canAccessCamera(LoginActivity.this) ||
+                    !PermissionUtils.canWhitePhone(LoginActivity.this) ||
+                    !PermissionUtils.canReadContacts(LoginActivity.this) ||
+                    !PermissionUtils.canReadPhone(LoginActivity.this)) {  // 폰 정보 권한이 없다면
+                Log.i("SKY", "폰권한이 없다면");
+                ActivityCompat.requestPermissions(LoginActivity.this, PermissionUtils.PHONE_PERMS, 1);
+            } else {
+                // 권한 있음
+                Log.e("SKY", "권한 있음");
+                mHandler.postDelayed(r, time);
+            }
+        } else {
+            mHandler.postDelayed(r, time);
+        }
+
+        //test
+        idEditText.setText("kdh0002");
+        pwEditText.setText("plokijuh1@");
+        id = idEditText.getText().toString();
+        pw = pwEditText.getText().toString();
+
+        if (id.equals("") || pw.equals("")) {
+            Toast.makeText(getApplicationContext(), CommandUtil.getInstance().getStr(R.string.mong_login_id_pw_input), Toast.LENGTH_SHORT).show();
+        } else {
+//                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(i);
+            sendRequestForLogin(false);
+
+        }
     }
+
+    Handler mHandler = new Handler();
+    Runnable r = new Runnable() {
+        @Override
+        public void run() {
+            //첫실행
+            //new MySQLiteOpenHelper(IntroActivity.this);
+        }
+    };
 
     private void showIntroBG(){
 
@@ -178,7 +221,7 @@ public class LoginActivity extends CommonActivity {
             }else if(msg.what == INTRO_VERSION_UPDATE){
 //                Intent i = new Intent(LoginActivity.this,DownloadActivity.class);
 //                startActivity(i);
-                startDownload();
+//                startDownload();
             }
         }
     };

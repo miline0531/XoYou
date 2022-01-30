@@ -24,6 +24,7 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name="kr.co.genericit.mybase.xoyou2.MymongBaseApplication"
@@ -155,6 +156,10 @@
             android:name="kr.co.genericit.mybase.xoyou2.activity.ADevTempActivity"
             android:screenOrientation="portrait" />
 
+
+        <activity
+            android:name="kr.co.genericit.mybase.xoyou2.activity.ContactActivity"
+            android:screenOrientation="portrait" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

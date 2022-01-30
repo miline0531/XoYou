@@ -5,8 +5,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -16,8 +20,10 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -34,13 +40,15 @@ import java.util.ArrayList;
 
 import kr.co.genericit.mybase.xoyou2.R;
 import kr.co.genericit.mybase.xoyou2.activity.login.LoginActivity;
-import kr.co.genericit.mybase.xoyou2.activity.main.FindFragment;
-import kr.co.genericit.mybase.xoyou2.activity.main.HomeFragment;
-import kr.co.genericit.mybase.xoyou2.activity.main.ManageFragment;
-import kr.co.genericit.mybase.xoyou2.activity.main.StoreFragment;
+import kr.co.genericit.mybase.xoyou2.adapter.SectionPageAdapter;
 import kr.co.genericit.mybase.xoyou2.adapter.SlideMenuAdapter;
 import kr.co.genericit.mybase.xoyou2.common.CommonActivity;
 import kr.co.genericit.mybase.xoyou2.common.Constants;
+import kr.co.genericit.mybase.xoyou2.common.SkyLog;
+import kr.co.genericit.mybase.xoyou2.fregment.MainFragment1;
+import kr.co.genericit.mybase.xoyou2.fregment.MainFragment2;
+import kr.co.genericit.mybase.xoyou2.fregment.MainFragment3;
+import kr.co.genericit.mybase.xoyou2.fregment.MainFragment4;
 import kr.co.genericit.mybase.xoyou2.interfaces.DialogClickListener;
 import kr.co.genericit.mybase.xoyou2.model.SlideMenuData;
 import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
@@ -98,12 +106,15 @@ public class MainActivity extends CommonActivity {
     private String id;
 
     //20220126
-    private ViewPager2 viewPager;
     private LinearLayout layoutDots;
     private int[] fragments;
     private TextView[] dots;
     private ViewsSliderAdapter mAdapter;
     private boolean initDotted = true;
+
+
+    //SKY
+    private ViewPager2 mViewPager;
 
     @Override
     protected void onResume() {
@@ -122,6 +133,7 @@ public class MainActivity extends CommonActivity {
         id = jwSharePreference.getString(JWSharePreference.PREFERENCE_LOGIN_ID,"");
 
         initView();
+        init();
         AddUserInfo addUserInfo = new AddUserInfo("id","5","1212","name","1","2222","");
         Log.v("CHECK","DDDDD :: " + addUserInfo.toString() );
 
@@ -133,6 +145,70 @@ public class MainActivity extends CommonActivity {
         this.getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
+    private void init(){
+        navView = findViewById(R.id.nav_view);
+        mViewPager = findViewById(R.id.view_pager);
+        TextView btnOpenDrawer = findViewById(R.id.btn_slide);
+        btnOpenDrawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(drawerView);
+            }
+        });
+        setupViewPager();
+        setupBottomView();
+    }
+
+    private void setupBottomView(){
+        navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.navigation_forme) {
+                    SkyLog.d("==navigation_forme==");
+                    return true;
+                }else if (item.getItemId() == R.id.navigation_with) {
+                    SkyLog.d("==navigation_with==");
+                    return true;
+                }else if (item.getItemId() == R.id.navigation_mylife) {
+                    SkyLog.d("==navigation_mylife==");
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+    public void setupViewPager() {
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(MainFragment1.newInstance(0));
+        fragments.add(MainFragment2.newInstance(1));
+        fragments.add(MainFragment3.newInstance(1));
+        fragments.add(MainFragment4.newInstance(1));
+
+
+        SectionPageAdapter viewPager2Adapter = new SectionPageAdapter(this, fragments);
+        mViewPager.setAdapter(viewPager2Adapter);
+        mViewPager.registerOnPageChangeCallback(viewPagerCallback);
+        addBottomDots(0);
+    }
+
+    private ViewPager2.OnPageChangeCallback viewPagerCallback = new ViewPager2.OnPageChangeCallback() {
+        @Override
+        public void onPageSelected(int pos) {
+            super.onPageSelected(pos);
+            SkyLog.e("current =" + pos);
+            addBottomDots(pos);
+            if (pos == 0) {
+                navView.setSelectedItemId(R.id.navigation_forme);
+            } else if(pos == 1){
+                navView.setSelectedItemId(R.id.navigation_with);
+            } else if(pos == 2){
+                navView.setSelectedItemId(R.id.navigation_with);
+            } else {
+                navView.setSelectedItemId(R.id.navigation_mylife);
+            }
+        }
+    };
+
     public void MainOpenDrawer(){
         drawerLayout.openDrawer(drawerView);
     }
@@ -143,80 +219,19 @@ public class MainActivity extends CommonActivity {
     public RelativeLayout floatingButton;
     public void initView(){
 
-        viewPager = findViewById(R.id.view_pager);
         layoutDots = findViewById(R.id.layoutDots);
-        setViewPager();
-
-
-        //floatingButton = findViewById(R.id.btn_keyword_input);
-
-        //슬라이드메뉴
-        // 전체화면인 DrawerLayout 객체 참조
         drawerLayout = findViewById(R.id.drawerLayout);
-
-        // Drawer 화면(뷰) 객체 참조
         drawerView = findViewById(R.id.drawer);
-        // 드로어 화면을 열고 닫을 버튼 객체 참조
-        TextView btnOpenDrawer = findViewById(R.id.btn_slide);
 
-        // 드로어 여는 버튼 리스너
-        btnOpenDrawer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(drawerView);
-            }
-        });
+        //슬라이드 메뉴 여는 명령어
+        //drawerLayout.openDrawer(drawerView);
 
-//        setViewPager();
-
-//        main_title = findViewById(R.id.main_title);
-//        main_image = findViewById(R.id.main_image);
 
         //상단 타이틀 제거
         getSupportActionBar().hide();
 
         //슬라이드메뉴 초기화
         initSlideMenuView();
-
-        /*navView = findViewById(R.id.nav_view);
-
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_manage, R.id.navigation_store, R.id.navigation_home, R.id.navigation_find)
-                .build();
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
-
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                if(controller.getCurrentDestination().getId() == R.id.navigation_manage){
-//                    main_title.setText(R.string.title_manage);
-                    main_image.setImageResource(R.drawable.img_manage);
-                }else if(controller.getCurrentDestination().getId() == R.id.navigation_home){
-//                    main_title.setText(R.string.title_home);
-                    main_image.setImageResource(R.drawable.img_home);
-                }else if(controller.getCurrentDestination().getId() == R.id.navigation_store){
-//                    main_title.setText(R.string.title_store);
-                    main_image.setImageResource(R.drawable.img_store);
-                }else if(controller.getCurrentDestination().getId() == R.id.navigation_find){
-//                    main_title.setText(R.string.title_find);
-                    main_image.setImageResource(R.drawable.img_findme);
-                }
-//                else if(controller.getCurrentDestination().getId() == R.id.navigation_recommend){
-////                    main_title.setText(R.string.title_house);
-//                    main_image.setImageResource(R.drawable.img_house);
-//                }
-            }
-        });*/
-
-        /*findViewById(R.id.btn_keyword_input).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, KeywordInputActivity.class);
-                startActivity(i);
-            }
-        });*/
 
         findViewById(R.id.btn_logout).setOnClickListener(v ->{
             JWSharePreference sharePreference = new JWSharePreference();
@@ -236,32 +251,8 @@ public class MainActivity extends CommonActivity {
         });
     }
     /**
-     * 탑페이지뷰
-     */
-
-    public void setViewPager(){
-
-        fragments = new int[]{R.layout.fragment_main_top_1,
-                            R.layout.fragment_main_top_2,
-                            R.layout.fragment_main_top_3,
-                            R.layout.fragment_main_top_4};
-
-        mainTopView = new ArrayList<>();
-        mAdapter = new ViewsSliderAdapter();
-        viewPager.setAdapter(mAdapter);
-        viewPager.registerOnPageChangeCallback(pageChangeCallback);
-
-        addBottomDots(0);
-    }
-
-
-
-
-
-    /**
      * 슬라이드메뉴
      */
-
     private void initSlideMenuView(){
         //사용자
         String[] mSlideMenuItemText1 = getResources().getStringArray(R.array.slide_menu_1);
@@ -332,7 +323,6 @@ public class MainActivity extends CommonActivity {
 
 
     }
-
     public void setUserInfo(){
         JWSharePreference sharePreference = new JWSharePreference();
         String name = sharePreference.getString(JWSharePreference.PREFERENCE_LOGIN_NAME,"");
@@ -535,9 +525,6 @@ public class MainActivity extends CommonActivity {
         }));
         ActionRuler.getInstance().runNext();
     }
-
-
-
     public void requestUserList(){ //유저리스트
         ActionRuler.getInstance().addAction(new ActionRequestUserList(this,id, new ActionResultListener<UserListResult>() {
             @Override
@@ -639,7 +626,6 @@ public class MainActivity extends CommonActivity {
         }));
         ActionRuler.getInstance().runNext();
     }
-
     public void requestCoinData(){
         ActionRuler.getInstance().addAction(new ActionRequestCoinData(this, new ActionResultListener<CoinDataResult>() {
 
@@ -678,7 +664,6 @@ public class MainActivity extends CommonActivity {
         }));
         ActionRuler.getInstance().runNext();
     }
-
     OnBackPressedCallback callback = new OnBackPressedCallback(true) {
         @Override
         public void handleOnBackPressed() {
@@ -688,46 +673,11 @@ public class MainActivity extends CommonActivity {
         }
     };
 
-    //ViewPager관련
-    private void FragmentView(int fragment){
-
-        //FragmentTransactiom를 이용해 프래그먼트를 사용합니다.
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        switch (fragment){
-            case 0:
-                // 홈 프래그먼트 호출
-                HomeFragment homeFragment = new HomeFragment();
-                transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment);
-                transaction.commit();
-                break;
-
-            case 1:
-                // 매니지 프래그먼트 호출
-                ManageFragment manageFragment = new ManageFragment();
-                transaction.replace(R.id.nav_host_fragment_activity_main, manageFragment);
-                transaction.commit();
-                break;
-            case 2:
-                // 스토어 프래그먼트 호출
-                StoreFragment storeFragment = new StoreFragment();
-                transaction.replace(R.id.nav_host_fragment_activity_main, storeFragment);
-                transaction.commit();
-                break;
-            case 3:
-                // FindMe 프래그먼트 호출
-                FindFragment findFragment = new FindFragment();
-                transaction.replace(R.id.nav_host_fragment_activity_main, findFragment);
-                transaction.commit();
-                break;
-        }
-
-    }
 
 
     private void addBottomDots(int currentPage) {
         Log.v("ifeelbluu","addBottomDots :: " +currentPage);
-        dots = new TextView[fragments.length];
+        dots = new TextView[4];
 
         layoutDots.removeAllViews();
         for (int i = 0; i < dots.length; i++) {
@@ -743,47 +693,6 @@ public class MainActivity extends CommonActivity {
 
     }
 
-    String[] titleString = {
-            CommandUtil.getInstance().getStr(R.string.fragment_home_result),
-            CommandUtil.getInstance().getStr(R.string.fragment_manage_title),
-            CommandUtil.getInstance().getStr(R.string.fragment_store_1),
-            CommandUtil.getInstance().getStr(R.string.fragment_find_title)
-    };
-
-    ViewPager2.OnPageChangeCallback pageChangeCallback = new ViewPager2.OnPageChangeCallback() {
-        @Override
-        public void onPageSelected(int position) {
-            super.onPageSelected(position);
-            if(!initDotted) addBottomDots(position);
-            FragmentView(position);
-            initDotted = false;
-
-            CurrentPosition = position;
-            Log.v("ifeelbluu", "mainTopView Size :: " + mainTopView.size());
-
-            String mainText = "";
-            switch (position){
-                case 0:
-                    String name = jwSharePreference.getString(JWSharePreference.PREFERENCE_LOGIN_NAME,"");
-                    mainText = CommandUtil.getInstance().getStr(R.string.fragment_home_result).replaceAll("name", name);
-                    break;
-                case 1:
-                    try {
-                        mainText = Constants.MainData.getString("InfoTitle");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case 2:
-                    mainText = CommandUtil.getInstance().getStr(R.string.fragment_store_1);
-                    break;
-                case 3:
-//                    mainText = CommandUtil.getInstance().getStr(R.string.fragment_store_1);
-                    break;
-            }
-            setMainTopText(mainText);
-        }
-    };
 
     public int CurrentPosition = 0;
     public ArrayList<View> mainTopView;

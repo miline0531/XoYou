@@ -1,16 +1,21 @@
 package kr.co.genericit.mybase.xoyou2.activity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import kr.co.genericit.mybase.xoyou2.R;
 import kr.co.genericit.mybase.xoyou2.common.CommonActivity;
+import kr.co.genericit.mybase.xoyou2.common.SkyLog;
 import kr.co.genericit.mybase.xoyou2.interfaces.DialogClickListener;
 import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
 import kr.co.genericit.mybase.xoyou2.network.interfaces.ActionResultListener;
@@ -33,8 +38,8 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
     private String IN_SEQ="",USER_ID="",GWANGYE="",NICK_NAME="",NAME="",MW="1",BIRTH_DATE="",IMAGE_URL="";
     private DatePickerDialog datePickerDialog;
     private JWSharePreference jwSharePreference;
-
-
+    private Button btn_contract;
+    private final int CONTRACT_REQUEST_IDX = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,29 +47,6 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
 
         initView();
-
-        setupBtn.setOnClickListener(v ->{
-            IN_SEQ = jwSharePreference.getString(JWSharePreference.PREFERENCE_USER_SEQ,"");
-            USER_ID = jwSharePreference.getString(JWSharePreference.PREFERENCE_LOGIN_ID,"");
-            GWANGYE = relationEdt.getText().toString();
-            NAME = nameEdt.getText().toString();
-            NICK_NAME = NAME;
-            MW = "1";
-            BIRTH_DATE = tv_birthday.getText().toString();
-            IMAGE_URL = "";
-
-            if(GWANGYE.equals("")||NAME.equals("")||NICK_NAME.equals("")||BIRTH_DATE.equals("")){
-                //todo 입력오류 얼럿!!
-            }else{
-                if(seq == -1){
-                    requestAddRelationship(); //등록
-                }else{
-                    requestUpdateRelationship();//수정
-                }
-
-            }
-
-        });
 
 
 //        Calendar c = Calendar.getInstance();
@@ -80,12 +62,6 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
 //            }
 //        }, 1970, 0, 1);
 //
-//        btn_birthday.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                datePickerDialog.show();
-//            }
-//        });
 
     }
 
@@ -137,9 +113,7 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
     private void requestAddRelationship(){
         final String year = BIRTH_DATE.substring(0,4);
 
-        Log.d("TEST",IN_SEQ+"\t"+USER_ID+"\t"+GWANGYE+"\t"+NICK_NAME+"\t"+NAME+"\t"+MW+"\t"+year+"\t"+IMAGE_URL);
-
-
+        SkyLog.d(""+IN_SEQ+"\t"+USER_ID+"\t"+GWANGYE+"\t"+NICK_NAME+"\t"+NAME+"\t"+MW+"\t"+year+"\t"+IMAGE_URL);
         ActionRuler.getInstance().addAction(new ActionRequestAddRelation(this,IN_SEQ,USER_ID,GWANGYE,NICK_NAME,NAME,MW,year,IMAGE_URL, new ActionResultListener<AddRelationResult>() {
             @Override
             public void onResponseResult(AddRelationResult response) {
@@ -151,8 +125,7 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
                         //성공
                         message = CommandUtil.getInstance().getStr(R.string.add_relation_reg_success);
                         isFinish = true;
-
-                   }else{
+                    }else{
                         message = CommandUtil.getInstance().getStr(R.string.add_relation_reg_fail);
                     }
 
@@ -202,6 +175,7 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
         setupBtn = findViewById(R.id.btn_setup);
         btn_birthday = findViewById(R.id.btn_birthday);
         btn_cancel = findViewById(R.id.btn_cancel);
+        btn_contract = findViewById(R.id.btn_contract);
 
         jwSharePreference = new JWSharePreference();
 
@@ -224,6 +198,8 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
         }
 
         btn_cancel.setOnClickListener(this);
+        btn_contract.setOnClickListener(this);
+        setupBtn.setOnClickListener(this);
 
     }
 
@@ -234,6 +210,55 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
             case R.id.btn_cancel:
                 finish();
                 break;
+            case R.id.btn_contract:
+                Intent it = new Intent(AddRelationActivity.this , ContactActivity.class);
+                it.putExtra("" , "");
+                startActivityForResult(it , CONTRACT_REQUEST_IDX);
+                break;
+            case R.id.btn_setup:
+                SkyLog.d("GWANGYE :: " + relationEdt.getText().toString());
+                SkyLog.d("NICK_NAME :: " + nameEdt.getText().toString());
+                SkyLog.d("NAME :: " + nameEdt.getText().toString());
+                SkyLog.d("BIRTH_DATE :: " + tv_birthday.getText().toString());
+
+                IN_SEQ = jwSharePreference.getString(JWSharePreference.PREFERENCE_USER_SEQ,"");
+                USER_ID = jwSharePreference.getString(JWSharePreference.PREFERENCE_LOGIN_ID,"");
+                GWANGYE = relationEdt.getText().toString();
+                NAME = nameEdt.getText().toString();
+                NICK_NAME = NAME;
+                MW = "1";
+                BIRTH_DATE = tv_birthday.getText().toString();
+                IMAGE_URL = "";
+
+                if(GWANGYE.equals("")||NAME.equals("")||NICK_NAME.equals("")||BIRTH_DATE.equals("")){
+                    //todo 입력오류 얼럿!!
+                    Toast.makeText(AddRelationActivity.this , "필수항목을 모두 입력해주세요." , Toast.LENGTH_SHORT).show();
+                }else{
+                    if(seq == -1){
+                        requestAddRelationship(); //등록
+                    }else{
+                        requestUpdateRelationship();//수정
+                    }
+
+                }
+                break;
         }
     }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == RESULT_OK){
+            switch (requestCode){
+                // MainActivity 에서 요청할 때 보낸 요청 코드 (3000)
+                case CONTRACT_REQUEST_IDX:
+                    SkyLog.d("name :: " + data.getStringExtra("name"));
+                    SkyLog.d("number :: " + data.getStringExtra("number"));
+                    relationEdt.setText(data.getStringExtra("name"));
+
+                    break;
+            }
+        }
+    }
+
 }

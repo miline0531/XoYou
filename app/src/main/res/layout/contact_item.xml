@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="40dp"
+        android:id="@+id/default_img"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/img_profile_box"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/idid_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text=""
+            android:textColor="#fff"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_toRightOf="@+id/default_img"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        style="@style/text_regular"
+        android:lineSpacingExtra="8dp"
+        android:textSize="17dp"
+        android:textColor="#96a1ae" />
+
+    <TextView
+        android:id="@+id/number"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_gravity="center"
+        style="@style/text_regular"
+        android:layout_centerVertical="true"
+        android:paddingHorizontal="20dp"
+        android:lineSpacingExtra="8dp"
+        android:textSize="14dp"
+        android:textColor="#96a1ae" />
+
+
+
+</RelativeLayout>
