@@ -146,4 +146,7 @@
 
     </RelativeLayout>
 
+    <!--드로어 화면이 될 Layout-->
+
+
 </androidx.drawerlayout.widget.DrawerLayout>

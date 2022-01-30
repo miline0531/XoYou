@@ -160,6 +160,10 @@
         <activity
             android:name="kr.co.genericit.mybase.xoyou2.activity.ContactActivity"
             android:screenOrientation="portrait" />
+
+
+
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

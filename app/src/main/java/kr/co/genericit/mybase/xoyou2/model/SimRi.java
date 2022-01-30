@@ -15,6 +15,21 @@ public class SimRi implements Serializable {
     double iDou;
     boolean XO;
 
+    public SimRi(int id, int no, String nickName, String name, String userInfo, String gwanInfo, String simRiInfo, String value, double iDou, boolean XO) {
+        Id = id;
+        No = no;
+        NickName = nickName;
+        Name = name;
+        UserInfo = userInfo;
+        GwanInfo = gwanInfo;
+        SimRiInfo = simRiInfo;
+        Value = value;
+        this.iDou = iDou;
+        this.XO = XO;
+    }
+
+    public SimRi(){
+    }
     public int getId() {
         return Id;
     }

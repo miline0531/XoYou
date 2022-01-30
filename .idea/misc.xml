@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.19427083333333334" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/drawable/img_profile_box.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/activity_circle_graph_map.xml" value="0.19429347826086957" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/activity_login.xml" value="0.10030395136778116" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/activity_setting_relation.xml" value="0.13994565217391305" />
@@ -16,6 +17,12 @@
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/fragment_manage.xml" value="0.23052536231884058" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/fragment_store.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/main_fragment_one.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/mainfrag1_item.xml" value="0.23125" />
+        <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/mainfrag1left_item.xml" value="0.1" />
+        <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/popup_frag1main.xml" value="0.2421875" />
+        <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/view_slide_menu.xml" value="0.23125" />
+        <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/view_slide_menu2.xml" value="0.23125" />
+        <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/view_slide_menu3.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/menu/mymong_toolbar.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/ifeelbluu/StudioProjects/jw_android/app/src/main/res/layout/activity_main.xml" value="0.3229166666666667" />

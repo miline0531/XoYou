@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lb_slide3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/view_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#434343"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="건강 관련 질문"
+        android:textColor="#fff"
+        android:textSize="16dp" />
+
+
+    <TextView
+        android:id="@+id/view_bottom"
+        android:layout_width="match_parent"
+        android:text="질문 항목 선택"
+        android:gravity="center"
+        android:background="#434343"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:textSize="16dp"
+        android:textColor="#fff"
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:id="@+id/list_left3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/view_bottom"
+        android:layout_below="@+id/view_top"
+        android:divider="#c3c3c3"
+        android:dividerHeight="1px" />
+
+
+</RelativeLayout>
