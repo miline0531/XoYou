@@ -9,6 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/topview"
         android:background="@drawable/myyouyopimage4"
         android:layout_height="240dp">
 
@@ -37,6 +38,17 @@
 
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/centerTxt"
+        android:layout_below="@+id/topview"
+        android:background="#c3c3c3c3"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:text="1월27일(목) 10시~11시 이별에 도움이 되는 등록인 순"
+        android:layout_height="wrap_content"/>
 
 
 

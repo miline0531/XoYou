@@ -1,5 +1,6 @@
 package kr.co.genericit.mybase.xoyou2.fregment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +12,18 @@ import androidx.viewpager.widget.ViewPager;
 import kr.co.genericit.mybase.xoyou2.R;
 
 public class MainFragment4 extends Fragment {
-    ViewPager viewPager;
+    public Activity ac;
 
-    public static MainFragment4 newInstance(int number) {
-        MainFragment4 fragment2 = new MainFragment4();
+    public static MainFragment4 newInstance(int number, Activity _ac) {
+        MainFragment4 fragment2 = new MainFragment4(_ac);
         Bundle bundle = new Bundle();
         bundle.putInt("number", number);
         fragment2.setArguments(bundle);
         return fragment2;
     }
 
-    public MainFragment4(){
-
+    public MainFragment4(Activity _ac){
+        this.ac = _ac;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){

@@ -179,10 +179,10 @@ public class MainActivity extends CommonActivity {
     }
     public void setupViewPager() {
         ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(MainFragment1.newInstance(0));
-        fragments.add(MainFragment2.newInstance(1));
-        fragments.add(MainFragment3.newInstance(1));
-        fragments.add(MainFragment4.newInstance(1));
+        fragments.add(MainFragment1.newInstance(0 , MainActivity.this));
+        fragments.add(MainFragment2.newInstance(1 , MainActivity.this));
+        fragments.add(MainFragment3.newInstance(2 , MainActivity.this));
+        fragments.add(MainFragment4.newInstance(3 , MainActivity.this));
 
 
         SectionPageAdapter viewPager2Adapter = new SectionPageAdapter(this, fragments);

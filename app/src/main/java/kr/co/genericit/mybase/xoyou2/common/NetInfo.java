@@ -11,7 +11,7 @@ public class NetInfo {
     public static String SERVER_MAIN_URL = "http://api.soulway.world:3100/";
     public static String SERVER_VERSION_CHECK_URL = "http://35.72.101.26/";
     public static String SERVER_RELATION_URL = "http://35.72.101.26/";
-    public static String SERVER_BASE_URL = "http://15.165.134.221:7081/";
+    public static String SERVER_BASE_URL = "http://15.165.134.221:7081";
     public static String SERVER_BASE_URL2 = "http://15.165.134.221:7081/";
 //    public static String SERVER_BASE_URL = "http://192.168.0.55:8081/";
 //    public static String SERVER_BASE_URL2 = "http://192.168.0.55:8081/";
