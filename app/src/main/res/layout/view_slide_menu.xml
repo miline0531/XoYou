@@ -5,163 +5,177 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/app_slide_bg"
-    android:paddingHorizontal="10dp"
-    android:paddingVertical="20dp">
+    android:background="#F4F4F4"
+    android:paddingTop="20dp">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-
         <LinearLayout
-            android:id="@+id/slide_menu_self"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/icon_profile"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:adjustViewBounds="true"
-                android:background="@drawable/icon_m"/>
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/slide_menu_self"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="15dp">
-                <TextView
-                    android:id="@+id/txt_slide_name"
-                    style="@style/text_semibold"
+                android:padding="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/icon_profile"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/icon_m"/>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#ececec"
-                    android:textSize="20dp"
-                    android:text="sunsun.1990"/>
-                <TextView
-                    android:id="@+id/txt_slide_birth"
-                    style="@style/text_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#96a1ae"
-                    android:textSize="16dp"
-                    android:text="Setting ID"
-                    android:layout_marginTop="2dp"/>
+                    android:orientation="vertical"
+                    android:layout_marginLeft="15dp">
+                    <TextView
+                        android:id="@+id/txt_slide_name"
+                        style="@style/text_semibold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#222222"
+                        android:textSize="20dp"
+                        android:text="sunsun.1990"/>
+                    <TextView
+                        android:id="@+id/txt_slide_birth"
+                        style="@style/text_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/mong_grey_default"
+                        android:textSize="16dp"
+                        android:text="Setting ID"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/btn_setting"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/ic_baseline_settings_24"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/mong_grey_default"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_slide_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                style="@style/text_semibold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="20dp"
+                android:background="@color/mong_grey_default"
+                android:text="@string/slide_menu_0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_title"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_slide_2"
+                android:background="#1A8A8686"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:background="#1A8A8686"
+                android:paddingHorizontal="5dp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingVertical="5dp"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/icon_info"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/slide_menu_1"
+                        android:textColor="@color/mong_grey_default"
+                        android:textSize="@dimen/text_size_16"/>
+
+                </LinearLayout>
             </LinearLayout>
             <View
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <ImageView
-                android:id="@+id/btn_setting"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_baseline_settings_24"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="20dp"
-            android:background="@color/app_main_color_2"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_slide_1"
-            android:layout_marginVertical="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="20dp"
-            android:background="@color/app_main_color_2"/>
-
-        <TextView
-            style="@style/text_semibold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/slide_menu_0"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:layout_marginVertical="20dp"
-            android:paddingLeft="20dp"/>
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_slide_2"
-            android:layout_marginVertical="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="20dp"
-            android:background="@color/app_main_color_2"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="30dp">
-            <LinearLayout
-                android:id="@+id/btn_explain"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:paddingVertical="10dp"
-                android:layout_weight="1">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/slide_icon"/>
-
-                <TextView
-                    style="@style/text_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="#c3d0df"
-                    android:textSize="15dp"
-                    android:text="@string/slide_menu_1"/>
-            </LinearLayout>
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/mong_grey_default"/>
             <LinearLayout
                 android:id="@+id/btn_logout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:paddingVertical="10dp"
-                android:layout_weight="1">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/slide_icon"/>
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:background="#1A8A8686"
+                android:paddingHorizontal="5dp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingVertical="5dp"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/icon_logout"/>
+                </LinearLayout>
 
-                <TextView
-                    style="@style/text_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="#c3d0df"
-                    android:textSize="15dp"
-                    android:text="@string/slide_menu_2"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/slide_menu_2"
+                        android:textColor="@color/mong_grey_default"
+                        android:textSize="@dimen/text_size_16"/>
+
+                </LinearLayout>
             </LinearLayout>
+
+
         </LinearLayout>
 
 
-
-    </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

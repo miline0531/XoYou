@@ -288,21 +288,35 @@ public class MainActivity extends CommonActivity {
         initSlideMenuView();
 
         findViewById(R.id.btn_logout).setOnClickListener(v ->{
-            JWSharePreference sharePreference = new JWSharePreference();
-            sharePreference.setInt(JWSharePreference.PREFERENCE_SRL, 0);
-            sharePreference.setString(JWSharePreference.PREFERENCE_LOGIN_ID, "");
-            sharePreference.setString(JWSharePreference.PREFERENCE_USER_ID, "");
-            sharePreference.setString(JWSharePreference.PREFERENCE_LOGIN_NAME, "");
-            sharePreference.setString(JWSharePreference.PREFERENCE_LOGIN_BIRTH, "");
-            sharePreference.setInt(JWSharePreference.PREFERENCE_GENDER, -1);
-//                    sharePreference.setString(JWSharePreference.PREFERENCE_USER_ID, "1");
-            sharePreference.setString(JWSharePreference.PREFERENCE_LOGIN_TOKEN, "");
-            sharePreference.setString(JWSharePreference.PREFERENCE_LOGIN_FLAG, "N");
-
-            Intent i = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(i);
-            finish();
+            String confirm = CommandUtil.getInstance().getStr(R.string.str_cofirm);
+            String cancel = CommandUtil.getInstance().getStr(R.string.str_cancel);
+            String message = CommandUtil.getInstance().getStr(R.string.str_logout);
+            CommandUtil.getInstance().showCommonTwoButtonDialog(this, message, cancel, confirm, new DialogClickListener() {
+                @Override
+                public void onClick(int button) { //확인 : 2 , 취소 : 1
+                    if(button==2){
+                        logout();
+                    }
+                }
+            });
         });
+    }
+
+    private void logout(){
+        JWSharePreference sharePreference = new JWSharePreference();
+        sharePreference.setInt(JWSharePreference.PREFERENCE_SRL, 0);
+        sharePreference.setString(JWSharePreference.PREFERENCE_LOGIN_ID, "");
+        sharePreference.setString(JWSharePreference.PREFERENCE_USER_ID, "");
+        sharePreference.setString(JWSharePreference.PREFERENCE_LOGIN_NAME, "");
+        sharePreference.setString(JWSharePreference.PREFERENCE_LOGIN_BIRTH, "");
+        sharePreference.setInt(JWSharePreference.PREFERENCE_GENDER, -1);
+//                    sharePreference.setString(JWSharePreference.PREFERENCE_USER_ID, "1");
+        sharePreference.setString(JWSharePreference.PREFERENCE_LOGIN_TOKEN, "");
+        sharePreference.setString(JWSharePreference.PREFERENCE_LOGIN_FLAG, "N");
+
+        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(i);
+        finish();
     }
     /**
      * 슬라이드메뉴

@@ -132,7 +132,7 @@
     <!--드로어 화면이 될 Layout-->
     <RelativeLayout
         android:id="@+id/drawer"
-        android:layout_width="300dp"
+        android:layout_width="220dp"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:background="#ffffff"
@@ -141,7 +141,7 @@
         <include
             layout="@layout/view_slide_menu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
 
 
     </RelativeLayout>

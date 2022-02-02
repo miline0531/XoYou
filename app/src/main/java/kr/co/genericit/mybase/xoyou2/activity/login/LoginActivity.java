@@ -4,15 +4,19 @@ import static kr.co.genericit.mybase.xoyou2.storage.JWSharePreference.PREFERENCE
 import static kr.co.genericit.mybase.xoyou2.storage.JWSharePreference.PREFERENCE_AUTO_LOGIN_ID;
 import static kr.co.genericit.mybase.xoyou2.storage.JWSharePreference.PREFERENCE_AUTO_LOGIN_PASS;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -207,6 +211,11 @@ public class LoginActivity extends CommonActivity {
     private final int INTRO_BG_ANIMATION = 1;
     private final int INTRO_VERSION_UPDATE = 2;
 
+    public static int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE= 5469;
+    public static boolean Prem = false;
+    public static boolean isPerm(){
+        return Prem;
+    }
     //인트로 및 버전 체크 핸들러
     private final Handler LoginHandler = new Handler(){
         @Override
@@ -218,6 +227,9 @@ public class LoginActivity extends CommonActivity {
                 layout_intro_bg = findViewById(R.id.layout_intro_bg);
                 Animation animation = AnimationUtils.loadAnimation(getBaseContext(),R.anim.fade_out_1500);
                 layout_intro_bg.startAnimation(animation);
+                //권한 체크
+                Permission();
+                Prem = grantExternalStoragePermission();
             }else if(msg.what == INTRO_VERSION_UPDATE){
 //                Intent i = new Intent(LoginActivity.this,DownloadActivity.class);
 //                startActivity(i);
@@ -225,7 +237,84 @@ public class LoginActivity extends CommonActivity {
             }
         }
     };
+    public void Permission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M     // M 버전(안드로이드 6.0 마시멜로우 버전) 보다 같거나 큰 API에서만 설정창 이동 가능합니다.,
+                && !Settings.canDrawOverlays(this)) {                     //지금 창이 오버레이 설정창이 아니라면 조건 입니다.
+            PermissionOverlay();
+        } else {
+            System.out.println("버전이 낮거나 오버레이설정창이 아니라면");
+        }
+    }
 
+    @TargetApi(Build.VERSION_CODES.M)  //M 버전 이상 API를 타겟으로,
+    public void PermissionOverlay() {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + getPackageName()));
+        startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE);
+    }
+
+    /**********************
+     * Permission Check
+     **********************/
+    private boolean grantExternalStoragePermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(android.Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(android.Manifest.permission.PROCESS_OUTGOING_CALLS) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(android.Manifest.permission.RECEIVE_BOOT_COMPLETED) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(android.Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED
+            ) {
+                Log.v("ifeelbluu","Permission is granted");
+                return true;
+            }else{
+                Log.v("ifeelbluu","Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]
+                        {android.Manifest.permission.READ_CONTACTS,android.Manifest.permission.READ_CALL_LOG,
+                                android.Manifest.permission.CALL_PHONE,
+                                android.Manifest.permission.PROCESS_OUTGOING_CALLS,
+                                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                android.Manifest.permission.RECEIVE_BOOT_COMPLETED,
+                                android.Manifest.permission.READ_PHONE_STATE,
+                                android.Manifest.permission.READ_SMS,
+
+                        }, 1);
+
+                return false;
+            }
+        }else{
+            Toast.makeText(this, "External Storage Permission is Grant",
+                    Toast.LENGTH_SHORT).show();
+            Log.d("ifeelbluu", "External Storage Permission is Grant ");
+
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (Build.VERSION.SDK_INT >= 23) {
+            if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                Log.v("ifeelbluu","Permission: "+permissions[0]+ "was "+grantResults[0]);
+                //resume tasks needing this permission
+            }
+        }
+
+        if (requestCode == ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Settings.canDrawOverlays(this)) {
+                    // You have permission
+
+                    // 오버레이 설정창 이동 후 이벤트 처리합니다.
+
+                }
+            }
+        }
+    }
     public void sendRequestForLogin(final boolean pass){
         ActionRuler.getInstance().addAction(new ActionRequestLogin(this, id, pw, new ActionResultListener<LoginResult>() {
             @Override

@@ -2,60 +2,76 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_root"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:orientation="horizontal"
-    android:gravity="center_horizontal"
-    android:paddingHorizontal="30dp">
+    android:layout_height="81dp"
+    android:orientation="vertical">
     <LinearLayout
-        android:id="@+id/btn_slide_menu"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingVertical="10dp"
-        android:layout_weight="1">
-        <ImageView
-            android:id="@+id/img_slide_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/slide_icon"/>
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:paddingBottom="5dp">
 
-        <TextView
-            style="@style/text_regular"
-            android:id="@+id/txt_slide_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="#c3d0df"
-            android:textSize="15dp"
-            android:text=""/>
+        <RelativeLayout
+            android:id="@+id/btn_slide_menu"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img_slide_menu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/slide_icon"
+                android:layout_above="@+id/txt_slide_menu"
+                android:layout_centerHorizontal="true"
+                />
+
+            <TextView
+                style="@style/text_regular"
+                android:id="@+id/txt_slide_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/mong_grey_default"
+                android:textSize="15dp"
+                android:text=""
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_slide_count"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/img_slide_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_title"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_above="@+id/txt_slide_count"/>
+
+            <TextView
+                style="@style/text_regular"
+                android:id="@+id/txt_slide_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/mong_grey_default"
+                android:textSize="15dp"
+                android:text=""
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/btn_slide_count"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingVertical="10dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/img_slide_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="5"
-            android:textColor="#c3d0df"
-            android:textSize="@dimen/text_size_title"/>
-
-        <TextView
-            style="@style/text_regular"
-            android:id="@+id/txt_slide_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="#c3d0df"
-            android:textSize="15dp"
-            android:text=""/>
-    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/mong_grey_default"/>
 </LinearLayout>
