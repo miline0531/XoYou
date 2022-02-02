@@ -318,6 +318,7 @@ public class MainActivity extends CommonActivity {
         startActivity(i);
         finish();
     }
+
     /**
      * 슬라이드메뉴
      */

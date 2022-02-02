@@ -12,19 +12,19 @@
         android:fitsSystemWindows="true">
 
         <RelativeLayout
-            android:layout_width="match_parent"
             android:id="@+id/topview"
-            android:background="@drawable/myyouyopimage4"
-            android:layout_height="240dp">
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="@drawable/myyouyopimage4">
 
 
             <TextView
                 android:id="@+id/top_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:fontFamily="@font/gowunbatang_regular"
                 android:gravity="center_vertical"
-                android:layout_margin="10dp"
                 android:text="등록인: 18명\n남성: 12명\n여성: 6명"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/text_size_14sp" />
@@ -33,9 +33,9 @@
                 android:id="@+id/top_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:fontFamily="@font/gowunbatang_regular"
                 android:gravity="center_vertical"
-                android:layout_centerInParent="true"
                 android:text="현시간은 사업운이 좋고 이별운이 나쁩니다."
                 android:textColor="@color/color_yellow"
                 android:textSize="@dimen/text_size_body" />
