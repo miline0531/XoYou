@@ -3,11 +3,14 @@ package kr.co.genericit.mybase.xoyou2.activity.xoyou;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.RequiresApi;
@@ -25,6 +28,7 @@ import co.kr.sky.AccumThread;
 import kr.co.genericit.mybase.xoyou2.R;
 import kr.co.genericit.mybase.xoyou2.activity.MainActivity;
 import kr.co.genericit.mybase.xoyou2.adapter.MainFrag2ListAdapter;
+import kr.co.genericit.mybase.xoyou2.adapter.WeUnListAdapter;
 import kr.co.genericit.mybase.xoyou2.common.CommonUtil;
 import kr.co.genericit.mybase.xoyou2.common.NetInfo;
 import kr.co.genericit.mybase.xoyou2.common.SkyLog;
@@ -44,7 +48,7 @@ public class WeUnListActivity extends AppCompatActivity {
     private Map<String, String> map = new HashMap<String, String>();
     private ListView list;
     private ArrayList<WeYouUnDataListObj> weYouUnDataList = new ArrayList<WeYouUnDataListObj>();
-    private MainFrag2ListAdapter m_Adapter;
+    private WeUnListAdapter m_Adapter;
 
 
     @Override
@@ -75,6 +79,8 @@ public class WeUnListActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         obj = getIntent().getParcelableExtra("obj");
         mContext = this;
+        list = findViewById(R.id.list);
+
 
         getUnData();
 
@@ -94,6 +100,10 @@ public class WeUnListActivity extends AppCompatActivity {
         mThread.start();        //스레드 시작!!
     }
 
+    AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView parent, View view, int position, long id) {
+        }
+    };
 
     Handler mAfterAccum = new Handler() {
         @Override
@@ -121,7 +131,12 @@ public class WeUnListActivity extends AppCompatActivity {
                                     jsonObject.getString("Image") ,
                                     jsonObject.getString("Doui")));
                         }
-                        m_Adapter.notifyDataSetChanged();
+
+
+                        m_Adapter = new WeUnListAdapter( WeUnListActivity.this, weYouUnDataList);
+                        list.setOnItemClickListener(mItemClickListener);
+                        list.setAdapter(m_Adapter);
+
                     }else{
                         CommandUtil.getInstance().showCommonOneButtonDialog(mContext,
                                 jsonObject_succes.getString("error") + getClass().toString(),

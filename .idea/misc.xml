@@ -162,13 +162,27 @@
         <entry key="app/src/main/res/layout/fragment_manage.xml" value="0.11594202898550725" />
         <entry key="app/src/main/res/layout/fragment_store.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_bottom_sheet_default.xml" value="0.10208333333333333" />
+        <entry key="app/src/main/res/layout/item_calendar.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/item_calendar_header.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/item_card.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/item_date_list.xml" value="0.10677083333333333" />
+        <entry key="app/src/main/res/layout/item_day.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/item_day_empty.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/item_family_check.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/item_findme_list.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/item_frag_home_mong.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/item_location_list.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/item_manage_list_horizontal.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/item_manage_list_vertical.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_manage_list_vertical_bak.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_mymong_detail_4.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/item_mymong_detail_5.xml" value="0.10677083333333333" />
+        <entry key="app/src/main/res/layout/item_mymong_regist_image.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/item_mymong_regist_image_none.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/item_recommend_list.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/item_relation_swipe_view.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_slide_detail_menu.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/item_weunlist.xml" value="0.33" />
         <entry key="app/src/main/res/layout/mainfrag1_item.xml" value="0.151268115942029" />
         <entry key="app/src/main/res/layout/mainfrag2_item.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/notice_layout.xml" value="0.25" />
