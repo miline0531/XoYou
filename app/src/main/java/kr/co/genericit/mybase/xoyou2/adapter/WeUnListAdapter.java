@@ -68,7 +68,7 @@ public class WeUnListAdapter extends BaseAdapter {
 //        Log.e("SKY", "position : " + position);
 
 
-        String resName = "a_sample_icon"+0;
+        String resName = "recmd"+position;
         Glide.with(activity).load(board.getImage()).thumbnail(0.1f).centerCrop().placeholder(findRes(resName)).into(vh.manage_image_view);
 
         vh.item_name.setText(board.getName());

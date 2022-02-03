@@ -2,20 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#b3b3b3"
+    android:background="#cccccc"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <include
         android:id="@+id/common_back_top"
         layout="@layout/common_topview_5" />
+
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_below="@+id/common_back_top"
         android:layout_height="match_parent"
+        android:layout_below="@+id/common_back_top"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:divider="#a3a3a3"
-        android:layout_margin="10dp"
         android:dividerHeight="1px"
         android:listSelector="#00000000" />
 

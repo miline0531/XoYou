@@ -102,6 +102,9 @@ public class WeUnListActivity extends AppCompatActivity {
 
     AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View view, int position, long id) {
+            Intent it = new Intent(mContext , WeUnDetailActivity.class);
+            it.putExtra("obj" , weYouUnDataList.get(position));
+            startActivity(it);
         }
     };
 

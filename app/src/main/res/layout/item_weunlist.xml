@@ -6,20 +6,25 @@
     android:layout_margin="10dp"
     android:orientation="horizontal">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:cardCornerRadius="5dp">
+    <FrameLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/weun_img_box"
+        android:layout_width="90dp"
+        android:layout_height="90dp">
         <ImageView
+            android:layout_gravity="center"
             android:id="@+id/manage_image_view"
             android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </androidx.cardview.widget.CardView>
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
+    </FrameLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:padding="10dp"
         android:layout_height="match_parent">
 
@@ -35,14 +40,16 @@
 
         <TextView
             android:id="@+id/item_age"
+            android:textColor="#a7a7a7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
             android:layout_toRightOf="@+id/item_name"
+            android:gravity="center_vertical"
             android:text="친구 : 남성, 24세" />
 
         <TextView
+            android:textColor="#a7a7a7"
             android:id="@+id/item_info"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"

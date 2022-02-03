@@ -494,7 +494,7 @@ public class MymongBidActivity extends CommonActivity {
         xAxis.setValueFormatter(new MyXAxisValueFormatter(labels));
         xAxis.setTextColor(Color.WHITE);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setGridColor(Color.BLACK);
+        xAxis.setGridColor(Color.RED);
         xAxis.setAxisLineColor(Color.BLACK);
         xAxis.setDrawAxisLine(false);
         xAxis.setDrawGridLines(false);
