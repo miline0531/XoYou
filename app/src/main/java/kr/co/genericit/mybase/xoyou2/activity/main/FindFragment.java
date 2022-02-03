@@ -1,13 +1,7 @@
 package kr.co.genericit.mybase.xoyou2.activity.main;
 
-import static kr.co.genericit.mybase.xoyou2.storage.JWSharePreference.PREFERENCE_AUTO_FINGER_LOGIN;
-import static kr.co.genericit.mybase.xoyou2.storage.JWSharePreference.PREFERENCE_AUTO_LOGIN_ID;
-import static kr.co.genericit.mybase.xoyou2.storage.JWSharePreference.PREFERENCE_LOGIN_NAME;
-
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -20,34 +14,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.RadarChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
@@ -58,18 +38,12 @@ import java.util.Date;
 
 import kr.co.genericit.mybase.xoyou2.R;
 import kr.co.genericit.mybase.xoyou2.activity.MainActivity;
-import kr.co.genericit.mybase.xoyou2.activity.MongStoreSaveActivity;
-import kr.co.genericit.mybase.xoyou2.adapter.FindMeRecyclerviewAdapter;
-import kr.co.genericit.mybase.xoyou2.adapter.ReccomendRecyclerviewAdapter;
-import kr.co.genericit.mybase.xoyou2.common.Constants;
 import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
 import kr.co.genericit.mybase.xoyou2.network.interfaces.ActionResultListener;
 import kr.co.genericit.mybase.xoyou2.network.request.ActionRequestGetRealUn;
-import kr.co.genericit.mybase.xoyou2.network.request.ActionRequestStorySearch;
 import kr.co.genericit.mybase.xoyou2.network.response.DefaultResult;
 import kr.co.genericit.mybase.xoyou2.storage.JWSharePreference;
 import kr.co.genericit.mybase.xoyou2.utils.CommandUtil;
-import kr.co.genericit.mybase.xoyou2.utils.RecyclerDecoration;
 
 
 public class FindFragment extends Fragment {
@@ -168,7 +142,7 @@ public class FindFragment extends Fragment {
                 case 0:
                     break;
                 case 1:
-                    ((MainActivity)getActivity()).setMainTopText(name+CommandUtil.getInstance().getStr(R.string.mong_findme_un_load2));
+                    ((MainActivity)getActivity()).setMainTopText(name+ CommandUtil.getInstance().getStr(R.string.mong_findme_un_load2));
                     break;
             }
 //            setMainTopText(mainText);
@@ -196,7 +170,7 @@ public class FindFragment extends Fragment {
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(viewType, parent, false);
-            return new ViewsSliderAdapter.SliderViewHolder(view);
+            return new SliderViewHolder(view);
         }
 
         @Override

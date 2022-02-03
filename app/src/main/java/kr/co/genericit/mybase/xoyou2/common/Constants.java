@@ -4,7 +4,7 @@ package kr.co.genericit.mybase.xoyou2.common;
 import org.json.JSONObject;
 
 public class Constants {
-    public static final String APP_VERSION = "0.11";
+    public static final String APP_VERSION = "0.12";
 
     //계정사용자 정보
     public static String RootSEQ = "";

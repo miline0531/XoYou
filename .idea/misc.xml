@@ -147,6 +147,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home_left.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home_right.xml" value="0.10208333333333333" />
+        <entry key="app/src/main/res/layout/fragment_main_top_1.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/fragment_main_top_2.xml" value="0.1671875" />
         <entry key="app/src/main/res/layout/fragment_main_top_3.xml" value="0.1671875" />
         <entry key="app/src/main/res/layout/fragment_main_top_4.xml" value="0.1671875" />
@@ -160,6 +161,7 @@
         <entry key="app/src/main/res/layout/item_mymong_detail_5.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/item_relation_swipe_view.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_slide_detail_menu.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/mainfrag2_item.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/notice_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/view_mymong_bid_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout/view_mymong_pwauth_dialog.xml" value="0.335" />

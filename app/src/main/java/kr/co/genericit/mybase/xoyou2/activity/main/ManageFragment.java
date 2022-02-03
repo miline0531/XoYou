@@ -1,267 +1,132 @@
 package kr.co.genericit.mybase.xoyou2.activity.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.appbar.AppBarLayout;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import co.kr.sky.AccumThread;
 import kr.co.genericit.mybase.xoyou2.R;
 import kr.co.genericit.mybase.xoyou2.activity.MainActivity;
-import kr.co.genericit.mybase.xoyou2.activity.MymongBidActivity;
-import kr.co.genericit.mybase.xoyou2.adapterxo.XoYouUserLoadRecyclerviewAdapter;
-import kr.co.genericit.mybase.xoyou2.common.Constants;
-import kr.co.genericit.mybase.xoyou2.model.SimRi;
-import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
-import kr.co.genericit.mybase.xoyou2.network.interfaces.ActionResultListener;
-import kr.co.genericit.mybase.xoyou2.network.requestxo.ActionRequestXoYouUserLoad;
-import kr.co.genericit.mybase.xoyou2.network.response.DefaultResult;
+import kr.co.genericit.mybase.xoyou2.adapter.MainFrag2ListAdapter;
+import kr.co.genericit.mybase.xoyou2.adapter.ManageHorizontalRecyclerviewAdapter;
+import kr.co.genericit.mybase.xoyou2.common.NetInfo;
+import kr.co.genericit.mybase.xoyou2.common.SkyLog;
+import kr.co.genericit.mybase.xoyou2.model.WeListObj;
 import kr.co.genericit.mybase.xoyou2.storage.JWSharePreference;
-import kr.co.genericit.mybase.xoyou2.utils.LogUtil;
-import kr.co.genericit.mybase.xoyou2.utils.RecyclerDecoration;
+import kr.co.genericit.mybase.xoyou2.utils.CommandUtil;
+import kr.co.genericit.mybase.xoyou2.view.CommonPopupDialog;
 
 
 public class ManageFragment extends Fragment {
-    private Context mContext;
-    private String mCurrentTabIndex = "1";
-    private NestedScrollView scrollView;
-    private JWSharePreference jwSharePreference;
-    private ArrayList<SimRi> dataList;
-    private boolean isLoading = false;
-    private int currentPage = 0;
+    public Context mContext;
+
+    //SKY
+    private AccumThread mThread;
+    private Map<String, String> map = new HashMap<String, String>();
+    private RecyclerView list;
+    private ArrayList<WeListObj> weList = new ArrayList<WeListObj>();
+    private MainFrag2ListAdapter m_Adapter;
+
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-
-        //context가져오기
         mContext = context;
     }
+
 
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)getActivity()).visibleFloatingButton(View.VISIBLE);
+        SkyLog.d("-- onResume --");
 
-        if(isBidMove){
-            isBidMove = false;
-            //requestMyMongList(mCurrentTabIndex,data);
-        }
-
+        getWeList();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_manage, container, false);
+        View view = inflater.inflate(R.layout.fragment_manage, container, false);
 
-        jwSharePreference = new JWSharePreference();
-        rcv_vertical = v.findViewById(R.id.rcv_manage_list_vertical);
-        setRecycler();
+        list = (RecyclerView)view.findViewById(R.id.list);
+        list.setLayoutManager(new LinearLayoutManager(mContext)) ;
 
-        initData();
+        m_Adapter = new MainFrag2ListAdapter( mContext, weList);
+        m_Adapter.setListOnClickListener(mItemClickListener);
+        list.setAdapter(m_Adapter);
 
-        setTabLayout(v);
-
-        v.findViewById(R.id.btn_menu).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity)getActivity()).MainOpenDrawer();
-            }
-        });
-
-        AppBarLayout collapsingView = v.findViewById(R.id.collapsingView);
-        collapsingView.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                int visible = 0;
-                if (Math.abs(verticalOffset)-appBarLayout.getTotalScrollRange() == 0){
-                    visible = View.GONE;
-                }else{
-                    visible = View.VISIBLE;
-                }
-                ((MainActivity)getActivity()).visibleFloatingButton(visible);
-            }
-        });
-
-        TextView top_result = v.findViewById(R.id.top_result);
-        String resultStr = "";
-        try {
-            resultStr = Constants.MainData.getString("ManageTitle");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //top_result.setText(resultStr);
-        return v;
+        return view;
     }
 
-    public void initData(){
-        requestMyMongList(mCurrentTabIndex,data);
-    }
-
-    private boolean isBidMove = false;
-    public XoYouUserLoadRecyclerviewAdapter.listOnClickListener onClick = new XoYouUserLoadRecyclerviewAdapter.listOnClickListener() {
+    public MainFrag2ListAdapter.listOnClickListener mItemClickListener = new MainFrag2ListAdapter.listOnClickListener() {
         @Override
         public void onClickItem(int id, int action) {
-            Intent i = new Intent(getActivity(), MymongBidActivity.class);
-            i.putExtra("SEQ",data.get(id).getId());
-            startActivity(i);
-            isBidMove = true;
+            SkyLog.d("CLACIK id :: "  + id);
+            SkyLog.d("CLACIK action :: "  + action);
         }
     };
 
+    private void getWeList(){
+        CommandUtil.getInstance().showLoadingDialog(MainActivity.mainAc);
+        map.clear();
+        map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_WE_LIST);
+        map.put("userId", new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+        //스레드 생성
+        mThread = new AccumThread(mContext, mAfterAccum, map, 5, 0, null);
+        mThread.start();        //스레드 시작!!
     }
 
 
-    //Manage화면
-    private RecyclerView rcv_vertical;
-    private RecyclerView.Adapter adapter_horizontal1;
-    private XoYouUserLoadRecyclerviewAdapter adapter_vertical;
-    private LinearLayout btn1,btn2,btn3,btn4;
-    private ArrayList<SimRi> data = new ArrayList<>();
-    public void setRecycler(){
-
-        rcv_vertical.setLayoutManager(new LinearLayoutManager(mContext));
-        adapter_vertical = new XoYouUserLoadRecyclerviewAdapter(mContext,data);
-        adapter_vertical.setListOnClickListener(onClick);
-        rcv_vertical.setAdapter(adapter_vertical);
-
-        RecyclerDecoration spaceDecoration3 = new RecyclerDecoration(10,"vertical");
-        rcv_vertical.addItemDecoration(spaceDecoration3);
-
-        initScrollListener();
-    }
-
-    private ArrayList<TextView> tabText;
-    private ArrayList<View> tabUnderBar;
-
-    private void requestMyMongList(String viewType,ArrayList<SimRi> dataList){
-        String userId = String.valueOf(jwSharePreference.getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
-        ActionRuler.getInstance().addAction(new ActionRequestXoYouUserLoad(getActivity(),userId, new ActionResultListener<DefaultResult>() {
-
-            @Override
-            public void onResponseResult(DefaultResult response) {
+    Handler mAfterAccum = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            CommandUtil.getInstance().dismissLoadingDialog();
+            if(msg.arg1 == 0) {
+                String res  = (String)msg.obj;
+                SkyLog.d("res 0: " + res);
                 try {
-                    DefaultResult result = response;
-                    Log.d("TEST",result.getData().toString());
+                    JSONObject jsonObject_succes = new JSONObject(res);                     //SUCCESS
+                    if(jsonObject_succes.getString("success").equals("true")){
+                        JSONArray jsonObject_listWe = new JSONArray(jsonObject_succes.getString("data"));
 
-                    if(result.isSuccess()){
-                        dataList.clear();
-                        dataList.addAll(stringToArrayList(result.getData()));
-                        Log.d("TEST",dataList.size()+"");
-                        adapter_vertical.notifyDataSetChanged();
-                        currentPage++;
+                        SkyLog.d("COUNT :: " + jsonObject_listWe.length());
+                        weList.clear();
+                        for (int i = 0; i < jsonObject_listWe.length(); i++) {
+                            JSONObject jsonObject = jsonObject_listWe.getJSONObject(i);
+                            weList.add(new WeListObj(
+                                    jsonObject.getString("No") ,
+                                    jsonObject.getString("UnName") ,
+                                    jsonObject.getString("MaxName") ,
+                                    jsonObject.getString("MinName")));
+                        }
+                        m_Adapter.notifyDataSetChanged();
                     }else{
+                        CommandUtil.getInstance().showCommonOneButtonDialog(mContext,
+                                jsonObject_succes.getString("error") + getClass().toString(),
+                                mContext.getResources().getString(R.string.str_cofirm),
+                                CommonPopupDialog.COMMON_DIALOG_OPTION_CLOSE_DIALOG,
+                                null);
                     }
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                }catch (Exception e){
+                    SkyLog.d("e :: " + e);
                 }
             }
-
-            @Override
-            public void onResponseError(String message) {
-                //Toast.makeText(getContext(), "꿈 가져오기 실패.\n잠시 후 다시 시도해주세요.",Toast.LENGTH_SHORT).show();
-                LogUtil.LogD("꿈 가져오기 실패!!!!");
-            }
-        }));
-        ActionRuler.getInstance().runNext();
-    }
-    private void initScrollListener() {
-        rcv_vertical.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-
-            }
-
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-
-                if (layoutManager != null && layoutManager.findLastCompletelyVisibleItemPosition()==data.size()-1) {
-                    //더이상 스크롤 할수 없을때 direction : -1.최상단, 1.최하단
-                    //리스트 마지막
-                    isLoading = true;
-                    //requestReadMoreMyMongList(mCurrentTabIndex,data);
-                    Log.d("TEST","최하단");
-                    Log.d("TEST","position : " + layoutManager.findLastCompletelyVisibleItemPosition());
-
-                }
-            }
-        });
-    }
-
-    private void setTabLayout(View v){
-        tabText = new ArrayList<>();
-        tabUnderBar = new ArrayList<>();
-
-        for(int i=0; i<4; i++){
-            TextView item = v.findViewById(findRes("txt_keyword"+(i+1), "id"));
-            tabText.add(item);
-            View item2 = v.findViewById(findRes("view_under_line"+(i+1), "id"));
-            tabUnderBar.add(item2);
         }
-    }
-
-    //리소스 아이디참조
-    public int findRes(String pVariableName, String type) {
-        Log.v("ifeelbluu","findRes ::: "  + pVariableName);
-        try {
-            return mContext.getResources().getIdentifier(pVariableName, type, mContext.getPackageName());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
-    public ArrayList<SimRi> stringToArrayList(String data) throws JSONException {
-        JSONObject jsonObj = new JSONObject(data);
-        JSONArray jsonArray = new JSONArray(jsonObj.getString("listSimRi"));
-        ArrayList<SimRi> arrayList = new ArrayList<>();
-        for(int i=0; i<jsonArray.length(); i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            SimRi simri = new SimRi();
-            //TODO 데이터 추가
-            simri.setId(jsonObject.getInt("Id"));
-            simri.setNo(jsonObject.getInt("No"));
-            simri.setNickName(jsonObject.getString("NickName"));
-            simri.setName(jsonObject.getString("Name"));
-            simri.setUserInfo(jsonObject.getString("UserInfo"));
-            simri.setGwanInfo(jsonObject.getString("GwanInfo"));
-            simri.setSimRiInfo(jsonObject.getString("SimRiInfo"));
-            simri.setValue(jsonObject.getString("Value"));
-            simri.setiDou(jsonObject.getDouble("iDou"));
-            simri.setXO(jsonObject.getBoolean("XO"));
-
-            Log.d("TEST","ID : " + simri.getId());
-            arrayList.add(simri);
-        }
-
-        return arrayList;
-    }
+    };
 }

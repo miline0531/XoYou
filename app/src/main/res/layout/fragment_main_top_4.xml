@@ -1,145 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawerLayout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
+
+    <ImageView
+        android:id="@+id/main_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_2"
-        android:fitsSystemWindows="true">
-
-        <RelativeLayout
-            android:id="@+id/topview"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:background="@drawable/myyouyopimage3">
-
-
-            <TextView
-                android:id="@+id/top_result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/gowunbatang_regular"
-                android:gravity="center_vertical"
-                android:text="지금 운을 분석중..."
-                android:textColor="@color/color_yellow"
-                android:textSize="@dimen/text_size_body" />
-
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/centerTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/topview"
-            android:background="#DD696969"
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:visibility="invisible"
-            android:text="1월27일(목) 10시~11시 이별에 도움이 되는 등록인 순" />
-
-
-        <RelativeLayout
-            android:id="@+id/layout_viewpager2"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:visibility="gone"
-                android:id="@+id/txt_empty"
-                style="@style/text_regular"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="#D9020202"
-                android:textSize="@dimen/text_size_title"
-                android:textColor="@color/white"
-                android:text="@string/mong_find_me_empty"/>
-
-            <LinearLayout
-                android:id="@+id/layoutDots2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:visibility="visible"/>
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/view_pager2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@id/layoutDots" />
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    <LinearLayout
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_findme" />
+    <View
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:id="@+id/popview"
-        android:visibility="gone"
-        android:background="#DD696969"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/btn_1"
-            android:layout_width="wrap_content"
-            android:text="유톡연결"
-            android:padding="10dp"
-            android:textColor="#000"
-            android:background="#c3c3c3"
-            android:layout_margin="5dp"
-            android:layout_height="wrap_content"/>
-
-
-        <TextView
-            android:id="@+id/btn_2"
-            android:background="#c3c3c3"
-            android:layout_width="wrap_content"
-            android:text="유톡연결"
-            android:textColor="#000"
-            android:padding="10dp"
-            android:layout_margin="5dp"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/btn_3"
-            android:layout_margin="5dp"
-            android:background="#c3c3c3"
-            android:padding="10dp"
-            android:layout_width="wrap_content"
-            android:textColor="#000"
-            android:text="유톡연결"
-            android:layout_height="wrap_content"/>
-
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/drawer2"
+        android:layout_height="match_parent"
+        android:background="#B3000000"/>
+    <TextView
+        android:id="@+id/main_title"
+        style="@style/text_semibold"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:background="#ffffff"
-        android:layout_gravity="start">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
+        android:layout_centerInParent="true"
+        android:text=""
+        android:textColor="@color/md_yellow_600"
+        android:textSize="@dimen/text_size_body" />
 
-        <include
-            layout="@layout/view_slide_menu2"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mong_main_top_title4"
+        android:textColor="@color/color_yellow"
+        android:textSize="@dimen/text_size_tooltip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
 
-        <include
-            layout="@layout/view_slide_menu3"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-</androidx.drawerlayout.widget.DrawerLayout>
+</RelativeLayout>

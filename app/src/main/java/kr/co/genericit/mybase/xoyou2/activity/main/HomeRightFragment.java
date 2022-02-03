@@ -1,16 +1,15 @@
 package kr.co.genericit.mybase.xoyou2.activity.main;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +27,7 @@ import kr.co.genericit.mybase.xoyou2.network.request.ActionRequestMyMongList;
 import kr.co.genericit.mybase.xoyou2.network.response.MyMongResult;
 import kr.co.genericit.mybase.xoyou2.storage.JWSharePreference;
 import kr.co.genericit.mybase.xoyou2.utils.LogUtil;
+
 
 public class HomeRightFragment extends Fragment {
     private RecyclerView rcv_home;

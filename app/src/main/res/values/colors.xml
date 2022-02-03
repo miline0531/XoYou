@@ -102,4 +102,8 @@
     <color name="mong_grey_default">#8A8686</color>
 
     <color name="bilnd_black">#80000000</color>
+
+
+    <color name="mong_grey_2">#F2423E3E</color>
+
 </resources>

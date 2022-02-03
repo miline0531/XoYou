@@ -33,10 +33,12 @@ import kr.co.genericit.mybase.xoyou2.activity.MainActivity;
 import kr.co.genericit.mybase.xoyou2.activity.MymongBidActivity;
 import kr.co.genericit.mybase.xoyou2.adapter.ManageHorizontalRecyclerviewAdapter;
 import kr.co.genericit.mybase.xoyou2.adapter.StoreVerticalRecyclerviewAdapter;
+import kr.co.genericit.mybase.xoyou2.model.Mong;
 import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
 import kr.co.genericit.mybase.xoyou2.network.interfaces.ActionResultListener;
-import kr.co.genericit.mybase.xoyou2.model.Mong;
+import kr.co.genericit.mybase.xoyou2.network.request.ActionRequestCoinData;
 import kr.co.genericit.mybase.xoyou2.network.request.ActionRequestStoreList;
+import kr.co.genericit.mybase.xoyou2.network.response.CoinDataResult;
 import kr.co.genericit.mybase.xoyou2.network.response.StoreListResult;
 import kr.co.genericit.mybase.xoyou2.storage.JWSharePreference;
 import kr.co.genericit.mybase.xoyou2.utils.LogUtil;
@@ -63,6 +65,7 @@ public class StoreFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity)getActivity()).visibleFloatingButton(View.VISIBLE);
+        requestStoreList();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -128,9 +131,46 @@ public class StoreFragment extends Fragment {
                 ((MainActivity)getActivity()).visibleFloatingButton(visible);
             }
         });
+
+        requestStoreStatInfo();
+
         return v;
     }
+    public void requestStoreStatInfo(){
+        ActionRuler.getInstance().addAction(new ActionRequestCoinData(getActivity(), new ActionResultListener<CoinDataResult>() {
 
+            @Override
+            public void onResponseResult(CoinDataResult response) {
+                try {
+                    CoinDataResult result = response;
+
+                    if(result!=null) {
+                        Log.d("CHECK", "CoinData : " + result.getResp().toString());
+                        if (result.isResult()) {
+                            CoinDataResult.Resp resp = result.getResp();
+                            String stringInfo = "스토어입장 : " + resp.getNumber_go_store() + "명"
+                                    + "\n거래수 : " + resp.getNumber_transaction() + "개"
+                                    + "\n경매수 : " + resp.getNumber_auction_in_store() + "개"
+                                    + "\n\n신규등록수 : " + resp.getTransaction_register_today() + "개"
+                                    + "\n최고가 : " + Math.round(Float.parseFloat(resp.getMax_price()))
+                                    + "\n최저가 : " + Math.round(Float.parseFloat(resp.getMin_price()));
+                            ((MainActivity)getActivity()).setMainTopText(stringInfo);
+
+                        }
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onResponseError(String message) {
+
+            }
+        }));
+        ActionRuler.getInstance().runNext();
+    }
     private void requestStoreList(){
         jwSharePreference = new JWSharePreference();
         int userId = jwSharePreference.getInt(JWSharePreference.PREFERENCE_SRL,0);
