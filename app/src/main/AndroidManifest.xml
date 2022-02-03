@@ -161,8 +161,17 @@
         <activity
             android:name="kr.co.genericit.mybase.xoyou2.activity.ContactActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="kr.co.genericit.mybase.xoyou2.activity.xoyou.ChattingRoomActivity"
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name="kr.co.genericit.mybase.xoyou2.activity.xoyou.WeUnListActivity"
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name="kr.co.genericit.mybase.xoyou2.activity.xoyou.WeUnDetailActivity"
+            android:screenOrientation="portrait" />
 
 
         <provider

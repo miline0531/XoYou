@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/common_back_top"
+        layout="@layout/common_topview_5" />
+
+    <RelativeLayout
+        android:id="@+id/bottomview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/empty_lay"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#00000000"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editview"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_round_2f2f2f"
+            android:paddingLeft="10dp">
+
+
+            <EditText
+                android:id="@+id/msg_edit"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:background="@null"
+                android:hint="메시지를 입력하세요."
+                android:paddingBottom="13dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="20dp"
+                android:paddingTop="13dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#707070"
+                android:textSize="14dp" />
+
+            <RelativeLayout
+                android:id="@+id/btnSend"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/btn_round_a48b58">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/button_comment" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/editview"
+            android:id="@+id/middleProgressLayout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
+            android:background="@color/black"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_weight="1">
+
+                <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                    android:id="@+id/progressView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    app:animate="true"
+                    app:animateDuration="600"
+                    app:fillColor="@color/progress_circle_bg_1"
+                    app:progress="13"
+                    app:progressColor="@color/progress_circle_1"
+                    app:progressRoundCap="true"
+                    app:progressTextColor="#ffffff"
+                    app:progressTextEnabled="false"
+                    app:progressTextSize="13dp"
+                    app:progressTextType="progress"
+                    app:progressWidth="5dp"
+                    app:startAngle="270"
+                    app:total="100"
+                    app:totalColor="@color/progress_circle_bg_1"
+                    app:totalWidth="5dp" />
+                <TextView
+                    android:id="@+id/progressTxt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="11dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_weight="1">
+
+                <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                    android:id="@+id/progressView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    app:animate="true"
+                    app:animateDuration="600"
+                    app:fillColor="@color/progress_circle_bg_2"
+                    app:progress="43"
+                    app:progressColor="@color/progress_circle_2"
+                    app:progressRoundCap="true"
+                    app:progressTextColor="#ffffff"
+                    app:progressTextEnabled="false"
+                    app:progressTextSize="13dp"
+                    app:progressTextType="progress"
+                    app:progressWidth="5dp"
+                    app:startAngle="270"
+                    app:total="100"
+                    app:totalColor="@color/progress_circle_bg_2"
+                    app:totalWidth="5dp" />
+                <TextView
+                    android:id="@+id/progressTxt2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="11dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_weight="1">
+
+                <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                    android:id="@+id/progressView3"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:animate="true"
+                    app:animateDuration="600"
+                    app:fillColor="@color/progress_circle_bg_3"
+                    app:progress="67"
+                    app:progressColor="@color/progress_circle_3"
+                    app:progressRoundCap="true"
+                    app:progressTextColor="#ffffff"
+                    app:progressTextEnabled="false"
+                    app:progressTextSize="13dp"
+                    app:progressTextType="progress"
+                    app:progressWidth="5dp"
+                    app:startAngle="270"
+                    app:total="100"
+                    app:totalColor="@color/progress_circle_bg_3"
+                    app:totalWidth="5dp" />
+                <TextView
+                    android:id="@+id/progressTxt3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="11dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_weight="1">
+
+                <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                    android:id="@+id/progressView4"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:animate="true"
+                    app:animateDuration="600"
+                    app:fillColor="@color/progress_circle_bg_4"
+                    app:progress="100"
+                    app:progressColor="@color/progress_circle_4"
+                    app:progressRoundCap="true"
+                    app:progressTextColor="#ffffff"
+                    app:progressTextEnabled="false"
+                    app:progressTextSize="13dp"
+                    app:progressTextType="progress"
+                    app:progressWidth="5dp"
+                    app:startAngle="270"
+                    app:total="100"
+                    app:totalColor="@color/progress_circle_bg_4"
+                    app:totalWidth="5dp" />
+                <TextView
+                    android:id="@+id/progressTxt4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="11dp"
+                    android:textColor="@color/white"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/empty_lay"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_alignParentBottom="true" />
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottomview"
+            android:dividerHeight="10dp"
+            android:transcriptMode="alwaysScroll"
+            android:stackFromBottom="true"
+            android:layout_below="@+id/common_back_top" />
+
+</RelativeLayout>

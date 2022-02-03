@@ -1,18 +1,17 @@
-package kr.co.genericit.mybase.xoyou2.activity.main;
+package kr.co.genericit.mybase.xoyou2.activity.xoyou;
 
+
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ListView;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,78 +22,72 @@ import java.util.Map;
 
 import co.kr.sky.AccumThread;
 import kr.co.genericit.mybase.xoyou2.R;
-import kr.co.genericit.mybase.xoyou2.activity.MainActivity;
-import kr.co.genericit.mybase.xoyou2.activity.xoyou.WeUnListActivity;
 import kr.co.genericit.mybase.xoyou2.adapter.MainFrag2ListAdapter;
-import kr.co.genericit.mybase.xoyou2.adapter.ManageHorizontalRecyclerviewAdapter;
+import kr.co.genericit.mybase.xoyou2.common.CommonUtil;
 import kr.co.genericit.mybase.xoyou2.common.NetInfo;
 import kr.co.genericit.mybase.xoyou2.common.SkyLog;
 import kr.co.genericit.mybase.xoyou2.model.WeListObj;
+import kr.co.genericit.mybase.xoyou2.model.WeYouUnDataListObj;
 import kr.co.genericit.mybase.xoyou2.storage.JWSharePreference;
 import kr.co.genericit.mybase.xoyou2.utils.CommandUtil;
 import kr.co.genericit.mybase.xoyou2.view.CommonPopupDialog;
 
-
-public class ManageFragment extends Fragment {
+public class WeUnDetailActivity extends AppCompatActivity {
+    private WeListObj obj;
     public Context mContext;
+    CommonUtil dataSet = CommonUtil.getInstance();
 
     //SKY
     private AccumThread mThread;
     private Map<String, String> map = new HashMap<String, String>();
-    private RecyclerView list;
-    private ArrayList<WeListObj> weList = new ArrayList<WeListObj>();
+    private ListView list;
+    private ArrayList<WeYouUnDataListObj> weYouUnDataList = new ArrayList<WeYouUnDataListObj>();
     private MainFrag2ListAdapter m_Adapter;
 
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        mContext = context;
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
 
     @Override
     public void onResume() {
         super.onResume();
-        SkyLog.d("-- onResume --");
 
-        getWeList();
+
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_manage, container, false);
 
-        list = (RecyclerView)view.findViewById(R.id.list);
-        list.setLayoutManager(new LinearLayoutManager(mContext)) ;
 
-        m_Adapter = new MainFrag2ListAdapter( mContext, weList);
-        m_Adapter.setListOnClickListener(mItemClickListener);
-        list.setAdapter(m_Adapter);
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_weundetail);
+        obj = getIntent().getParcelableExtra("obj");
+        mContext = this;
 
-        return view;
+        getUnData();
+
+        findViewById(R.id.common_left_btn).setOnClickListener(btnListener);
+
     }
-
-    public MainFrag2ListAdapter.listOnClickListener mItemClickListener = new MainFrag2ListAdapter.listOnClickListener() {
-        @Override
-        public void onClickItem(int id, int action) {
-            SkyLog.d("CLACIK id :: "  + id);
-            SkyLog.d("CLACIK action :: "  + action);
-
-            Intent it = new Intent(mContext , WeUnListActivity.class);
-            it.putExtra("obj" , weList.get(id));
-            startActivity(it);
-        }
-    };
-
-    private void getWeList(){
-        CommandUtil.getInstance().showLoadingDialog(MainActivity.mainAc);
+    private void getUnData(){
+        CommandUtil.getInstance().showLoadingDialog(WeUnDetailActivity.this);
         map.clear();
-        map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_WE_LIST);
+        map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_WE_UN_LIST);
         map.put("userId", new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
+        map.put("date", dataSet.FullPatternDate("yyyyMMddHHmmss"));
+        map.put("unName", obj.getUnName());
 
         //스레드 생성
-        mThread = new AccumThread(mContext, mAfterAccum, map, 5, 0, null);
+        mThread = new AccumThread(WeUnDetailActivity.this, mAfterAccum, map, 5, 0, null);
         mThread.start();        //스레드 시작!!
     }
 
@@ -112,14 +105,18 @@ public class ManageFragment extends Fragment {
                         JSONArray jsonObject_listWe = new JSONArray(jsonObject_succes.getString("data"));
 
                         SkyLog.d("COUNT :: " + jsonObject_listWe.length());
-                        weList.clear();
+                        weYouUnDataList.clear();
+
                         for (int i = 0; i < jsonObject_listWe.length(); i++) {
                             JSONObject jsonObject = jsonObject_listWe.getJSONObject(i);
-                            weList.add(new WeListObj(
+                            weYouUnDataList.add(new WeYouUnDataListObj(
                                     jsonObject.getString("No") ,
+                                    jsonObject.getString("Name") ,
+                                    jsonObject.getString("Info") ,
                                     jsonObject.getString("UnName") ,
-                                    jsonObject.getString("MaxName") ,
-                                    jsonObject.getString("MinName")));
+                                    jsonObject.getString("UnSimRi") ,
+                                    jsonObject.getString("Image") ,
+                                    jsonObject.getString("Doui")));
                         }
                         m_Adapter.notifyDataSetChanged();
                     }else{
@@ -132,6 +129,19 @@ public class ManageFragment extends Fragment {
                 }catch (Exception e){
                     SkyLog.d("e :: " + e);
                 }
+            }
+        }
+    };
+
+    //버튼 리스너 구현 부분
+    View.OnClickListener btnListener = new View.OnClickListener() {
+        @SuppressLint("ResourceType")
+        public void onClick(View v) {
+            switch (v.getId()) {
+
+                case R.id.common_left_btn:
+                    finish();
+                    break;
             }
         }
     };

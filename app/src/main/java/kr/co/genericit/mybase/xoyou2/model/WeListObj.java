@@ -1,6 +1,14 @@
 package kr.co.genericit.mybase.xoyou2.model;
 
-public class WeListObj {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class WeListObj implements Parcelable {
+    public static Creator<WeListObj> getCreator() {
+        return CREATOR;
+    }
+
+
     String No;
     String UnName;
     String MaxName;
@@ -44,4 +52,41 @@ public class WeListObj {
     public void setMinName(String minName) {
         MinName = minName;
     }
+
+
+    public WeListObj(Parcel in) {
+        readFromParcel(in);
+    }
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(No);
+        dest.writeString(UnName);
+        dest.writeString(MaxName);
+        dest.writeString(MinName);
+    }
+    private void readFromParcel(Parcel in){
+
+        No = in.readString();
+        UnName = in.readString();
+        MaxName = in.readString();
+        MinName = in.readString();
+    }
+    @SuppressWarnings("rawtypes")
+    public static final Creator<WeListObj> CREATOR = new Creator() {
+        public Object createFromParcel(Parcel in) {
+            return new WeListObj(in);
+        }
+
+        public Object[] newArray(int size) {
+            return new WeListObj[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
 }

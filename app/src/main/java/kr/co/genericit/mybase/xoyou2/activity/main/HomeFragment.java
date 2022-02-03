@@ -35,6 +35,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -58,6 +60,7 @@ import kr.co.genericit.mybase.xoyou2.activity.detail.MymongDetailActivity;
 import kr.co.genericit.mybase.xoyou2.adapter.MainFrag1Left3ListAdapter;
 import kr.co.genericit.mybase.xoyou2.adapter.MainFrag1LeftListAdapter;
 import kr.co.genericit.mybase.xoyou2.adapter.MainFrag1ListAdapter;
+import kr.co.genericit.mybase.xoyou2.adapter.MainFrag2ListAdapter;
 import kr.co.genericit.mybase.xoyou2.common.Constants;
 import kr.co.genericit.mybase.xoyou2.common.NetInfo;
 import kr.co.genericit.mybase.xoyou2.common.SkyLog;
@@ -87,7 +90,9 @@ public class HomeFragment extends Fragment{
     private Map<String, String> map = new HashMap<String, String>();
     private ArrayList<SimRi> listSimRi = new ArrayList<SimRi>();
     private ArrayList<QaListObj> qrList = new ArrayList<QaListObj>();
-    private ListView list , list_left , list_left3;
+    private RecyclerView list;
+
+    private ListView list_left , list_left3;
     private MainFrag1ListAdapter m_Adapter;
     private MainFrag1LeftListAdapter m_LeftAdapter;
     private MainFrag1Left3ListAdapter m_Left3Adapter;
@@ -118,8 +123,8 @@ public class HomeFragment extends Fragment{
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        list = (ListView)view.findViewById(R.id.list);
-        /*
+        list = (RecyclerView)view.findViewById(R.id.list);
+        list.setLayoutManager(new LinearLayoutManager(mContext)) ;        /*
         drawerLayout = view.findViewById(R.id.drawerLayout);
         drawer2 = (RelativeLayout) view.findViewById(R.id.drawer2);
         lb_slide = view.findViewById(R.id.lb_slide);
@@ -142,7 +147,7 @@ public class HomeFragment extends Fragment{
         list_left3.setAdapter(m_Left3Adapter);
         */
         m_Adapter = new MainFrag1ListAdapter( MainActivity.mainAc, listSimRi);
-        list.setOnItemClickListener(mItemClickListener);
+        m_Adapter.setListOnClickListener(mItemClickListener);
         list.setAdapter(m_Adapter);
 
 
@@ -152,6 +157,32 @@ public class HomeFragment extends Fragment{
 
         return view;
     }
+
+    public MainFrag1ListAdapter.listOnClickListener mItemClickListener = new MainFrag1ListAdapter.listOnClickListener() {
+        @Override
+        public void onClickItem(int id, int action) {
+            SkyLog.d("CLACIK id :: "  + id);
+            SkyLog.d("CLACIK action :: "  + action);
+
+
+            /*
+            //MainActivity.viewSlide2();
+            lb_slide3.setVisibility(View.GONE);
+            lb_slide.setVisibility(View.VISIBLE);
+            drawerLayout.closeDrawer(drawer2);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    lb_slide3.setVisibility(View.GONE);
+                    lb_slide.setVisibility(View.VISIBLE);
+                    drawerLayout.openDrawer(drawer2);
+                }
+            }, 300); //딜레이 타임 조절
+            */
+        }
+    };
+
     private void getUserList(){
         CommandUtil.getInstance().showLoadingDialog(MainActivity.mainAc);
         map.clear();
@@ -173,28 +204,6 @@ public class HomeFragment extends Fragment{
         mThread = new AccumThread(MainActivity.mainAc, mAfterAccum, map, 5, 1, null);
         mThread.start();        //스레드 시작!!
     }
-
-    AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
-        public void onItemClick(AdapterView parent, View view, int position, long id) {
-            SkyLog.d("mItemClickListener position :: " + position);
-            //MainActivity.viewSlide2();
-            lb_slide3.setVisibility(View.GONE);
-            lb_slide.setVisibility(View.VISIBLE);
-            drawerLayout.closeDrawer(drawer2);
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    lb_slide3.setVisibility(View.GONE);
-                    lb_slide.setVisibility(View.VISIBLE);
-                    drawerLayout.openDrawer(drawer2);
-                }
-            }, 300); //딜레이 타임 조절
-
-            //API 호출(API_SELECT_QA_LIST)
-
-        }
-    };
 
 
     AdapterView.OnItemClickListener mItemClickListener2 = new AdapterView.OnItemClickListener() {

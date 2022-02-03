@@ -89,6 +89,8 @@
         <entry key="app/src/main/res/drawable/bg_round_10dp_detail_bg3.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/drawable/bg_round_10dp_detail_bg4.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/drawable/bg_round_10dp_trans.xml" value="0.12291666666666666" />
+        <entry key="app/src/main/res/drawable/btn_round_2f2f2f.xml" value="0.21927083333333333" />
+        <entry key="app/src/main/res/drawable/btn_round_a48b58.xml" value="0.21927083333333333" />
         <entry key="app/src/main/res/drawable/button_common_login_green.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/drawable/dialog_common_bg_round.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/drawable/edt_under_selected.xml" value="0.18385416666666668" />
@@ -113,6 +115,7 @@
         <entry key="app/src/main/res/layout/activity_add_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_adev_temp.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_bid.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_chattingroom.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_detail_view_slider.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_finger_id_reg.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.11639492753623189" />
@@ -129,10 +132,15 @@
         <entry key="app/src/main/res/layout/activity_record.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_setting_location.xml" value="0.11639492753623189" />
         <entry key="app/src/main/res/layout/activity_setting_relation.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_setting_self.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/activity_signview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_signview2.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_weundetail.xml" value="0.348731884057971" />
+        <entry key="app/src/main/res/layout/activity_weunlist.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/bottom_sheet_default_list.xml" value="0.10208333333333333" />
+        <entry key="app/src/main/res/layout/call_popup_top.xml" value="0.348731884057971" />
         <entry key="app/src/main/res/layout/common_dialog.xml" value="0.13179347826086957" />
+        <entry key="app/src/main/res/layout/common_topview_5.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/fragment_detail_1.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_detail_3.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_detail_4.xml" value="0.10677083333333333" />
@@ -161,6 +169,7 @@
         <entry key="app/src/main/res/layout/item_mymong_detail_5.xml" value="0.10677083333333333" />
         <entry key="app/src/main/res/layout/item_relation_swipe_view.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_slide_detail_menu.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/mainfrag1_item.xml" value="0.151268115942029" />
         <entry key="app/src/main/res/layout/mainfrag2_item.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/notice_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/view_mymong_bid_dialog.xml" value="0.25" />
