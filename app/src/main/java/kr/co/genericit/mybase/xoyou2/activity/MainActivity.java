@@ -53,6 +53,7 @@ import kr.co.genericit.mybase.xoyou2.adapter.SectionPageAdapter;
 import kr.co.genericit.mybase.xoyou2.adapter.SlideMenuAdapter;
 import kr.co.genericit.mybase.xoyou2.common.CommonActivity;
 import kr.co.genericit.mybase.xoyou2.common.Constants;
+import kr.co.genericit.mybase.xoyou2.common.MySQLiteOpenHelper;
 import kr.co.genericit.mybase.xoyou2.common.SkyLog;
 import kr.co.genericit.mybase.xoyou2.interfaces.DialogClickListener;
 import kr.co.genericit.mybase.xoyou2.model.Message;
@@ -119,6 +120,7 @@ public class MainActivity extends CommonActivity {
     private TextView[] dots;
     private ViewsSliderAdapter mAdapter;
     private boolean initDotted = true;
+    private MySQLiteOpenHelper vc;
 
     @Override
     protected void onResume() {
@@ -135,6 +137,7 @@ public class MainActivity extends CommonActivity {
         setContentView(R.layout.activity_main);
         mainAc = this;
         id = jwSharePreference.getString(JWSharePreference.PREFERENCE_LOGIN_ID,"");
+        vc = new MySQLiteOpenHelper(this);
 
         initView();
         AddUserInfo addUserInfo = new AddUserInfo("id","5","1212","name","1","2222","");
@@ -147,6 +150,7 @@ public class MainActivity extends CommonActivity {
         mBackPressFinishHandler = new BackPressFinishHandler(this);
         this.getOnBackPressedDispatcher().addCallback(this, callback);
     }
+
 
     public void MainOpenDrawer(){
         drawerLayout.openDrawer(drawerView);

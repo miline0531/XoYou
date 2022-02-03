@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#000000">
+
+
+    <RelativeLayout
+        android:id="@+id/left_view_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:id="@+id/left_imglinearLayout3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_chat_circle"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/left_item_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/chatting_user" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/left_msg_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/left_imglinearLayout3"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxHeight="450dp"
+                android:background="@drawable/chat_ballon_left"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/left_item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:text="전지현"
+                    android:textColor="#ffffff"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/left_item_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:autoLink="all"
+                    android:maxWidth="270dp"
+                    android:padding="10dp"
+                    android:text="드드드드드드드드드드드드드드드드드드드드드드드드드드드드드드"
+                    android:textColor="#ffffff"
+                    android:textColorLink="#ffffff"
+                    android:textSize="14dp" />
+
+
+                <TextView
+                    android:id="@+id/left_item_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="01:27:00"
+                    android:textColor="#ffffff"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/left_item_center"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:text="adsfasdfasd"
+                android:textColor="#ffffff"
+                android:textSize="13dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/right_view_msg"
+        android:layout_below="@+id/left_view_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <FrameLayout
+            android:id="@+id/right_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:maxHeight="250dp"
+            android:maxWidth="250dp">
+            <TextView
+                android:id="@+id/right_item_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:background="@drawable/chat_ballon_right"
+                android:gravity="right"
+                android:maxWidth="270dp"
+                android:padding="10dp"
+                android:text="드레스 신상품신상품신상품신상품신상품"
+                android:textColor="#ffffff"
+                android:textColorLink="#ffffff"
+                android:textSize="14dp" />
+        </FrameLayout>
+    </RelativeLayout>
+</RelativeLayout>

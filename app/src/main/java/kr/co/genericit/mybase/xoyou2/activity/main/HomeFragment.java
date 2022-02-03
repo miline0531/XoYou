@@ -4,8 +4,11 @@ import static kr.co.genericit.mybase.xoyou2.storage.JWSharePreference.PREFERENCE
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -57,13 +60,16 @@ import kr.co.genericit.mybase.xoyou2.activity.MainActivity;
 import kr.co.genericit.mybase.xoyou2.activity.MongStoreSaveActivity;
 import kr.co.genericit.mybase.xoyou2.activity.detail.MyMongRegistActivity;
 import kr.co.genericit.mybase.xoyou2.activity.detail.MymongDetailActivity;
+import kr.co.genericit.mybase.xoyou2.activity.xoyou.ChattingRoomActivity;
 import kr.co.genericit.mybase.xoyou2.adapter.MainFrag1Left3ListAdapter;
 import kr.co.genericit.mybase.xoyou2.adapter.MainFrag1LeftListAdapter;
 import kr.co.genericit.mybase.xoyou2.adapter.MainFrag1ListAdapter;
 import kr.co.genericit.mybase.xoyou2.adapter.MainFrag2ListAdapter;
+import kr.co.genericit.mybase.xoyou2.common.CommonUtil;
 import kr.co.genericit.mybase.xoyou2.common.Constants;
 import kr.co.genericit.mybase.xoyou2.common.NetInfo;
 import kr.co.genericit.mybase.xoyou2.common.SkyLog;
+import kr.co.genericit.mybase.xoyou2.model.ContractObj;
 import kr.co.genericit.mybase.xoyou2.model.QaListObj;
 import kr.co.genericit.mybase.xoyou2.model.SimRi;
 import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
@@ -86,6 +92,7 @@ public class HomeFragment extends Fragment{
     public Context mContext;
 
     //SKY
+    private CommonUtil dataSet = CommonUtil.getInstance();
     private AccumThread mThread;
     private Map<String, String> map = new HashMap<String, String>();
     private ArrayList<SimRi> listSimRi = new ArrayList<SimRi>();
@@ -163,8 +170,12 @@ public class HomeFragment extends Fragment{
         public void onClickItem(int id, int action) {
             SkyLog.d("CLACIK id :: "  + id);
             SkyLog.d("CLACIK action :: "  + action);
+            SkyLog.d("CLACIK getPhone :: "  + listSimRi.get(id).getPhone());
 
 
+            Intent it = new Intent(mContext , ChattingRoomActivity.class);
+            it.putExtra("phone" , listSimRi.get(id).getPhone());
+            startActivity(it);
             /*
             //MainActivity.viewSlide2();
             lb_slide3.setVisibility(View.GONE);
@@ -223,6 +234,112 @@ public class HomeFragment extends Fragment{
             popview.setVisibility(View.VISIBLE);
         }
     };
+
+    //받은건 flag = 0 , 보낸건 flag = 1
+    public int readSMSMessage(String[] arrVal , String name) {
+        //내가 받은것!
+        Uri allMessage = Uri.parse("content://sms/inbox/");
+
+
+        ContentResolver cr = mContext.getContentResolver();
+        Cursor c = cr.query(allMessage,
+                new String[]{"_id", "thread_id", "address", "person", "date", "body"},
+                "address=?", arrVal,
+                "date DESC");
+
+        while (c.moveToNext()) {
+            kr.co.genericit.mybase.xoyou2.model.Message msg = new kr.co.genericit.mybase.xoyou2.model.Message(); // 따로 저는 클래스를 만들어서 담아오도록 했습니다.
+
+            long messageId = c.getLong(0);
+            msg.setMessageId(String.valueOf(messageId));
+
+            long threadId = c.getLong(1);
+            msg.setThreadId(String.valueOf(threadId));
+
+            String address = c.getString(2);
+            msg.setAddress(address);
+
+            long contactId = c.getLong(3);
+            msg.setContactId(String.valueOf(contactId));
+
+            String contactId_string = String.valueOf(contactId);
+            msg.setContactId_string(contactId_string);
+
+            long timestamp = c.getLong(4);
+            msg.setTimestamp(String.valueOf(timestamp));
+
+            String body = c.getString(5);
+            msg.setBody(body);
+
+            SkyLog.d("==============SMS==============");
+            SkyLog.d("messageId :: " + messageId);
+            SkyLog.d("threadId :: " + threadId);
+            SkyLog.d("address :: " + address);
+            SkyLog.d("contactId_string :: " + contactId_string);
+            SkyLog.d("timestamp :: " + timestamp);
+            SkyLog.d("body :: " + body);
+
+            ContractObj obj = new ContractObj("" + messageId , "" +threadId , address , contactId_string , "" +timestamp , body , "0" , name);
+            dataSet.sqlContractInsert(mContext , obj);
+
+            SkyLog.d("==============SMS==============");
+
+
+            //arrayList.add(msg); //이부분은 제가 arraylist에 담으려고 하기떄문에 추가된부분이며 수정가능합니다.
+
+        }
+
+        //내가 보낸것!
+        Uri allMessage2 = Uri.parse("content://sms/sent/");
+        Cursor c2 = cr.query(allMessage2,
+                new String[]{"_id", "thread_id", "address", "person", "date", "body"},
+                "address=?", arrVal,
+                "date DESC");
+
+        while (c2.moveToNext()) {
+            kr.co.genericit.mybase.xoyou2.model.Message msg = new kr.co.genericit.mybase.xoyou2.model.Message(); // 따로 저는 클래스를 만들어서 담아오도록 했습니다.
+
+            long messageId = c2.getLong(0);
+            msg.setMessageId(String.valueOf(messageId));
+
+            long threadId = c2.getLong(1);
+            msg.setThreadId(String.valueOf(threadId));
+
+            String address = c2.getString(2);
+            msg.setAddress(address);
+
+            long contactId = c2.getLong(3);
+            msg.setContactId(String.valueOf(contactId));
+
+            String contactId_string = String.valueOf(contactId);
+            msg.setContactId_string(contactId_string);
+
+            long timestamp = c2.getLong(4);
+            msg.setTimestamp(String.valueOf(timestamp));
+
+            String body = c2.getString(5);
+            msg.setBody(body);
+
+            SkyLog.d("==============SMS==============");
+            SkyLog.d("messageId :: " + messageId);
+            SkyLog.d("threadId :: " + threadId);
+            SkyLog.d("address :: " + address);
+            SkyLog.d("contactId_string :: " + contactId_string);
+            SkyLog.d("timestamp :: " + timestamp);
+            SkyLog.d("body :: " + body);
+
+            ContractObj obj = new ContractObj("" + messageId , "", address , contactId_string , "" +timestamp , body , "1" , name);
+            dataSet.sqlContractInsert(mContext , obj);
+
+            SkyLog.d("==============SMS==============");
+
+
+            //arrayList.add(msg); //이부분은 제가 arraylist에 담으려고 하기떄문에 추가된부분이며 수정가능합니다.
+
+        }
+        return 0;
+    }
+
     Handler mAfterAccum = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -240,8 +357,17 @@ public class HomeFragment extends Fragment{
                         listSimRi.clear();
                         for (int i = 0; i < jsonObject_listSimRi.length(); i++) {
                             JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
+                            String[] phone_Arr = new String[1];
 
+                            if(i == 0){
+                                phone_Arr[0] = "01033435914";
+                            }else{
+                                phone_Arr[0] = "" + i;
+
+                            }
                             listSimRi.add(new SimRi(
+                                    //jsonObject.getString("Phone") ,
+                                    phone_Arr[0] ,
                                     jsonObject.getInt("Id") ,
                                     jsonObject.getInt("No") ,
                                     jsonObject.getString("NickName") ,
@@ -252,8 +378,14 @@ public class HomeFragment extends Fragment{
                                     jsonObject.getString("Value") ,
                                     jsonObject.getDouble("iDou") ,
                                     jsonObject.getBoolean("XO")));
+                            readSMSMessage(phone_Arr , jsonObject.getString("Name"));
                         }
                         m_Adapter.notifyDataSetChanged();
+
+
+
+
+                        //전화번호부 저장
                     }else{
                         CommandUtil.getInstance().showCommonOneButtonDialog(MainActivity.mainAc,
                                 jsonObject_succes.getString("error") + getClass().toString(),

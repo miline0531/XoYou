@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -51,6 +53,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import co.kr.sky.Check_Preferences;
+import kr.co.genericit.mybase.xoyou2.model.ContractObj;
 
 
 public class CommonUtil {
@@ -668,6 +671,107 @@ public class CommonUtil {
         });
         builder.show();
 
+    }
+
+
+
+    public void sqlContractInsert(Context cv , ContractObj val){
+        Log.e("SKY" , "sqlContractInsert");
+        try {
+            SQLiteDatabase db = cv.openOrCreateDatabase("xoyou.db", Context.MODE_PRIVATE, null);
+            db.beginTransaction(); //sql문을 실행하는 일정구간을 트랜잭션으로 묶어주겠다라는 의미
+            // 쿼리로 db의 커서 획득
+            try{
+                String sql ="";
+                sql = "SELECT *  FROM sms_history WHERE number = '" + val.getAddress()+ "' AND date = '" + val.getTimestamp() + "'";
+                Log.e("SKY" , "sql :: "  + sql);
+                // 쿼리로 db의 커서 획득
+                Cursor cur = db.rawQuery(sql, null);
+
+                Log.e("SKY" , "COUNT :: "  + cur.getCount());
+                //하나도 없으면 INSERT
+                if (cur.getCount() == 0){
+                    sql ="";
+
+                    sql += "INSERT INTO sms_history (" +
+                            "key_index," +
+                            "number," +
+                            "date," +
+                            "body," +
+                            "img," +
+                            "sned_recieve," +
+                            "name" +
+                            ") VALUES(";
+                    sql += "" + val.getMessageId()+ ",";
+                    sql += "'" + val.getAddress()+ "',";
+                    sql += "'" + val.getTimestamp()+ "',";
+                    sql += "'" + val.getBody()+ "',";
+                    sql += "'" + ""+ "',";
+                    sql += "'" + val.getSend_Flag()+ "',";
+                    sql += "'" + val.getName()+ "')";
+                    Log.e("SKY" , "sql :: "  + sql);
+                    db.execSQL(sql);
+                }
+                cur.close();
+            }catch (Exception e) {
+                Log.e("SKY","onPostExecute error : "+ e.toString());
+            }
+
+            db.setTransactionSuccessful(); //트랜잭션으로 묶어준 일정영역의 SQL문들이 모두 성공적으로 끝났을 지정
+            db.endTransaction(); //트랜잭션을 끝내는 메소드.
+            db.close();
+        }catch (Exception e){
+            Log.e("SKY","SQL_WORKER_FIRST_INSERT error : "+ e.toString());
+        }
+
+    }
+
+    public ArrayList<ContractObj> sqlSelectContract(Context cv , String val ){
+        Log.e("SKY" , "sqlSelectContract");
+        ArrayList<ContractObj> arr = new ArrayList<ContractObj>();
+        try{
+            SQLiteDatabase db = cv.openOrCreateDatabase("xoyou.db", Context.MODE_PRIVATE, null);
+            //  db파일 읽어오기
+            String sql;
+            sql = "SELECT * FROM sms_history WHERE number = '" + val + "'";
+            // 쿼리로 db의 커서 획득
+            Log.e("SKY" , "sql :: " + sql);
+
+            Cursor cur = db.rawQuery(sql, null);
+            while(cur.moveToNext()){
+
+                // 읽은값 출력
+                @SuppressLint("Range") String key_index 			    = cur.getString( cur.getColumnIndex("key_index"));
+                @SuppressLint("Range") String number 			    = cur.getString( cur.getColumnIndex("number"));
+                @SuppressLint("Range") String date 			    = cur.getString( cur.getColumnIndex("date"));
+                @SuppressLint("Range") String body 			    = cur.getString( cur.getColumnIndex("body"));
+                @SuppressLint("Range") String img 			    = cur.getString( cur.getColumnIndex("img"));
+                @SuppressLint("Range") String sned_recieve 			    = cur.getString( cur.getColumnIndex("sned_recieve"));
+                @SuppressLint("Range") String name 			    = cur.getString( cur.getColumnIndex("name"));
+
+                Log.e("SKY" , "sql :: ==================Strat");
+                Log.e("SKY" , "sql :: =========key_index :: " + key_index);
+                Log.e("SKY" , "sql :: =========number :: " + number);
+                Log.e("SKY" , "sql :: =========date :: " + date);
+                Log.e("SKY" , "sql :: =========body :: " + body);
+                Log.e("SKY" , "sql :: =========img :: " + img);
+                Log.e("SKY" , "sql :: =========sned_recieve :: " + sned_recieve);
+                Log.e("SKY" , "sql :: =========name :: " + name);
+
+                Log.e("SKY" , "sql :: ==================End\n\n");
+
+
+
+                arr.add(new ContractObj(key_index ,"" ,  number ,"" , date , body  , sned_recieve , name));
+
+            }
+            cur.close();
+            db.close();
+        }catch (Exception e) {
+            Log.e("SKY","onPostExecute error : "+ e.toString());
+        }
+
+        return arr;
     }
 
 }
