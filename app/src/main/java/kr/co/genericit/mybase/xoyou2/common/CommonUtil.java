@@ -748,6 +748,13 @@ public class CommonUtil {
                 @SuppressLint("Range") String img 			    = cur.getString( cur.getColumnIndex("img"));
                 @SuppressLint("Range") String sned_recieve 			    = cur.getString( cur.getColumnIndex("sned_recieve"));
                 @SuppressLint("Range") String name 			    = cur.getString( cur.getColumnIndex("name"));
+                @SuppressLint("Range") String suggestion 			    = cur.getString( cur.getColumnIndex("suggestion"));
+
+                @SuppressLint("Range") String po0Val 			    = cur.getString( cur.getColumnIndex("po0Val"));
+                @SuppressLint("Range") String po1Val 			    = cur.getString( cur.getColumnIndex("po1Val"));
+                @SuppressLint("Range") String po2Val 			    = cur.getString( cur.getColumnIndex("po2Val"));
+                @SuppressLint("Range") String po3Val 			    = cur.getString( cur.getColumnIndex("po3Val"));
+                @SuppressLint("Range") String message 			    = cur.getString( cur.getColumnIndex("message"));
 
                 Log.e("SKY" , "sql :: ==================Strat");
                 Log.e("SKY" , "sql :: =========key_index :: " + key_index);
@@ -757,12 +764,31 @@ public class CommonUtil {
                 Log.e("SKY" , "sql :: =========img :: " + img);
                 Log.e("SKY" , "sql :: =========sned_recieve :: " + sned_recieve);
                 Log.e("SKY" , "sql :: =========name :: " + name);
+                Log.e("SKY" , "sql :: =========suggestion :: " + suggestion);
+                Log.e("SKY" , "sql :: =========po0Val :: " + po0Val);
+                Log.e("SKY" , "sql :: =========po1Val :: " + po1Val);
+                Log.e("SKY" , "sql :: =========po2Val :: " + po2Val);
+                Log.e("SKY" , "sql :: =========po3Val :: " + po3Val);
+                Log.e("SKY" , "sql :: =========message :: " + message);
 
                 Log.e("SKY" , "sql :: ==================End\n\n");
 
 
 
-                arr.add(new ContractObj(key_index ,"" ,  number ,"" , date , body  , sned_recieve , name));
+                arr.add(new ContractObj(key_index ,
+                        "" ,
+                        number ,
+                        "" ,
+                        date ,
+                        body  ,
+                        sned_recieve ,
+                        name ,
+                        suggestion,
+                        po0Val,
+                        po1Val,
+                        po2Val,
+                        po3Val,
+                        message));
 
             }
             cur.close();
@@ -774,4 +800,52 @@ public class CommonUtil {
         return arr;
     }
 
+    public void sqlContractUpdate(Context cv , ContractObj val , String suggestion
+            , String po0Val
+            , String po1Val
+            , String po2Val
+            , String po3Val
+            , String message){
+        Log.e("SKY" , "sqlContractUpdate");
+        try {
+            SQLiteDatabase db = cv.openOrCreateDatabase("xoyou.db", Context.MODE_PRIVATE, null);
+            db.beginTransaction(); //sql문을 실행하는 일정구간을 트랜잭션으로 묶어주겠다라는 의미
+            // 쿼리로 db의 커서 획득
+            try{
+                String sql ="";
+                Log.e("SKY" , "sql :: "  + sql);
+                // 쿼리로 db의 커서 획득
+
+                sql = "UPDATE sms_history SET ";
+                sql += "suggestion=";
+                sql += "'" + suggestion  + "'," ;
+                sql += "po0Val=";
+                sql += "'" + po0Val  + "'," ;
+                sql += "po1Val=";
+                sql += "'" + po1Val  + "'," ;
+                sql += "po2Val=";
+                sql += "'" + po2Val  + "'," ;
+                sql += "po3Val=";
+                sql += "'" + po3Val  + "'," ;
+                sql += "message=";
+                sql += "'" + message  + "'" ;
+
+                sql += " WHERE number=";
+                sql += "'" + val.getAddress()  + "' AND date = " ;
+                sql += "'" + val.getTimestamp()  + "'" ;
+
+                Log.e("SKY","sql  : "+ sql);
+                db.execSQL(sql);
+            }catch (Exception e) {
+                Log.e("SKY","onPostExecute error : "+ e.toString());
+            }
+
+            db.setTransactionSuccessful(); //트랜잭션으로 묶어준 일정영역의 SQL문들이 모두 성공적으로 끝났을 지정
+            db.endTransaction(); //트랜잭션을 끝내는 메소드.
+            db.close();
+        }catch (Exception e){
+            Log.e("SKY","SQL_WORKER_FIRST_INSERT error : "+ e.toString());
+        }
+
+    }
 }

@@ -230,7 +230,8 @@ public class LoginActivity extends CommonActivity {
                     checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                     checkSelfPermission(android.Manifest.permission.RECEIVE_BOOT_COMPLETED) == PackageManager.PERMISSION_GRANTED &&
                     checkSelfPermission(android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED &&
-                    checkSelfPermission(android.Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED
+                    checkSelfPermission(android.Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED
             ) {
                 Log.v("ifeelbluu","Permission is granted");
                 return true;
@@ -244,6 +245,7 @@ public class LoginActivity extends CommonActivity {
                                 android.Manifest.permission.RECEIVE_BOOT_COMPLETED,
                                 android.Manifest.permission.READ_PHONE_STATE,
                                 android.Manifest.permission.READ_SMS,
+                                android.Manifest.permission.SEND_SMS,
 
                         }, 1);
 
@@ -395,6 +397,7 @@ public class LoginActivity extends CommonActivity {
             m.what = INTRO_BG_ANIMATION;
             LoginHandler.sendMessage(m);
         }else{
+            Toast.makeText(getApplicationContext() , "업데이트 이동.." , Toast.LENGTH_SHORT).show();
             Message m = new Message();
             m.what = INTRO_VERSION_UPDATE;
             LoginHandler.sendMessage(m);

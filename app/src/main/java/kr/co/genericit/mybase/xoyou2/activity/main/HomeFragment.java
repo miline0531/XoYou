@@ -166,9 +166,16 @@ public class HomeFragment extends Fragment{
             SkyLog.d("CLACIK id :: "  + id);
             SkyLog.d("CLACIK action :: "  + action);
             SkyLog.d("CLACIK getPhone :: "  + listSimRi.get(id).getPhone());
-            MainActivity.homeClickPosition = id;
-            MainActivity.homeClickObj = listSimRi.get(id);
-            ((MainActivity)getContext()).refreshSlide2();
+//            MainActivity.homeClickPosition = id;
+//            MainActivity.homeClickObj = listSimRi.get(id);
+//            ((MainActivity)getContext()).refreshSlide2();
+
+            //test
+            Intent it = new Intent(mContext , ChattingRoomActivity.class);
+            it.putExtra("phone" , listSimRi.get(id).getPhone());
+            it.putExtra("name" , listSimRi.get(id).getName());
+            startActivity(it);
+
         }
     };
 
@@ -239,7 +246,20 @@ public class HomeFragment extends Fragment{
             SkyLog.d("timestamp :: " + timestamp);
             SkyLog.d("body :: " + body);
 
-            ContractObj obj = new ContractObj("" + messageId , "" +threadId , address , contactId_string , "" +timestamp , body , "0" , name);
+            ContractObj obj = new ContractObj("" + messageId ,
+                    "" +threadId ,
+                    address ,
+                    contactId_string ,
+                    "" +timestamp ,
+                    body ,
+                    "0" ,
+                    name ,
+                    "" ,
+                    "" ,
+                    "" ,
+                    "" ,
+                    "" ,
+                    "");
             dataSet.sqlContractInsert(mContext , obj);
 
             SkyLog.d("==============SMS==============");
@@ -288,7 +308,20 @@ public class HomeFragment extends Fragment{
             SkyLog.d("timestamp :: " + timestamp);
             SkyLog.d("body :: " + body);
 
-            ContractObj obj = new ContractObj("" + messageId , "", address , contactId_string , "" +timestamp , body , "1" , name);
+            ContractObj obj = new ContractObj("" + messageId ,
+                    "",
+                    address ,
+                    contactId_string ,
+                    "" +timestamp ,
+                    body ,
+                    "1" ,
+                    name ,
+                    "" ,
+                    "" ,
+                    "" ,
+                    "" ,
+                    "" ,
+                    "");
             dataSet.sqlContractInsert(mContext , obj);
 
             SkyLog.d("==============SMS==============");
@@ -319,6 +352,7 @@ public class HomeFragment extends Fragment{
                             JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
                             String[] phone_Arr = new String[1];
 
+                            //NMR 수정해야할곳!!
                             if(i == 0){
                                 phone_Arr[0] = "01033435914";
                             }else{
@@ -359,5 +393,6 @@ public class HomeFragment extends Fragment{
             }
         }
     };
+
 
 }

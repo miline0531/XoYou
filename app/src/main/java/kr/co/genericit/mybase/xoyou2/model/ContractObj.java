@@ -19,8 +19,14 @@ public class ContractObj implements Parcelable {
     String body;
     String send_Flag;
     String name;
+    String suggestion;
+    String po0Val;
+    String po1Val;
+    String po2Val;
+    String po3Val;
+    String message;
 
-    public ContractObj(String messageId, String threadId, String address, String contactId_string, String timestamp, String body, String send_Flag, String name) {
+    public ContractObj(String messageId, String threadId, String address, String contactId_string, String timestamp, String body, String send_Flag, String name, String suggestion, String po0Val, String po1Val, String po2Val, String po3Val, String message) {
         this.messageId = messageId;
         this.threadId = threadId;
         this.address = address;
@@ -29,6 +35,12 @@ public class ContractObj implements Parcelable {
         this.body = body;
         this.send_Flag = send_Flag;
         this.name = name;
+        this.suggestion = suggestion;
+        this.po0Val = po0Val;
+        this.po1Val = po1Val;
+        this.po2Val = po2Val;
+        this.po3Val = po3Val;
+        this.message = message;
     }
 
     public String getMessageId() {
@@ -95,6 +107,54 @@ public class ContractObj implements Parcelable {
         this.name = name;
     }
 
+    public String getSuggestion() {
+        return suggestion;
+    }
+
+    public String getPo0Val() {
+        return po0Val;
+    }
+
+    public void setPo0Val(String po0Val) {
+        this.po0Val = po0Val;
+    }
+
+    public String getPo1Val() {
+        return po1Val;
+    }
+
+    public void setPo1Val(String po1Val) {
+        this.po1Val = po1Val;
+    }
+
+    public String getPo2Val() {
+        return po2Val;
+    }
+
+    public void setPo2Val(String po2Val) {
+        this.po2Val = po2Val;
+    }
+
+    public String getPo3Val() {
+        return po3Val;
+    }
+
+    public void setPo3Val(String po3Val) {
+        this.po3Val = po3Val;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setSuggestion(String suggestion) {
+        this.suggestion = suggestion;
+    }
+
     public ContractObj(Parcel in) {
         readFromParcel(in);
     }
@@ -109,6 +169,12 @@ public class ContractObj implements Parcelable {
         dest.writeString(body);
         dest.writeString(send_Flag);
         dest.writeString(name);
+        dest.writeString(suggestion);
+        dest.writeString(po0Val);
+        dest.writeString(po1Val);
+        dest.writeString(po2Val);
+        dest.writeString(po3Val);
+        dest.writeString(message);
     }
     private void readFromParcel(Parcel in){
 
@@ -119,6 +185,12 @@ public class ContractObj implements Parcelable {
         body = in.readString();
         send_Flag = in.readString();
         name = in.readString();
+        suggestion = in.readString();
+        po0Val = in.readString();
+        po1Val = in.readString();
+        po2Val = in.readString();
+        po3Val = in.readString();
+        message = in.readString();
     }
     @SuppressWarnings("rawtypes")
     public static final Creator<ContractObj> CREATOR = new Creator() {

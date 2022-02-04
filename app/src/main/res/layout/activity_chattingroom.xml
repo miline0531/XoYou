@@ -38,10 +38,10 @@
                 android:layout_height="47dp"
                 android:background="@null"
                 android:hint="메시지를 입력하세요."
-                android:paddingBottom="13dp"
                 android:paddingLeft="10dp"
-                android:paddingRight="20dp"
                 android:paddingTop="13dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="13dp"
                 android:textColor="#ffffff"
                 android:textColorHint="#707070"
                 android:textSize="14dp" />
