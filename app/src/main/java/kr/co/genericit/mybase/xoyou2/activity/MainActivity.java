@@ -277,7 +277,7 @@ public class MainActivity extends CommonActivity {
 
         fragments = new int[]{R.layout.fragment_main_top_1,
                 R.layout.fragment_main_top_2,
-                R.layout.fragment_main_top_3,
+                //R.layout.fragment_main_top_3,
                 R.layout.fragment_main_top_4};
 
         mainTopView = new ArrayList<>();
@@ -744,13 +744,15 @@ public class MainActivity extends CommonActivity {
                 transaction.replace(R.id.nav_host_fragment_activity_main, manageFragment);
                 transaction.commit();
                 break;
+                /*
             case 2:
                 // 스토어 프래그먼트 호출
                 StoreFragment storeFragment = new StoreFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main, storeFragment);
                 transaction.commit();
                 break;
-            case 3:
+                 */
+            case 2:
                 // FindMe 프래그먼트 호출
                 FindFragment findFragment = new FindFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main, findFragment);
@@ -782,7 +784,7 @@ public class MainActivity extends CommonActivity {
     String[] titleString = {
             CommandUtil.getInstance().getStr(R.string.fragment_home_result),
             CommandUtil.getInstance().getStr(R.string.fragment_manage_title),
-            CommandUtil.getInstance().getStr(R.string.fragment_store_1),
+            //CommandUtil.getInstance().getStr(R.string.fragment_store_1),
             CommandUtil.getInstance().getStr(R.string.fragment_find_title)
     };
 
