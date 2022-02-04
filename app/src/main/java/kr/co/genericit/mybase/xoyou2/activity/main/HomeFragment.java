@@ -96,16 +96,11 @@ public class HomeFragment extends Fragment{
     private AccumThread mThread;
     private Map<String, String> map = new HashMap<String, String>();
     private ArrayList<SimRi> listSimRi = new ArrayList<SimRi>();
-    private ArrayList<QaListObj> qrList = new ArrayList<QaListObj>();
     private RecyclerView list;
 
-    private ListView list_left , list_left3;
     private MainFrag1ListAdapter m_Adapter;
-    private MainFrag1LeftListAdapter m_LeftAdapter;
-    private MainFrag1Left3ListAdapter m_Left3Adapter;
     private DrawerLayout drawerLayout;
     private RelativeLayout drawer2;
-    private String[] YouQA_Name ={"기본", "건강", "결혼", "명예", "사고", "이동", "인연","재능", "재물", "직업", "집안"};
     private RelativeLayout lb_slide;
     private RelativeLayout lb_slide3;
     private LinearLayout popview;
@@ -171,26 +166,9 @@ public class HomeFragment extends Fragment{
             SkyLog.d("CLACIK id :: "  + id);
             SkyLog.d("CLACIK action :: "  + action);
             SkyLog.d("CLACIK getPhone :: "  + listSimRi.get(id).getPhone());
-
-
-            Intent it = new Intent(mContext , ChattingRoomActivity.class);
-            it.putExtra("phone" , listSimRi.get(id).getPhone());
-            startActivity(it);
-            /*
-            //MainActivity.viewSlide2();
-            lb_slide3.setVisibility(View.GONE);
-            lb_slide.setVisibility(View.VISIBLE);
-            drawerLayout.closeDrawer(drawer2);
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    lb_slide3.setVisibility(View.GONE);
-                    lb_slide.setVisibility(View.VISIBLE);
-                    drawerLayout.openDrawer(drawer2);
-                }
-            }, 300); //딜레이 타임 조절
-            */
+            MainActivity.homeClickPosition = id;
+            MainActivity.homeClickObj = listSimRi.get(id);
+            ((MainActivity)getContext()).refreshSlide2();
         }
     };
 
@@ -205,16 +183,6 @@ public class HomeFragment extends Fragment{
         mThread.start();        //스레드 시작!!
     }
 
-    private void getQaList(){
-        CommandUtil.getInstance().showLoadingDialog(MainActivity.mainAc);
-        map.clear();
-        map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_QA_LIST);
-        map.put("userId", new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
-
-        //스레드 생성
-        mThread = new AccumThread(MainActivity.mainAc, mAfterAccum, map, 5, 1, null);
-        mThread.start();        //스레드 시작!!
-    }
 
 
     AdapterView.OnItemClickListener mItemClickListener2 = new AdapterView.OnItemClickListener() {
@@ -222,18 +190,10 @@ public class HomeFragment extends Fragment{
             SkyLog.d("mItemClickListener2 position :: " + position);
             //MainActivity.viewSlide2();
             drawerLayout.close();
-            getQaList();
         }
     };
 
 
-    AdapterView.OnItemClickListener mItemClickListener3 = new AdapterView.OnItemClickListener() {
-        public void onItemClick(AdapterView parent, View view, int position, long id) {
-            SkyLog.d("position :: " + position);
-            drawerLayout.close();
-            popview.setVisibility(View.VISIBLE);
-        }
-    };
 
     //받은건 flag = 0 , 보낸건 flag = 1
     public int readSMSMessage(String[] arrVal , String name) {
@@ -386,49 +346,6 @@ public class HomeFragment extends Fragment{
 
 
                         //전화번호부 저장
-                    }else{
-                        CommandUtil.getInstance().showCommonOneButtonDialog(MainActivity.mainAc,
-                                jsonObject_succes.getString("error") + getClass().toString(),
-                                MainActivity.mainAc.getResources().getString(R.string.str_cofirm),
-                                CommonPopupDialog.COMMON_DIALOG_OPTION_CLOSE_DIALOG,
-                                null);
-                    }
-                }catch (Exception e){
-                    SkyLog.d("e :: " + e);
-                }
-            } else if(msg.arg1 == 1) {
-                String res  = (String)msg.obj;
-                SkyLog.d("res 1: " + res);
-                lb_slide3.setVisibility(View.GONE);
-                lb_slide.setVisibility(View.GONE);
-
-                try {
-                    JSONObject jsonObject_succes = new JSONObject(res);                     //SUCCESS
-                    if(jsonObject_succes.getString("success").equals("true")){
-                        JSONArray jsonObject_listSimRi = new JSONArray(jsonObject_succes.getString("data"));
-
-                        SkyLog.d("COUNT :: " + jsonObject_listSimRi.length());
-                        qrList.clear();
-                        for (int i = 0; i < jsonObject_listSimRi.length(); i++) {
-                            JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
-                            qrList.add(new QaListObj(
-                                    jsonObject.getString("No") ,
-                                    jsonObject.getString("Menu") ,
-                                    jsonObject.getString("MenuGuBun") ,
-                                    jsonObject.getString("MenuName") ,
-                                    jsonObject.getString("MenuSeo")));
-                        }
-
-                        m_Adapter.notifyDataSetChanged();
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                lb_slide3.setVisibility(View.VISIBLE);
-                                lb_slide.setVisibility(View.GONE);
-                                drawerLayout.openDrawer(drawer2);
-                            }
-                        }, 1000); //딜레이 타임 조절
                     }else{
                         CommandUtil.getInstance().showCommonOneButtonDialog(MainActivity.mainAc,
                                 jsonObject_succes.getString("error") + getClass().toString(),

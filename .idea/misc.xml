@@ -10,6 +10,7 @@
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/drawable/weun_img_box.xml" value="0.184375" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/activity_bid.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/activity_chattingroom.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/activity_main.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/activity_weundetail.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/activity_weunlist.xml" value="0.16822916666666668" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/fragment_bid_graph.xml" value="0.36614583333333334" />
@@ -17,9 +18,13 @@
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/fragment_find.xml" value="0.15081521739130435" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/fragment_find_graph.xml" value="0.1" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/fragment_find_un.xml" value="0.15081521739130435" />
+        <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/fragment_home.xml" value="0.15081521739130435" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/fragment_store.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/item_chat.xml" value="0.25" />
         <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/item_weunlist.xml" value="0.16822916666666668" />
+        <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/view_slide_menu.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/view_slide_menu2.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/SKY/Desktop/Github/XoYou/app/src/main/res/layout/view_slide_menu3.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/ifeelbluu/StudioProjects/jw_android/app/src/main/res/layout/activity_main.xml" value="0.3229166666666667" />
         <entry key="..\:/Users/ifeelbluu/StudioProjects/jw_android/app/src/main/res/layout/view_slide_menu.xml" value="0.5" />
         <entry key="..\:/Users/masterpc-003/AndroidStudioProjects/jw_android2/app/src/main/res/drawable-xhdpi/shape_line_default_white_1px_inside.xml" value="0.4379487179487179" />

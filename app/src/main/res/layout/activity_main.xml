@@ -106,6 +106,53 @@
 
 
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/popview"
+            android:background="#DD696969"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="1월27일(목) 10시~11시 이별에 도움이 되는 등록인 순"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/btn_1"
+                android:layout_width="wrap_content"
+                android:text="유톡연결"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:background="#c3c3c3"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:id="@+id/btn_2"
+                android:background="#c3c3c3"
+                android:layout_width="wrap_content"
+                android:text="유톡연결"
+                android:textColor="#000"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/btn_3"
+                android:layout_margin="5dp"
+                android:background="#c3c3c3"
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:textColor="#000"
+                android:text="유톡연결"
+                android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--드로어 화면이 될 Layout-->
@@ -122,6 +169,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+
+        <include
+            layout="@layout/view_slide_menu2"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            layout="@layout/view_slide_menu3"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 

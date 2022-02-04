@@ -16,21 +16,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,21 +47,29 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import co.kr.sky.AccumThread;
 import kr.co.genericit.mybase.xoyou2.R;
 import kr.co.genericit.mybase.xoyou2.activity.login.LoginActivity;
 import kr.co.genericit.mybase.xoyou2.activity.main.FindFragment;
 import kr.co.genericit.mybase.xoyou2.activity.main.HomeFragment;
 import kr.co.genericit.mybase.xoyou2.activity.main.ManageFragment;
 import kr.co.genericit.mybase.xoyou2.activity.main.StoreFragment;
+import kr.co.genericit.mybase.xoyou2.activity.xoyou.ChattingRoomActivity;
+import kr.co.genericit.mybase.xoyou2.adapter.MainFrag1Left3ListAdapter;
+import kr.co.genericit.mybase.xoyou2.adapter.MainFrag1LeftListAdapter;
 import kr.co.genericit.mybase.xoyou2.adapter.SectionPageAdapter;
 import kr.co.genericit.mybase.xoyou2.adapter.SlideMenuAdapter;
 import kr.co.genericit.mybase.xoyou2.common.CommonActivity;
 import kr.co.genericit.mybase.xoyou2.common.Constants;
 import kr.co.genericit.mybase.xoyou2.common.MySQLiteOpenHelper;
+import kr.co.genericit.mybase.xoyou2.common.NetInfo;
 import kr.co.genericit.mybase.xoyou2.common.SkyLog;
 import kr.co.genericit.mybase.xoyou2.interfaces.DialogClickListener;
-import kr.co.genericit.mybase.xoyou2.model.Message;
+import kr.co.genericit.mybase.xoyou2.model.QaListObj;
+import kr.co.genericit.mybase.xoyou2.model.SimRi;
 import kr.co.genericit.mybase.xoyou2.model.SlideMenuData;
 import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
 import kr.co.genericit.mybase.xoyou2.network.interfaces.ActionResultListener;
@@ -109,6 +122,10 @@ public class MainActivity extends CommonActivity {
     private final int INTENT_FAMILY = 3;
     private final int INTENT_USER = 4;
 
+    private RelativeLayout lb_slide2;
+    private RelativeLayout lb_slide3;
+    private LinearLayout rl_root;
+
     private BackPressFinishHandler mBackPressFinishHandler;
 
     private String id;
@@ -121,6 +138,17 @@ public class MainActivity extends CommonActivity {
     private ViewsSliderAdapter mAdapter;
     private boolean initDotted = true;
     private MySQLiteOpenHelper vc;
+    private String[] YouQA_Name ={"기본", "건강", "결혼", "명예", "사고", "이동", "인연","재능", "재물", "직업", "집안"};
+    private ListView list_left;
+    private ListView list_left3;
+    private MainFrag1LeftListAdapter m_LeftAdapter;
+    private AccumThread mThread;
+    private Map<String, String> map = new HashMap<String, String>();
+    private ArrayList<QaListObj> qrList = new ArrayList<QaListObj>();
+    private MainFrag1Left3ListAdapter m_Left3Adapter;
+    public static int homeClickPosition;
+    public static SimRi homeClickObj;
+    private LinearLayout popview;
 
     @Override
     protected void onResume() {
@@ -153,6 +181,9 @@ public class MainActivity extends CommonActivity {
 
 
     public void MainOpenDrawer(){
+        rl_root.setVisibility(View.VISIBLE);
+        lb_slide2.setVisibility(View.GONE);
+        lb_slide3.setVisibility(View.GONE);
         drawerLayout.openDrawer(drawerView);
     }
 
@@ -162,8 +193,18 @@ public class MainActivity extends CommonActivity {
     public RelativeLayout floatingButton;
     public void initView(){
 
+        list_left = findViewById(R.id.list_left);
+        list_left3 = findViewById(R.id.list_left3);
         viewPager = findViewById(R.id.view_pager);
         layoutDots = findViewById(R.id.layoutDots);
+        lb_slide2 = findViewById(R.id.lb_slide2);
+        lb_slide3 = findViewById(R.id.lb_slide3);
+        rl_root = findViewById(R.id.rl_root);
+        popview = findViewById(R.id.popview);
+
+        findViewById(R.id.popview).setOnClickListener(btnListener);
+        findViewById(R.id.btn_1).setOnClickListener(btnListener);
+
         setViewPager();
 
 
@@ -182,6 +223,9 @@ public class MainActivity extends CommonActivity {
         btnOpenDrawer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                rl_root.setVisibility(View.VISIBLE);
+                lb_slide2.setVisibility(View.GONE);
+                lb_slide3.setVisibility(View.GONE);
                 drawerLayout.openDrawer(drawerView);
             }
         });
@@ -197,46 +241,6 @@ public class MainActivity extends CommonActivity {
         //슬라이드메뉴 초기화
         initSlideMenuView();
 
-        /*navView = findViewById(R.id.nav_view);
-
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_manage, R.id.navigation_store, R.id.navigation_home, R.id.navigation_find)
-                .build();
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
-
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                if(controller.getCurrentDestination().getId() == R.id.navigation_manage){
-//                    main_title.setText(R.string.title_manage);
-                    main_image.setImageResource(R.drawable.img_manage);
-                }else if(controller.getCurrentDestination().getId() == R.id.navigation_home){
-//                    main_title.setText(R.string.title_home);
-                    main_image.setImageResource(R.drawable.img_home);
-                }else if(controller.getCurrentDestination().getId() == R.id.navigation_store){
-//                    main_title.setText(R.string.title_store);
-                    main_image.setImageResource(R.drawable.img_store);
-                }else if(controller.getCurrentDestination().getId() == R.id.navigation_find){
-//                    main_title.setText(R.string.title_find);
-                    main_image.setImageResource(R.drawable.img_findme);
-                }
-//                else if(controller.getCurrentDestination().getId() == R.id.navigation_recommend){
-////                    main_title.setText(R.string.title_house);
-//                    main_image.setImageResource(R.drawable.img_house);
-//                }
-            }
-        });*/
-
-        /*findViewById(R.id.btn_keyword_input).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, KeywordInputActivity.class);
-                startActivity(i);
-            }
-        });*/
-
         findViewById(R.id.btn_logout).setOnClickListener(v ->{
             String confirm = CommandUtil.getInstance().getStr(R.string.str_cofirm);
             String cancel = CommandUtil.getInstance().getStr(R.string.str_cancel);
@@ -251,6 +255,25 @@ public class MainActivity extends CommonActivity {
             });
         });
     }
+    //버튼 리스너 구현 부분
+    View.OnClickListener btnListener = new View.OnClickListener() {
+        @SuppressLint("ResourceType")
+        public void onClick(View v) {
+            switch (v.getId()) {
+
+                case R.id.popview:
+                    popview.setVisibility(View.GONE);
+                    break;
+                case R.id.btn_1:
+                    popview.setVisibility(View.GONE);
+                    Intent it = new Intent(MainActivity.this , ChattingRoomActivity.class);
+                    //it.putExtra("phone" , homeClickObj.getPhone());
+                    it.putExtra("phone" , "01033435914");
+                    startActivity(it);
+                    break;
+            }
+        }
+    };
 
     private void logout(){
         JWSharePreference sharePreference = new JWSharePreference();
@@ -500,6 +523,9 @@ public class MainActivity extends CommonActivity {
 //                startActivity(i);
             }
         });
+    }
+    public void refreshSlid(){
+
     }
 
     public void getUserInfo(){ //유저리스트
@@ -829,6 +855,101 @@ public class MainActivity extends CommonActivity {
         TextView mainText = mainTopView.get(CurrentPosition).findViewById(R.id.main_title);
         mainText.setText(text);
     }
+
+    //2번째 슬라이드 메뉴
+    public void refreshSlide2() {
+        rl_root.setVisibility(View.GONE);
+        lb_slide2.setVisibility(View.VISIBLE);
+        lb_slide3.setVisibility(View.GONE);
+        drawerLayout.openDrawer(drawerView);
+
+        m_LeftAdapter = new MainFrag1LeftListAdapter( MainActivity.this, YouQA_Name);
+        list_left.setOnItemClickListener(mItemClickListener2);
+        list_left.setAdapter(m_LeftAdapter);
+
+        m_Left3Adapter = new MainFrag1Left3ListAdapter( MainActivity.this, qrList);
+        list_left3.setOnItemClickListener(mItemClickListener3);
+        list_left3.setAdapter(m_Left3Adapter);
+
+    }
+
+    AdapterView.OnItemClickListener mItemClickListener2 = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView parent, View view, int position, long id) {
+            SkyLog.d("mItemClickListener2 position :: " + position);
+            //MainActivity.viewSlide2();
+            drawerLayout.close();
+            getQaList();
+        }
+    };
+
+    AdapterView.OnItemClickListener mItemClickListener3 = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView parent, View view, int position, long id) {
+            SkyLog.d("position :: " + position);
+            drawerLayout.close();
+            popview.setVisibility(View.VISIBLE);
+        }
+    };
+    private void getQaList(){
+        CommandUtil.getInstance().showLoadingDialog(MainActivity.mainAc);
+        map.clear();
+        map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_QA_LIST);
+        map.put("userId", new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
+
+        //스레드 생성
+        mThread = new AccumThread(MainActivity.mainAc, mAfterAccum, map, 5, 1, null);
+        mThread.start();        //스레드 시작!!
+    }
+
+
+    Handler mAfterAccum = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            CommandUtil.getInstance().dismissLoadingDialog();
+            if(msg.arg1 == 1) {
+                String res  = (String)msg.obj;
+                SkyLog.d("res 1: " + res);
+
+                try {
+                    JSONObject jsonObject_succes = new JSONObject(res);                     //SUCCESS
+                    if(jsonObject_succes.getString("success").equals("true")){
+                        JSONArray jsonObject_listSimRi = new JSONArray(jsonObject_succes.getString("data"));
+
+                        SkyLog.d("COUNT :: " + jsonObject_listSimRi.length());
+                        qrList.clear();
+                        for (int i = 0; i < jsonObject_listSimRi.length(); i++) {
+                            JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
+                            qrList.add(new QaListObj(
+                                    jsonObject.getString("No") ,
+                                    jsonObject.getString("Menu") ,
+                                    jsonObject.getString("MenuGuBun") ,
+                                    jsonObject.getString("MenuName") ,
+                                    jsonObject.getString("MenuSeo")));
+                        }
+
+                        m_Left3Adapter.notifyDataSetChanged();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                rl_root.setVisibility(View.GONE);
+                                lb_slide2.setVisibility(View.GONE);
+                                lb_slide3.setVisibility(View.VISIBLE);
+                                drawerLayout.openDrawer(drawerView);
+                            }
+                        }, 1000); //딜레이 타임 조절
+                    }else{
+                        CommandUtil.getInstance().showCommonOneButtonDialog(MainActivity.mainAc,
+                                jsonObject_succes.getString("error") + getClass().toString(),
+                                MainActivity.mainAc.getResources().getString(R.string.str_cofirm),
+                                CommonPopupDialog.COMMON_DIALOG_OPTION_CLOSE_DIALOG,
+                                null);
+                    }
+                }catch (Exception e){
+                    SkyLog.d("e :: " + e);
+                }
+            }
+        }
+    };
 
     public class ViewsSliderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
