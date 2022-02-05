@@ -42,7 +42,7 @@ public class MainFrag1ListAdapter extends RecyclerView.Adapter<MainFrag1ListAdap
     @Override
     public void onBindViewHolder(@NonNull MainFrag1ListAdapter.MyViewHolder holder, int position) {
         final SimRi board = items.get(position);
-        SkyLog.d("onBindViewHolder :: " + position);
+        //SkyLog.d("onBindViewHolder :: " + position);
 
         holder.txt1.setText(board.getName());
         holder.txt2.setText(board.getSimRiInfo());

@@ -70,6 +70,7 @@ import kr.co.genericit.mybase.xoyou2.common.SkyLog;
 import kr.co.genericit.mybase.xoyou2.interfaces.DialogClickListener;
 import kr.co.genericit.mybase.xoyou2.model.QaListObj;
 import kr.co.genericit.mybase.xoyou2.model.SimRi;
+import kr.co.genericit.mybase.xoyou2.model.SimRiUser;
 import kr.co.genericit.mybase.xoyou2.model.SlideMenuData;
 import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
 import kr.co.genericit.mybase.xoyou2.network.interfaces.ActionResultListener;
@@ -105,6 +106,7 @@ public class MainActivity extends CommonActivity {
     private final int POP_STEP_1 = 3000;
     private final int POP_STEP_2 = 3001;
 
+    public static int fragmentPosionFlag = 0;
     private int userCount=0, relationCount=0, locationCount=0;
 
     private ArrayList<SlideMenuData> mSlideMenuItem1;
@@ -125,6 +127,11 @@ public class MainActivity extends CommonActivity {
     private final int INTENT_LOCATION = 2;
     private final int INTENT_FAMILY = 3;
     private final int INTENT_USER = 4;
+
+    private HomeFragment homeFragment;
+    private StoreFragment storeFragment;
+    private ManageFragment manageFragment;
+    private FindFragment findFragment;
 
     private RelativeLayout lb_slide2;
     private RelativeLayout lb_slide3;
@@ -152,6 +159,7 @@ public class MainActivity extends CommonActivity {
     private MainFrag1Left3ListAdapter m_Left3Adapter;
     public static int homeClickPosition;
     public static SimRi homeClickObj;
+    public static SimRiUser storeClickObj;
     private LinearLayout popview;
 
     @Override
@@ -273,8 +281,12 @@ public class MainActivity extends CommonActivity {
                 case R.id.btn_1:
                     popview.setVisibility(View.GONE);
                     Intent it = new Intent(MainActivity.this , ChattingRoomActivity.class);
-                    it.putExtra("phone" , homeClickObj.getPhone());
-//                    it.putExtra("phone" , "01033435914");
+                    if(fragmentPosionFlag == 0){
+                        it.putExtra("phone" , homeClickObj.getPhone());
+//                        it.putExtra("phone" , "01033435914");
+                    }else{
+                        it.putExtra("phone" , storeClickObj.getPhone());
+                    }
                     startActivity(it);
                     break;
                 case R.id.btn_popup:
@@ -539,7 +551,8 @@ public class MainActivity extends CommonActivity {
                 //두번쨰 팝업 실행
                 SkyLog.d("POP_STEP_1 position :: " + data.getStringExtra("position"));
                 SkyLog.d("POP_STEP_1 data:: " + data.getStringExtra("data"));
-                Toast.makeText(getApplicationContext() , "새로운 API 호출.." , Toast.LENGTH_SHORT).show();
+
+                homeFragment.getQaSimRiList(data.getStringExtra("data"));
             }
         }
     }
@@ -790,7 +803,7 @@ public class MainActivity extends CommonActivity {
         switch (fragment){
             case 0:
                 // 홈 프래그먼트 호출
-                HomeFragment homeFragment = new HomeFragment();
+                homeFragment = new HomeFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main, homeFragment);
                 transaction.commit();
                 break;
@@ -799,20 +812,20 @@ public class MainActivity extends CommonActivity {
                 // 매니지 프래그먼트 호출
                 ((TextView)findViewById(R.id.btn_slide)).setVisibility(View.GONE);
 
-                StoreFragment storeFragment = new StoreFragment();
+                storeFragment = new StoreFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main, storeFragment);
                 transaction.commit();
                 break;
             case 2:
                 // 스토어 프래그먼트 호출
-                ManageFragment manageFragment = new ManageFragment();
+                manageFragment = new ManageFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main, manageFragment);
                 transaction.commit();
 
                 break;
             case 3:
                 // FindMe 프래그먼트 호출
-                FindFragment findFragment = new FindFragment();
+                findFragment = new FindFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main, findFragment);
                 transaction.commit();
                 break;
@@ -888,7 +901,7 @@ public class MainActivity extends CommonActivity {
         mainText.setText(text);
     }
 
-    //2번째 슬라이드 메뉴
+    //1번째 프레그먼트클릭
     public void homeFragmentLiskClick() {
         popview.setVisibility(View.VISIBLE);
         /*
@@ -905,6 +918,22 @@ public class MainActivity extends CommonActivity {
         */
     }
 
+    //1번째 프레그먼트클릭
+    public void storeFragmentLiskClick() {
+        popview.setVisibility(View.VISIBLE);
+        /*
+        rl_root.setVisibility(View.GONE);
+        lb_slide2.setVisibility(View.VISIBLE);
+        lb_slide3.setVisibility(View.GONE);
+        drawerLayout.openDrawer(drawerView);
+        m_LeftAdapter = new MainFrag1LeftListAdapter( MainActivity.this, YouQA_Name);
+        list_left.setOnItemClickListener(mItemClickListener2);
+        list_left.setAdapter(m_LeftAdapter);
+        m_Left3Adapter = new MainFrag1Left3ListAdapter( MainActivity.this, qrList);
+        list_left3.setOnItemClickListener(mItemClickListener3);
+        list_left3.setAdapter(m_Left3Adapter);
+        */
+    }
     AdapterView.OnItemClickListener mItemClickListener2 = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             SkyLog.d("mItemClickListener2 position :: " + position);

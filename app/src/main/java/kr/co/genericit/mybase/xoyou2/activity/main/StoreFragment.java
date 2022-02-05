@@ -23,10 +23,12 @@ import java.util.Map;
 import co.kr.sky.AccumThread;
 import kr.co.genericit.mybase.xoyou2.R;
 import kr.co.genericit.mybase.xoyou2.activity.MainActivity;
+import kr.co.genericit.mybase.xoyou2.adapter.MainFrag1ListAdapter;
 import kr.co.genericit.mybase.xoyou2.adapter.StoreFagmentListAdapter;
 import kr.co.genericit.mybase.xoyou2.common.CommonUtil;
 import kr.co.genericit.mybase.xoyou2.common.NetInfo;
 import kr.co.genericit.mybase.xoyou2.common.SkyLog;
+import kr.co.genericit.mybase.xoyou2.model.SimRi;
 import kr.co.genericit.mybase.xoyou2.model.SimRiUser;
 import kr.co.genericit.mybase.xoyou2.storage.JWSharePreference;
 import kr.co.genericit.mybase.xoyou2.utils.CommandUtil;
@@ -66,11 +68,31 @@ public class StoreFragment extends Fragment {
 
 
         m_Adapter = new StoreFagmentListAdapter( MainActivity.mainAc, listSimRi);
-        //m_Adapter.setListOnClickListener(mItemClickListener);
+        m_Adapter.setListOnClickListener(mItemClickListener);
         list.setAdapter(m_Adapter);
         getUserList();
         return view;
     }
+
+    public StoreFagmentListAdapter.listOnClickListener mItemClickListener = new StoreFagmentListAdapter.listOnClickListener() {
+        @Override
+        public void onClickItem(int id, int action) {
+            SkyLog.d("CLACIK id :: "  + id);
+            SkyLog.d("CLACIK action :: "  + action);
+            SkyLog.d("CLACIK getPhone :: "  + listSimRi.get(id).getPhone());
+            MainActivity.homeClickPosition = id;
+            MainActivity.storeClickObj = listSimRi.get(id);
+            MainActivity.fragmentPosionFlag = 1;
+            ((MainActivity)getContext()).storeFragmentLiskClick();
+
+            //test
+//            Intent it = new Intent(mContext , ChattingRoomActivity.class);
+//            it.putExtra("phone" , listSimRi.get(id).getPhone());
+//            it.putExtra("name" , listSimRi.get(id).getName());
+//            startActivity(it);
+
+        }
+    };
     private void getUserList(){
         CommandUtil.getInstance().showLoadingDialog(MainActivity.mainAc);
         map.clear();
@@ -84,67 +106,90 @@ public class StoreFragment extends Fragment {
     }
 
 
+
+    Handler mEndAfterAccum = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            m_Adapter.notifyDataSetChanged();
+            CommandUtil.getInstance().dismissLoadingDialog();
+        }
+    };
     Handler mAfterAccum = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            CommandUtil.getInstance().dismissLoadingDialog();
             if(msg.arg1 == 0) {
                 String res  = (String)msg.obj;
                 SkyLog.d("res 0: " + res);
 
-                //startActivity(new Intent(mContext, AllStepActivity.class));
-                try {
-                    JSONObject jsonObject_succes = new JSONObject(res);                     //SUCCESS
-                    if(jsonObject_succes.getString("success").equals("true")){
-                        JSONArray jsonObject_listSimRi = new JSONArray(jsonObject_succes.getString("data"));
+                ContractThread thread2 = new ContractThread(res);
+                thread2.start();
+                SkyLog.d("end0 :: ");
+            }
+        }
+    };
 
-                        SkyLog.d("COUNT :: " + jsonObject_listSimRi.length());
-                        listSimRi.clear();
-                        for (int i = 0; i < jsonObject_listSimRi.length(); i++) {
-                            JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
-                            String[] phone_Arr = new String[1];
 
-                            //NMR 수정해야할곳!!
+    class ContractThread extends Thread {
+        private String jsonData = "";
+        public ContractThread(String jsonData){
+            this.jsonData = jsonData;
+        }
+
+        @Override
+        public void run() {
+            SkyLog.d("ContractThread start :: " + jsonData);
+
+            try {
+                JSONObject jsonObject_succes = new JSONObject(jsonData);                     //SUCCESS
+                if(jsonObject_succes.getString("success").equals("true")){
+                    JSONArray jsonObject_listSimRi = new JSONArray(jsonObject_succes.getString("data"));
+
+                    SkyLog.d("COUNT :: " + jsonObject_listSimRi.length());
+                    listSimRi.clear();
+                    for (int i = 0; i < jsonObject_listSimRi.length(); i++) {
+                        JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
+                        String[] phone_Arr = new String[1];
+
+                        //NMR 수정해야할곳!!
 //                            if(i == 0){
 //                                phone_Arr[0] = "01033435914";
 //                            }else{
 //                                phone_Arr[0] = "" + i;
 //
 //                            }
-                            phone_Arr[0] = "" + jsonObject.getString("Phone");
-                            listSimRi.add(new SimRiUser(
-                                    jsonObject.getString("Phone") ,
-                                    //phone_Arr[0] ,
-                                    jsonObject.getInt("Id") ,
-                                    jsonObject.getInt("No") ,
-                                    jsonObject.getString("NickName") ,
-                                    jsonObject.getString("Name") ,
-                                    jsonObject.getString("UserInfo") ,
-                                    jsonObject.getString("GwanInfo") ,
-                                    jsonObject.getString("SimRiInfo") ,
-                                    jsonObject.getString("Value") ,
-                                    jsonObject.getDouble("iDou") ,
-                                    jsonObject.getString("Image") ,
-                                    jsonObject.getBoolean("XO")));
-                            dataSet.readSMSMessage(mContext , phone_Arr , jsonObject.getString("Name"));
-                        }
-                        m_Adapter.notifyDataSetChanged();
-
-
-
-
-                        //전화번호부 저장
-                    }else{
-                        CommandUtil.getInstance().showCommonOneButtonDialog(MainActivity.mainAc,
-                                jsonObject_succes.getString("error") + getClass().toString(),
-                                MainActivity.mainAc.getResources().getString(R.string.str_cofirm),
-                                CommonPopupDialog.COMMON_DIALOG_OPTION_CLOSE_DIALOG,
-                                null);
+                        phone_Arr[0] = "" + jsonObject.getString("Phone");
+                        listSimRi.add(new SimRiUser(
+                                jsonObject.getString("Phone") ,
+                                //phone_Arr[0] ,
+                                jsonObject.getInt("Id") ,
+                                jsonObject.getInt("No") ,
+                                jsonObject.getString("NickName") ,
+                                jsonObject.getString("Name") ,
+                                jsonObject.getString("UserInfo") ,
+                                jsonObject.getString("GwanInfo") ,
+                                jsonObject.getString("SimRiInfo") ,
+                                jsonObject.getString("Value") ,
+                                jsonObject.getDouble("iDou") ,
+                                jsonObject.getString("Image") ,
+                                jsonObject.getBoolean("XO")));
+                        dataSet.readSMSMessage(mContext , phone_Arr , jsonObject.getString("Name"));
                     }
-                }catch (Exception e){
-                    SkyLog.d("e :: " + e);
+                    SkyLog.d("readSMSMessage end :: ");
+
+                    //전화번호부 저장
+                    Message msg2 = mEndAfterAccum.obtainMessage();
+                    mEndAfterAccum.sendMessage(msg2);
+                }else{
+                    CommandUtil.getInstance().showCommonOneButtonDialog(MainActivity.mainAc,
+                            jsonObject_succes.getString("error") + getClass().toString(),
+                            MainActivity.mainAc.getResources().getString(R.string.str_cofirm),
+                            CommonPopupDialog.COMMON_DIALOG_OPTION_CLOSE_DIALOG,
+                            null);
                 }
+            }catch (Exception e){
+                SkyLog.d("e :: " + e);
             }
         }
-    };
+    }
+
 }

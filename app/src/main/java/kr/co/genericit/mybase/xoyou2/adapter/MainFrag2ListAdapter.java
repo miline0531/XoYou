@@ -40,7 +40,7 @@ public class MainFrag2ListAdapter extends RecyclerView.Adapter<MainFrag2ListAdap
     @Override
     public void onBindViewHolder(@NonNull MainFrag2ListAdapter.MyViewHolder holder, int position) {
         final WeListObj board = items.get(position);
-        SkyLog.d("onBindViewHolder :: " + position);
+        //SkyLog.d("onBindViewHolder :: " + position);
 
         holder.txt1.setText(board.getUnName());
         holder.txt2.setText(board.getMaxName());

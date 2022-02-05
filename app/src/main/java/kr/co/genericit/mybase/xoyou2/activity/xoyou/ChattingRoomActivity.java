@@ -54,21 +54,26 @@ public class ChattingRoomActivity extends AppCompatActivity {
 
     private int apiPosition = 0;
 
+    private TextView common_title_tv;
     private ListView list;
     private ChattingRoom_Adapter m_Adapter;
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        dataSet.LIFE_ROOM = false;
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        dataSet.LIFE_ROOM = false;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        dataSet.LIFE_ROOM = true;
+        dataSet.LIFE_HANDLER = lifeAccum;
     }
 
 
@@ -80,18 +85,6 @@ public class ChattingRoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chattingroom);
         getSupportActionBar().hide();
         init();
-
-
-        apiPosition = arrContract.size()-1;
-
-        ChatAsyncTask asyncTask = new ChatAsyncTask(ChatAfterAccum , arrContract.get(apiPosition) ,apiPosition);
-        asyncTask.execute();
-
-        bottomCirclLast();
-
-        SkyLog.d("arrContract size :: " + arrContract.size());
-
-
     }
     private void init(){
         list = findViewById(R.id.list);
@@ -104,22 +97,37 @@ public class ChattingRoomActivity extends AppCompatActivity {
         progressTxt3 = findViewById(R.id.progressTxt3);
         progressTxt4 = findViewById(R.id.progressTxt4);
         msg_edit = findViewById(R.id.msg_edit);
+        common_title_tv = findViewById(R.id.common_title_tv);
 
         progressView1.setProgressTextEnabled(false);
         progressView2.setProgressTextEnabled(false);
         progressView3.setProgressTextEnabled(false);
         progressView4.setProgressTextEnabled(false);
 
+        findViewById(R.id.common_left_btn).setOnClickListener(btnListener);
+        findViewById(R.id.btnSend).setOnClickListener(btnListener);
+
         obj = getIntent().getStringExtra("phone");
 
+        common_title_tv.setText(obj);
         arrContract = dataSet.sqlSelectContract(this , obj);
+        SkyLog.d("arrContract size  :: " + arrContract.size());
+
+        if(arrContract.size() == 0){
+            Toast.makeText(getApplicationContext() , "문자 메시지가 존재하지 않습니다." , Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         m_Adapter = new ChattingRoom_Adapter( this, arrContract);
         list.setAdapter(m_Adapter);
 
         initData();
+        apiPosition = arrContract.size()-1;
+        ChatAsyncTask asyncTask = new ChatAsyncTask(ChatAfterAccum , arrContract.get(apiPosition) ,apiPosition);
+        asyncTask.execute();
+        bottomCirclLast();
 
-        findViewById(R.id.common_left_btn).setOnClickListener(btnListener);
-        findViewById(R.id.btnSend).setOnClickListener(btnListener);
+        SkyLog.d("arrContract size :: " + arrContract.size());
     }
     private void initData(){
         arrContract = dataSet.sqlSelectContract(this , obj);
@@ -234,6 +242,20 @@ public class ChattingRoomActivity extends AppCompatActivity {
                     }
                 }
             }
+        }
+    };
+
+
+    Handler lifeAccum = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            arrContract = dataSet.sqlSelectContract(ChattingRoomActivity.this , obj);
+            //m_Adapter.notifyDataSetChanged();
+            m_Adapter = new ChattingRoom_Adapter( ChattingRoomActivity.this, arrContract);
+            list.setAdapter(m_Adapter);
+            list.setSelection(arrContract.size()-1);
+            ChatAsyncTask asyncTask = new ChatAsyncTask(ChatAfterAccum , arrContract.get(apiPosition) ,apiPosition);
+            asyncTask.execute();
         }
     };
 

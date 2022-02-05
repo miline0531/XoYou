@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -160,6 +161,18 @@ public class HomeFragment extends Fragment{
         return view;
     }
 
+    public void getQaSimRiList(String data){
+        CommandUtil.getInstance().showLoadingDialog(MainActivity.mainAc);
+        map.clear();
+        map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_USER_LIST);
+        map.put("userId", new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
+        map.put("date", dataSet.FullPatternDate("yyyyMMddHHmmss"));
+        map.put("menuSeo", data);
+
+        //스레드 생성
+        mThread = new AccumThread(MainActivity.mainAc, mAfterAccum, map, 5, 1, null);
+        mThread.start();        //스레드 시작!!
+    }
     public MainFrag1ListAdapter.listOnClickListener mItemClickListener = new MainFrag1ListAdapter.listOnClickListener() {
         @Override
         public void onClickItem(int id, int action) {
@@ -168,6 +181,8 @@ public class HomeFragment extends Fragment{
             SkyLog.d("CLACIK getPhone :: "  + listSimRi.get(id).getPhone());
             MainActivity.homeClickPosition = id;
             MainActivity.homeClickObj = listSimRi.get(id);
+            MainActivity.fragmentPosionFlag = 0;
+
             ((MainActivity)getContext()).homeFragmentLiskClick();
 
             //test
@@ -205,64 +220,96 @@ public class HomeFragment extends Fragment{
     Handler mAfterAccum = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            CommandUtil.getInstance().dismissLoadingDialog();
+
             if(msg.arg1 == 0) {
                 String res  = (String)msg.obj;
                 SkyLog.d("res 0: " + res);
-                try {
-                    JSONObject jsonObject_succes = new JSONObject(res);                     //SUCCESS
-                    if(jsonObject_succes.getString("success").equals("true")){
-                        JSONObject jsonObject_data = new JSONObject(jsonObject_succes.getString("data"));
-                        JSONArray jsonObject_listSimRi = new JSONArray(jsonObject_data.getString("listSimRi"));
 
-                        SkyLog.d("COUNT :: " + jsonObject_listSimRi.length());
-                        listSimRi.clear();
-                        for (int i = 0; i < jsonObject_listSimRi.length(); i++) {
-                            JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
-                            String[] phone_Arr = new String[1];
+                ContractThread thread2 = new ContractThread(res);
+                thread2.start();
+                SkyLog.d("end0 :: ");
+            }else if(msg.arg1 == 1) {
+                String res  = (String)msg.obj;
+                SkyLog.d("res 1: " + res);
 
-                            //NMR 수정해야할곳!!
+                ContractThread thread2 = new ContractThread(res);
+                thread2.start();
+                SkyLog.d("end1 :: ");
+
+            }
+        }
+    };
+
+
+    Handler mEndAfterAccum = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            m_Adapter.notifyDataSetChanged();
+            CommandUtil.getInstance().dismissLoadingDialog();
+        }
+    };
+
+    class ContractThread extends Thread {
+        private String jsonData = "";
+        public ContractThread(String jsonData){
+            this.jsonData = jsonData;
+        }
+
+        @Override
+        public void run() {
+            SkyLog.d("ContractThread start :: " + jsonData);
+
+            try {
+                JSONObject jsonObject_succes = new JSONObject(jsonData);                     //SUCCESS
+                if(jsonObject_succes.getString("success").equals("true")){
+                    JSONObject jsonObject_data = new JSONObject(jsonObject_succes.getString("data"));
+                    JSONArray jsonObject_listSimRi = new JSONArray(jsonObject_data.getString("listSimRi"));
+
+                    SkyLog.d("COUNT :: " + jsonObject_listSimRi.length());
+                    listSimRi.clear();
+                    for (int i = 0; i < jsonObject_listSimRi.length(); i++) {
+                        JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
+                        String[] phone_Arr = new String[1];
+
+                        //NMR 수정해야할곳!!
 //                            if(i == 0){
 //                                phone_Arr[0] = "01033435914";
 //                            }else{
 //                                phone_Arr[0] = "" + i;
 //
 //                            }
-                            phone_Arr[0] = "" + jsonObject.getString("Phone");
-                            listSimRi.add(new SimRi(
-                                    jsonObject.getString("Phone") ,
-                                    //phone_Arr[0] ,
-                                    jsonObject.getInt("Id") ,
-                                    jsonObject.getInt("No") ,
-                                    jsonObject.getString("NickName") ,
-                                    jsonObject.getString("Name") ,
-                                    jsonObject.getString("UserInfo") ,
-                                    jsonObject.getString("GwanInfo") ,
-                                    jsonObject.getString("SimRiInfo") ,
-                                    jsonObject.getString("Value") ,
-                                    jsonObject.getDouble("iDou") ,
-                                    jsonObject.getBoolean("XO")));
-                            dataSet.readSMSMessage(mContext , phone_Arr , jsonObject.getString("Name"));
-                        }
-                        m_Adapter.notifyDataSetChanged();
-
-
-
-
-                        //전화번호부 저장
-                    }else{
-                        CommandUtil.getInstance().showCommonOneButtonDialog(MainActivity.mainAc,
-                                jsonObject_succes.getString("error") + getClass().toString(),
-                                MainActivity.mainAc.getResources().getString(R.string.str_cofirm),
-                                CommonPopupDialog.COMMON_DIALOG_OPTION_CLOSE_DIALOG,
-                                null);
+                        phone_Arr[0] = "" + jsonObject.getString("Phone");
+                        listSimRi.add(new SimRi(
+                                jsonObject.getString("Phone") ,
+                                //phone_Arr[0] ,
+                                jsonObject.getInt("Id") ,
+                                jsonObject.getInt("No") ,
+                                jsonObject.getString("NickName") ,
+                                jsonObject.getString("Name") ,
+                                jsonObject.getString("UserInfo") ,
+                                jsonObject.getString("GwanInfo") ,
+                                jsonObject.getString("SimRiInfo") ,
+                                jsonObject.getString("Value") ,
+                                jsonObject.getDouble("iDou") ,
+                                jsonObject.getBoolean("XO")));
+                        dataSet.readSMSMessage(mContext , phone_Arr , jsonObject.getString("Name"));
                     }
-                }catch (Exception e){
-                    SkyLog.d("e :: " + e);
+                    SkyLog.d("readSMSMessage end :: ");
+
+                    //전화번호부 저장
+                    Message msg2 = mEndAfterAccum.obtainMessage();
+                    mEndAfterAccum.sendMessage(msg2);
+                }else{
+                    CommandUtil.getInstance().showCommonOneButtonDialog(MainActivity.mainAc,
+                            jsonObject_succes.getString("error") + getClass().toString(),
+                            MainActivity.mainAc.getResources().getString(R.string.str_cofirm),
+                            CommonPopupDialog.COMMON_DIALOG_OPTION_CLOSE_DIALOG,
+                            null);
                 }
+            }catch (Exception e){
+                SkyLog.d("e :: " + e);
             }
         }
-    };
-
+    }
 
 }

@@ -60,18 +60,19 @@ import kr.co.genericit.mybase.xoyou2.model.ContractObj;
 public class CommonUtil {
     private static CommonUtil _instance;
     private CommonUtil dataSet = CommonUtil.getInstance();
+    public Boolean LIFE_ROOM;
+    public Handler LIFE_HANDLER;
+
 
 
     public int LOGIN_TYPE;
     public String PHONE;
     public String REG_ID;
     public String VERSION;
-    public Boolean LIFE_ROOM;
     public Handler ROOM_HM;
 
     public Boolean SYC_FLAG;
     public Boolean LIFE_LIST;
-    public Handler mainHandler;
     public Activity ac;
     public static String DEVICE_SERIAL_NO;
     public static String DEVICE_ID;
@@ -758,22 +759,22 @@ public class CommonUtil {
                 @SuppressLint("Range") String po3Val 			    = cur.getString( cur.getColumnIndex("po3Val"));
                 @SuppressLint("Range") String message 			    = cur.getString( cur.getColumnIndex("message"));
 
-                Log.e("SKY" , "sql :: ==================Strat");
-                Log.e("SKY" , "sql :: =========key_index :: " + key_index);
-                Log.e("SKY" , "sql :: =========number :: " + number);
-                Log.e("SKY" , "sql :: =========date :: " + date);
-                Log.e("SKY" , "sql :: =========body :: " + body);
-                Log.e("SKY" , "sql :: =========img :: " + img);
-                Log.e("SKY" , "sql :: =========sned_recieve :: " + sned_recieve);
-                Log.e("SKY" , "sql :: =========name :: " + name);
-                Log.e("SKY" , "sql :: =========suggestion :: " + suggestion);
-                Log.e("SKY" , "sql :: =========po0Val :: " + po0Val);
-                Log.e("SKY" , "sql :: =========po1Val :: " + po1Val);
-                Log.e("SKY" , "sql :: =========po2Val :: " + po2Val);
-                Log.e("SKY" , "sql :: =========po3Val :: " + po3Val);
-                Log.e("SKY" , "sql :: =========message :: " + message);
-
-                Log.e("SKY" , "sql :: ==================End\n\n");
+//                Log.e("SKY" , "sql :: ==================Strat");
+//                Log.e("SKY" , "sql :: =========key_index :: " + key_index);
+//                Log.e("SKY" , "sql :: =========number :: " + number);
+//                Log.e("SKY" , "sql :: =========date :: " + date);
+//                Log.e("SKY" , "sql :: =========body :: " + body);
+//                Log.e("SKY" , "sql :: =========img :: " + img);
+//                Log.e("SKY" , "sql :: =========sned_recieve :: " + sned_recieve);
+//                Log.e("SKY" , "sql :: =========name :: " + name);
+//                Log.e("SKY" , "sql :: =========suggestion :: " + suggestion);
+//                Log.e("SKY" , "sql :: =========po0Val :: " + po0Val);
+//                Log.e("SKY" , "sql :: =========po1Val :: " + po1Val);
+//                Log.e("SKY" , "sql :: =========po2Val :: " + po2Val);
+//                Log.e("SKY" , "sql :: =========po3Val :: " + po3Val);
+//                Log.e("SKY" , "sql :: =========message :: " + message);
+//
+//                Log.e("SKY" , "sql :: ==================End\n\n");
 
 
 

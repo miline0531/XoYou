@@ -40,7 +40,7 @@ public class StoreFagmentListAdapter extends RecyclerView.Adapter<StoreFagmentLi
     @Override
     public void onBindViewHolder(@NonNull StoreFagmentListAdapter.MyViewHolder holder, int position) {
         final SimRiUser board = items.get(position);
-        SkyLog.d("onBindViewHolder :: " + position);
+        //SkyLog.d("onBindViewHolder :: " + position);
 
         holder.txt1.setText(board.getName());
         holder.txt2.setText(board.getSimRiInfo());

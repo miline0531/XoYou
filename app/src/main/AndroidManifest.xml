@@ -215,6 +215,16 @@
             </intent-filter>
         </receiver>
 
+
+        <receiver
+            android:name="kr.co.genericit.mybase.xoyou2.broad.SMSReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
         <service android:name=".service.CallingService"/>
         <service android:name=".broadcast.CallRegistOutGoingJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"/>

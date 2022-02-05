@@ -231,6 +231,7 @@ public class LoginActivity extends CommonActivity {
                     checkSelfPermission(android.Manifest.permission.RECEIVE_BOOT_COMPLETED) == PackageManager.PERMISSION_GRANTED &&
                     checkSelfPermission(android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED &&
                     checkSelfPermission(android.Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(android.Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED &&
                     checkSelfPermission(android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED
             ) {
                 Log.v("ifeelbluu","Permission is granted");
@@ -246,6 +247,7 @@ public class LoginActivity extends CommonActivity {
                                 android.Manifest.permission.READ_PHONE_STATE,
                                 android.Manifest.permission.READ_SMS,
                                 android.Manifest.permission.SEND_SMS,
+                                android.Manifest.permission.RECEIVE_SMS,
 
                         }, 1);
 
