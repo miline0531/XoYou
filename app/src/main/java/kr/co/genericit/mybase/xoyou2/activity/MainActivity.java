@@ -84,6 +84,7 @@ import kr.co.genericit.mybase.xoyou2.network.response.DefaultResult;
 import kr.co.genericit.mybase.xoyou2.network.response.LocationListResult;
 import kr.co.genericit.mybase.xoyou2.network.response.RelationListResult;
 import kr.co.genericit.mybase.xoyou2.network.response.UserListResult;
+import kr.co.genericit.mybase.xoyou2.popup.Fragment2_PopUp1;
 import kr.co.genericit.mybase.xoyou2.storage.JWSharePreference;
 import kr.co.genericit.mybase.xoyou2.utils.BackPressFinishHandler;
 import kr.co.genericit.mybase.xoyou2.utils.CommandUtil;
@@ -100,6 +101,9 @@ public class MainActivity extends CommonActivity {
     private final int BTN_RELATION_SETTING = 100; //관계인
     private final int BTN_LOCATION_SETTING = 101; //관계장소
     private final int BTN_FAMILY_SETTING = 102; //가족구성
+
+    private final int POP_STEP_1 = 3000;
+    private final int POP_STEP_2 = 3001;
 
     private int userCount=0, relationCount=0, locationCount=0;
 
@@ -205,6 +209,8 @@ public class MainActivity extends CommonActivity {
         findViewById(R.id.popview).setOnClickListener(btnListener);
         findViewById(R.id.btn_1).setOnClickListener(btnListener);
 
+
+
         setViewPager();
 
 
@@ -267,9 +273,14 @@ public class MainActivity extends CommonActivity {
                 case R.id.btn_1:
                     popview.setVisibility(View.GONE);
                     Intent it = new Intent(MainActivity.this , ChattingRoomActivity.class);
-                    //it.putExtra("phone" , homeClickObj.getPhone());
-                    it.putExtra("phone" , "01033435914");
+                    it.putExtra("phone" , homeClickObj.getPhone());
+//                    it.putExtra("phone" , "01033435914");
                     startActivity(it);
+                    break;
+                case R.id.btn_popup:
+                    Intent itPopup = new Intent(MainActivity.this , Fragment2_PopUp1.class);
+                    itPopup.putExtra("STEP" , 1);
+                    startActivityForResult(itPopup , POP_STEP_1);
                     break;
             }
         }
@@ -299,8 +310,8 @@ public class MainActivity extends CommonActivity {
     public void setViewPager(){
 
         fragments = new int[]{R.layout.fragment_main_top_1,
+                R.layout.fragment_main_top_3,
                 R.layout.fragment_main_top_2,
-                //R.layout.fragment_main_top_3,
                 R.layout.fragment_main_top_4};
 
         mainTopView = new ArrayList<>();
@@ -510,6 +521,26 @@ public class MainActivity extends CommonActivity {
         }
         if(requestCode == INTENT_LOCATION){
             requestLocationList();
+        }
+
+        if (requestCode == POP_STEP_1) {
+            SkyLog.d("POP_STEP_1");
+            if (resultCode == RESULT_OK) {
+                //두번쨰 팝업 실행
+                SkyLog.d("POP_STEP_1 position :: " + data.getStringExtra("position"));
+                SkyLog.d("POP_STEP_1 data:: " + data.getStringExtra("data"));
+                Intent itPopup = new Intent(MainActivity.this , Fragment2_PopUp1.class);
+                itPopup.putExtra("STEP" , 2);
+                startActivityForResult(itPopup , POP_STEP_2);
+            }
+        }else if (requestCode == POP_STEP_2) {
+            SkyLog.d("POP_STEP_2");
+            if (resultCode == RESULT_OK) {
+                //두번쨰 팝업 실행
+                SkyLog.d("POP_STEP_1 position :: " + data.getStringExtra("position"));
+                SkyLog.d("POP_STEP_1 data:: " + data.getStringExtra("data"));
+                Toast.makeText(getApplicationContext() , "새로운 API 호출.." , Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -755,7 +786,7 @@ public class MainActivity extends CommonActivity {
         SkyLog.d("FragmentView position :: " + fragment);
         //FragmentTransactiom를 이용해 프래그먼트를 사용합니다.
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
+        ((TextView)findViewById(R.id.btn_slide)).setVisibility(View.VISIBLE);
         switch (fragment){
             case 0:
                 // 홈 프래그먼트 호출
@@ -766,19 +797,20 @@ public class MainActivity extends CommonActivity {
 
             case 1:
                 // 매니지 프래그먼트 호출
-                ManageFragment manageFragment = new ManageFragment();
-                transaction.replace(R.id.nav_host_fragment_activity_main, manageFragment);
-                transaction.commit();
-                break;
-                /*
-            case 2:
-                // 스토어 프래그먼트 호출
+                ((TextView)findViewById(R.id.btn_slide)).setVisibility(View.GONE);
+
                 StoreFragment storeFragment = new StoreFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main, storeFragment);
                 transaction.commit();
                 break;
-                 */
             case 2:
+                // 스토어 프래그먼트 호출
+                ManageFragment manageFragment = new ManageFragment();
+                transaction.replace(R.id.nav_host_fragment_activity_main, manageFragment);
+                transaction.commit();
+
+                break;
+            case 3:
                 // FindMe 프래그먼트 호출
                 FindFragment findFragment = new FindFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main, findFragment);
@@ -857,20 +889,20 @@ public class MainActivity extends CommonActivity {
     }
 
     //2번째 슬라이드 메뉴
-    public void refreshSlide2() {
+    public void homeFragmentLiskClick() {
+        popview.setVisibility(View.VISIBLE);
+        /*
         rl_root.setVisibility(View.GONE);
         lb_slide2.setVisibility(View.VISIBLE);
         lb_slide3.setVisibility(View.GONE);
         drawerLayout.openDrawer(drawerView);
-
         m_LeftAdapter = new MainFrag1LeftListAdapter( MainActivity.this, YouQA_Name);
         list_left.setOnItemClickListener(mItemClickListener2);
         list_left.setAdapter(m_LeftAdapter);
-
         m_Left3Adapter = new MainFrag1Left3ListAdapter( MainActivity.this, qrList);
         list_left3.setOnItemClickListener(mItemClickListener3);
         list_left3.setAdapter(m_Left3Adapter);
-
+        */
     }
 
     AdapterView.OnItemClickListener mItemClickListener2 = new AdapterView.OnItemClickListener() {
@@ -960,8 +992,11 @@ public class MainActivity extends CommonActivity {
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(viewType, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
+            SkyLog.d("RecyclerView :: " + viewType);
+            if(R.layout.fragment_main_top_3 == viewType){
+                view.findViewById(R.id.btn_popup).setOnClickListener(btnListener);
+            }
             return new SliderViewHolder(view);
         }
 

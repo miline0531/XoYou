@@ -176,6 +176,17 @@
             android:screenOrientation="portrait" />
 
 
+        <activity
+            android:name="kr.co.genericit.mybase.xoyou2.popup.Fragment2_PopUp1"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name="kr.co.genericit.mybase.xoyou2.popup.ContractInsertPopUp"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="adjustResize" />
+
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

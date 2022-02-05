@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -44,6 +45,7 @@ public class ContactAdapter extends BaseAdapter {
         TextView name , number;
         RelativeLayout default_img;
         TextView idid_txt;
+        ImageView img_relation_profile;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -55,6 +57,7 @@ public class ContactAdapter extends BaseAdapter {
             vh.number         = (TextView) convertView.findViewById(R.id.number);
             vh.default_img         = (RelativeLayout) convertView.findViewById(R.id.default_img);
             vh.idid_txt         = (TextView) convertView.findViewById(R.id.idid_txt);
+            vh.img_relation_profile         = (ImageView) convertView.findViewById(R.id.img_relation_profile);
 
             convertView.setTag(vh);
         } else {
@@ -76,6 +79,14 @@ public class ContactAdapter extends BaseAdapter {
 
         backColor(vh.default_img , ("" + (int)(Math.random()*6)));
 
+        if(board.getRelationFlag()){
+            vh.idid_txt.setVisibility(View.GONE);
+            vh.img_relation_profile.setVisibility(View.VISIBLE);
+        }else{
+            vh.idid_txt.setVisibility(View.VISIBLE);
+            vh.img_relation_profile.setVisibility(View.GONE);
+
+        }
 
         return convertView;
     }

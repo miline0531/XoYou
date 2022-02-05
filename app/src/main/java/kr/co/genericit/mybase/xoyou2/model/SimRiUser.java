@@ -1,16 +1,15 @@
 package kr.co.genericit.mybase.xoyou2.model;
 
 import android.annotation.SuppressLint;
+import android.media.Image;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
-import java.io.Serializable;
-
-public class SimRi implements Parcelable {
-    public static Creator<SimRi> getCreator() {
+public class SimRiUser implements Parcelable {
+    public static Creator<SimRiUser> getCreator() {
         return CREATOR;
     }
     String Phone;
@@ -23,9 +22,11 @@ public class SimRi implements Parcelable {
     String SimRiInfo;
     String Value;
     double iDou;
+    String Image;
+
     boolean XO;
 
-    public SimRi(String phone, int id, int no, String nickName, String name, String userInfo, String gwanInfo, String simRiInfo, String value, double iDou, boolean XO) {
+    public SimRiUser(String phone, int id, int no, String nickName, String name, String userInfo, String gwanInfo, String simRiInfo, String value, double iDou, String image, boolean XO) {
         Phone = phone;
         Id = id;
         No = no;
@@ -36,6 +37,7 @@ public class SimRi implements Parcelable {
         SimRiInfo = simRiInfo;
         Value = value;
         this.iDou = iDou;
+        Image = image;
         this.XO = XO;
     }
 
@@ -119,6 +121,14 @@ public class SimRi implements Parcelable {
         this.iDou = iDou;
     }
 
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
+    }
+
     public boolean isXO() {
         return XO;
     }
@@ -128,9 +138,10 @@ public class SimRi implements Parcelable {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    public SimRi(Parcel in) {
+    public SimRiUser(Parcel in) {
         readFromParcel(in);
     }
+
     @SuppressLint("NewApi")
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -145,6 +156,7 @@ public class SimRi implements Parcelable {
         dest.writeString(SimRiInfo);
         dest.writeString(Value);
         dest.writeDouble(iDou);
+        dest.writeString(Image);
         dest.writeBoolean(XO);
     }
     @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -160,16 +172,17 @@ public class SimRi implements Parcelable {
         SimRiInfo = in.readString();
         Value = in.readString();
         iDou = in.readDouble();
+        Image = in.readString();
         XO = in.readBoolean();
     }
     @SuppressWarnings("rawtypes")
-    public static final Creator<SimRi> CREATOR = new Creator() {
+    public static final Creator<SimRiUser> CREATOR = new Creator() {
         public Object createFromParcel(Parcel in) {
-            return new SimRi(in);
+            return new SimRiUser(in);
         }
 
         public Object[] newArray(int size) {
-            return new SimRi[size];
+            return new SimRiUser[size];
         }
     };
 

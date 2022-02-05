@@ -25,12 +25,14 @@ import java.util.ArrayList;
 import kr.co.genericit.mybase.xoyou2.R;
 import kr.co.genericit.mybase.xoyou2.adapter.ContactAdapter;
 import kr.co.genericit.mybase.xoyou2.common.CommonActivity;
+import kr.co.genericit.mybase.xoyou2.common.SkyLog;
 import kr.co.genericit.mybase.xoyou2.model.Contactobj;
+import kr.co.genericit.mybase.xoyou2.popup.ContractInsertPopUp;
+import kr.co.genericit.mybase.xoyou2.popup.Fragment2_PopUp1;
 
 public class ContactActivity extends CommonActivity {
     private ListView list;
     private ContactAdapter m_Adapter;
-    private String msg;
     private EditText search_edit;
     private Boolean searchFlag = false;
 
@@ -41,7 +43,6 @@ public class ContactActivity extends CommonActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_activity);
 
-        msg = getIntent().getStringExtra("msg");
 
         list = (ListView) findViewById(R.id.listView1);
         search_edit = (EditText) findViewById(R.id.search_edit);
@@ -63,6 +64,8 @@ public class ContactActivity extends CommonActivity {
                 contacts_arr_copy.clear();
                 for (int i=0; i < contacts_arr.size(); i++){
                     if(contacts_arr.get(i).getName().matches(".*" + str + ".*")){
+                        contacts_arr_copy.add(contacts_arr.get(i));
+                    }else if(contacts_arr.get(i).getNumber().matches(".*" + str + ".*")){
                         contacts_arr_copy.add(contacts_arr.get(i));
                     }
                 }
@@ -90,22 +93,6 @@ public class ContactActivity extends CommonActivity {
         findViewById(R.id.btn_send).setOnClickListener(btnListener);
 
 
-    }
-    public void sendSmsIntent(String number){
-        try{
-            Uri smsUri = Uri.parse("sms:"+number);
-            Intent sendIntent = new Intent(Intent.ACTION_SENDTO, smsUri);
-            sendIntent.putExtra("sms_body", msg);
-            startActivity(sendIntent);
-
-//        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-//        sendIntent.putExtra("address", number);
-//        sendIntent.putExtra("sms_body", editBody.getText().toString());
-//        sendIntent.setType("vnd.android-dir/mms-sms");
-//        startActivity(sendIntent);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
 
@@ -140,18 +127,10 @@ public class ContactActivity extends CommonActivity {
             // TODO Auto-generated method stub
             ArrayList<Contactobj> contacts = new ArrayList<Contactobj>();
 
-            Cursor c = getContentResolver().query(
-                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                    null, null, null);
+            Cursor c = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
             while (c.moveToNext()) {
-
-                @SuppressLint("Range") String contactName = c
-                        .getString(c
-                                .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                @SuppressLint("Range") String phNumber = c
-                        .getString(c
-                                .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
+                @SuppressLint("Range") String contactName = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                @SuppressLint("Range") String phNumber = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                 boolean falg = false;
                 for (int i=0; i <contacts.size(); i++){
                     if(contactName.equals(contacts.get(i).getName())  && phNumber.equals(contacts.get(i).getNumber())){
@@ -159,10 +138,11 @@ public class ContactActivity extends CommonActivity {
                     }
                 }
                 if(!falg){
-                    contacts.add(new Contactobj(
-                            contactName,
-                            phNumber
-                    ));
+//                    phNumber = phNumbe r.replace("+82" , "0");
+//                    phNumber = phNumber.replace(" " , "");
+                    phNumber = phNumber.replace("-" , "");
+//                    phNumber = phNumber.replace("010010" , "010");
+                    contacts.add(new Contactobj(contactName, phNumber , false));
                 }
             }
             c.close();
@@ -176,6 +156,33 @@ public class ContactActivity extends CommonActivity {
 
             pd.cancel();
             contacts_arr = contacts;
+
+            //관계인으로 등록 되어있는지 체크
+            for (int i=0; i <contacts_arr.size(); i++){
+                boolean relationFlag = false;
+
+                String phone = contacts_arr.get(i).getNumber().replace("+82" , "0");
+                phone = phone.replace(" " , "");
+                phone = phone.replace("-" , "");
+                phone = phone.replace("010010" , "010");
+
+                //SkyLog.d("phone :: " + phone);
+
+                for (int j=0; j <RelationListActivity.relationDataList.size(); j++){
+                    //SkyLog.d("getCALL_NUMBER :: " + RelationListActivity.relationDataList.get(j).getCALL_NUMBER());
+                    if(RelationListActivity.relationDataList.get(j).getCALL_NUMBER().equals(phone)){
+                        relationFlag = true;
+                    }
+                }
+                if(relationFlag){
+                    //SkyLog.d("phone :: " + phone);
+                    //SkyLog.d("getName :: " + contacts_arr.get(i).getName());
+                }
+                contacts_arr.get(i).setRelationFlag(relationFlag);
+            }
+
+
+
             //리스트 아답터 셋팅..
             m_Adapter = new ContactAdapter( ContactActivity.this, contacts);
             list.setOnItemClickListener(mItemClickListener);
@@ -186,18 +193,17 @@ public class ContactActivity extends CommonActivity {
     AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             Log.e("SKY",  "position :: " + position);
-//            if(!searchFlag){
-//                //default
-//                sendSmsIntent(contacts_arr.get(position).getNumber());
-//            }else{
-//                //search
-//                sendSmsIntent(contacts_arr_copy.get(position).getNumber());
-//            }
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("number","" + contacts_arr.get(position).getNumber());
-            resultIntent.putExtra("name","" + contacts_arr.get(position).getName());
-            setResult(RESULT_OK,resultIntent);
-            finish();
+
+            Intent it = new Intent(ContactActivity.this , ContractInsertPopUp.class);
+            it.putExtra("obj",contacts_arr.get(position));
+            startActivity(it);
+
+
+//            Intent resultIntent = new Intent();
+//            resultIntent.putExtra("number","" + contacts_arr.get(position).getNumber());
+//            resultIntent.putExtra("name","" + contacts_arr.get(position).getName());
+//            setResult(RESULT_OK,resultIntent);
+//            finish();
         }
     };
 }

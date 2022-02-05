@@ -17,10 +17,10 @@ import retrofit2.Response;
 public class ActionRequestAddRelation extends Action {
 
     public ActionResultListener mActionResultInterface;
-    private String IN_SEQ,USER_ID,GWANGYE,NICK_NAME,NAME,MW,BIRTH_DATE,IMAGE_URL;
+    private String IN_SEQ,USER_ID,GWANGYE,NICK_NAME,NAME,MW,BIRTH_DATE,IMAGE_URL,CALL_NUMBER;
 
     public ActionRequestAddRelation(Activity context, String IN_SEQ,String USER_ID,String GWANGYE,String NICK_NAME,String NAME,
-                                    String MW,String BIRTH_DATE,String IMAGE_URL, ActionResultListener actionResultInterface) {
+                                    String MW,String BIRTH_DATE,String IMAGE_URL,String CALL_NUMBER, ActionResultListener actionResultInterface) {
         mBaseActivity = context;
         mBaseContext = context;
         this.IN_SEQ = IN_SEQ;
@@ -31,12 +31,13 @@ public class ActionRequestAddRelation extends Action {
         this.MW = MW;
         this.BIRTH_DATE = BIRTH_DATE;
         this.IMAGE_URL = IMAGE_URL;
+        this.CALL_NUMBER = CALL_NUMBER;
         mActionResultInterface = actionResultInterface;
     }
     private final Callback<AddRelationResult> mCallback = new Callback<AddRelationResult>(){
         @Override
         public void onResponse(Call<AddRelationResult> call, Response<AddRelationResult> response) {
-            CommandUtil.getInstance().dismissLoadingDialog();
+
             actionDone(resultType.ACTION_RESULT_RUNNEXT);
             LogUtil.LogD("responseCode:: " + response.code());
             switch (response.code()) {
@@ -67,7 +68,7 @@ public class ActionRequestAddRelation extends Action {
         public void onFailure(Call<AddRelationResult> call, Throwable t) {
             LogUtil.LogD("responseCode:: onFailure");
 //            actionDone("", null, "");
-            CommandUtil.getInstance().dismissLoadingDialog();
+
         }
     };
 
@@ -84,7 +85,7 @@ public class ActionRequestAddRelation extends Action {
         setBaseUrl(NetInfo.SERVER_BASE_URL);
         RetrofitInterface mRetrofitAPIService = mRetrofit.create(RetrofitInterface.class);
 
-        AddRelationInfo info = new AddRelationInfo(IN_SEQ,USER_ID,GWANGYE,NICK_NAME,NAME,MW,BIRTH_DATE,IMAGE_URL);
+        AddRelationInfo info = new AddRelationInfo(IN_SEQ,USER_ID,GWANGYE,NICK_NAME,NAME,MW,BIRTH_DATE,IMAGE_URL,CALL_NUMBER);
 
         mRetrofitAPIService.requestAddRelation(info).enqueue(mCallback);
     }

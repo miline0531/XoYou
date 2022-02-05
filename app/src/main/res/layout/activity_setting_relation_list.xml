@@ -24,22 +24,31 @@
             android:background="@drawable/ic_arrow_back"/>
 
         <TextView
-            style="@style/text_semibold"
             android:id="@+id/activity_title"
+            style="@style/text_semibold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="관계인 목록"
             android:textColor="@color/white"
-            android:textSize="16dp"/>
+            android:textSize="16dp" />
 
         <ImageView
             android:id="@+id/btn_plus"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/icon_menu_plus"/>
+            android:layout_centerVertical="true"
+            android:background="@drawable/icon_menu_plus" />
+
+        <ImageView
+            android:id="@+id/btn_search"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/btn_plus"
+            android:background="@drawable/btn_search" />
     </RelativeLayout>
 
 

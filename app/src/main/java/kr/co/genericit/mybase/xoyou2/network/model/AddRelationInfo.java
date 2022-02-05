@@ -3,8 +3,8 @@ package kr.co.genericit.mybase.xoyou2.network.model;
 public class AddRelationInfo {
     TEMP_DATA us;
 
-    public AddRelationInfo(String IN_SEQ, String USER_ID, String GWANGYE, String NICK_NAME, String NAME, String MW, String BIRTH_DATE, String IMAGE_URL) {
-        this.us = new TEMP_DATA(IN_SEQ, USER_ID, GWANGYE, NICK_NAME, NAME, MW, BIRTH_DATE, IMAGE_URL);
+    public AddRelationInfo(String IN_SEQ, String USER_ID, String GWANGYE, String NICK_NAME, String NAME, String MW, String BIRTH_DATE, String IMAGE_URL, String CALL_NUMBER) {
+        this.us = new TEMP_DATA(IN_SEQ, USER_ID, GWANGYE, NICK_NAME, NAME, MW, BIRTH_DATE, IMAGE_URL, CALL_NUMBER);
     }
 
 
@@ -25,8 +25,9 @@ public class AddRelationInfo {
         String MW;
         String BIRTH_DATE;
         String IMAGE_URL;
+        String CALL_NUMBER;
 
-        public TEMP_DATA(String IN_SEQ, String USER_ID, String GWANGYE, String NICK_NAME, String NAME, String MW, String BIRTH_DATE, String IMAGE_URL) {
+        public TEMP_DATA(String IN_SEQ, String USER_ID, String GWANGYE, String NICK_NAME, String NAME, String MW, String BIRTH_DATE, String IMAGE_URL, String CALL_NUMBER) {
             this.IN_SEQ = IN_SEQ;
             this.USER_ID = USER_ID;
             this.GWANGYE = GWANGYE;
@@ -35,6 +36,7 @@ public class AddRelationInfo {
             this.MW = MW;
             this.BIRTH_DATE = BIRTH_DATE;
             this.IMAGE_URL = IMAGE_URL;
+            this.CALL_NUMBER = CALL_NUMBER;
         }
 
         public String getIN_SEQ() {
@@ -100,5 +102,15 @@ public class AddRelationInfo {
         public void setIMAGE_URL(String IMAGE_URL) {
             this.IMAGE_URL = IMAGE_URL;
         }
+
+
+        public String getCALL_NUMBER() {
+            return CALL_NUMBER;
+        }
+
+        public void setCALL_NUMBER(String CALL_NUMBER) {
+            this.CALL_NUMBER = CALL_NUMBER;
+        }
     }
+
 }

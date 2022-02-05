@@ -45,10 +45,10 @@ public class ChatAsyncTask extends AsyncTask<String,Void,String> {
             //NMR 수정해야할 부분!!!
             map.clear();
             map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_SIMRI_MESSAGE);
-            //map.put("userId", new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
-            map.put("userId", "ifeelbluu12");
-            map.put("callNumber", "01012345678");
-//        map.put("callNumber", obj.getAddress());
+            map.put("userId", new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
+//            map.put("userId", "ifeelbluu12");
+//            map.put("callNumber", "01012345678");
+        map.put("callNumber", obj.getAddress());
             //map.put("message", "좋은 아침");
             map.put("message", obj.getBody());
 

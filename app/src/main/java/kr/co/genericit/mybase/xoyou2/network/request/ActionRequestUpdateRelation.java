@@ -18,11 +18,11 @@ public class ActionRequestUpdateRelation extends Action {
 
     public ActionResultListener mActionResultInterface;
     private int relationId;
-    private  String SEQ,IN_SEQ,GWANGYE,NICK_NAME,NAME,MW,BIRTH_DATE,IMAGE_URL;
+    private  String SEQ,IN_SEQ,GWANGYE,NICK_NAME,NAME,MW,BIRTH_DATE,IMAGE_URL,CALL_NUMBER;
     private int gender;
 
     public ActionRequestUpdateRelation(Activity context,String SEQ,String IN_SEQ,String GWANGYE,String NICK_NAME,String NAME,
-                                       String MW,String BIRTH_DATE,String IMAGE_URL,
+                                       String MW,String BIRTH_DATE,String IMAGE_URL,String CALL_NUMBER,
                                        ActionResultListener actionResultInterface) {
         mBaseActivity = context;
         mBaseContext = context;
@@ -34,6 +34,7 @@ public class ActionRequestUpdateRelation extends Action {
         this.MW = MW;
         this.BIRTH_DATE = BIRTH_DATE;
         this.IMAGE_URL = IMAGE_URL;
+        this.CALL_NUMBER = CALL_NUMBER;
         mActionResultInterface = actionResultInterface;
     }
     private final Callback<UpdateRelationResult> mCallback = new Callback<UpdateRelationResult>(){
@@ -87,7 +88,7 @@ public class ActionRequestUpdateRelation extends Action {
         setBaseUrl(NetInfo.SERVER_BASE_URL);
         RetrofitInterface mRetrofitAPIService = mRetrofit.create(RetrofitInterface.class);
 
-        UpdateRelationInfo info = new UpdateRelationInfo(SEQ,IN_SEQ,GWANGYE,NICK_NAME,NAME,MW,BIRTH_DATE,IMAGE_URL);
+        UpdateRelationInfo info = new UpdateRelationInfo(SEQ,IN_SEQ,GWANGYE,NICK_NAME,NAME,MW,BIRTH_DATE,IMAGE_URL,CALL_NUMBER);
 
         mRetrofitAPIService.requestUpdateRelation(info).enqueue(mCallback);
     }

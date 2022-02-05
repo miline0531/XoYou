@@ -9,6 +9,7 @@ public class Relation {
     String NAME;
     int MW;
     String BIRTH_DATE;
+    String CALL_NUMBER;
     String IMAGE_URL;
     int JUSEO_SEQ;
     String USE_YN;
@@ -144,6 +145,14 @@ public class Relation {
 
     public void setCURRENT_PAGE(int CURRENT_PAGE) {
         this.CURRENT_PAGE = CURRENT_PAGE;
+    }
+
+    public String getCALL_NUMBER() {
+        return CALL_NUMBER;
+    }
+
+    public void setCALL_NUMBER(String CALL_NUMBER) {
+        this.CALL_NUMBER = CALL_NUMBER;
     }
 }
 /*

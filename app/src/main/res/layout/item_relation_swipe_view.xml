@@ -92,8 +92,8 @@
                 android:id="@+id/img_relation_profile"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/test_img1"
-                android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true"
+                android:background="@drawable/test_img1" />
         </RelativeLayout>
 
 

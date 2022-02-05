@@ -237,136 +237,6 @@ public class ChattingRoomActivity extends AppCompatActivity {
         }
     };
 
-    //받은건 flag = 0 , 보낸건 flag = 1
-    private int readSMSMessage(String[] arrVal , String name) {
-        //내가 받은것!
-        Uri allMessage = Uri.parse("content://sms/inbox/");
-
-
-        ContentResolver cr = getContentResolver();
-        Cursor c = cr.query(allMessage,
-                new String[]{"_id", "thread_id", "address", "person", "date", "body"},
-                "address=?", arrVal,
-                "date DESC");
-
-        while (c.moveToNext()) {
-            kr.co.genericit.mybase.xoyou2.model.Message msg = new kr.co.genericit.mybase.xoyou2.model.Message(); // 따로 저는 클래스를 만들어서 담아오도록 했습니다.
-
-            long messageId = c.getLong(0);
-            msg.setMessageId(String.valueOf(messageId));
-
-            long threadId = c.getLong(1);
-            msg.setThreadId(String.valueOf(threadId));
-
-            String address = c.getString(2);
-            msg.setAddress(address);
-
-            long contactId = c.getLong(3);
-            msg.setContactId(String.valueOf(contactId));
-
-            String contactId_string = String.valueOf(contactId);
-            msg.setContactId_string(contactId_string);
-
-            long timestamp = c.getLong(4);
-            msg.setTimestamp(String.valueOf(timestamp));
-
-            String body = c.getString(5);
-            msg.setBody(body);
-
-            SkyLog.d("==============SMS==============");
-            SkyLog.d("messageId :: " + messageId);
-            SkyLog.d("threadId :: " + threadId);
-            SkyLog.d("address :: " + address);
-            SkyLog.d("contactId_string :: " + contactId_string);
-            SkyLog.d("timestamp :: " + timestamp);
-            SkyLog.d("body :: " + body);
-
-            ContractObj obj = new ContractObj("" + messageId ,
-                    "" +threadId ,
-                    address ,
-                    contactId_string ,
-                    "" +timestamp ,
-                    body ,
-                    "0" ,
-                    name ,
-                    "" ,
-                    "" ,
-                    "" ,
-                    "" ,
-                    "" ,
-                    "");
-            dataSet.sqlContractInsert(ChattingRoomActivity.this , obj);
-
-            SkyLog.d("==============SMS==============");
-
-
-            //arrayList.add(msg); //이부분은 제가 arraylist에 담으려고 하기떄문에 추가된부분이며 수정가능합니다.
-
-        }
-
-        //내가 보낸것!
-        Uri allMessage2 = Uri.parse("content://sms/sent/");
-        Cursor c2 = cr.query(allMessage2,
-                new String[]{"_id", "thread_id", "address", "person", "date", "body"},
-                "address=?", arrVal,
-                "date DESC");
-
-        while (c2.moveToNext()) {
-            kr.co.genericit.mybase.xoyou2.model.Message msg = new kr.co.genericit.mybase.xoyou2.model.Message(); // 따로 저는 클래스를 만들어서 담아오도록 했습니다.
-
-            long messageId = c2.getLong(0);
-            msg.setMessageId(String.valueOf(messageId));
-
-            long threadId = c2.getLong(1);
-            msg.setThreadId(String.valueOf(threadId));
-
-            String address = c2.getString(2);
-            msg.setAddress(address);
-
-            long contactId = c2.getLong(3);
-            msg.setContactId(String.valueOf(contactId));
-
-            String contactId_string = String.valueOf(contactId);
-            msg.setContactId_string(contactId_string);
-
-            long timestamp = c2.getLong(4);
-            msg.setTimestamp(String.valueOf(timestamp));
-
-            String body = c2.getString(5);
-            msg.setBody(body);
-
-            SkyLog.d("==============SMS==============");
-            SkyLog.d("messageId :: " + messageId);
-            SkyLog.d("threadId :: " + threadId);
-            SkyLog.d("address :: " + address);
-            SkyLog.d("contactId_string :: " + contactId_string);
-            SkyLog.d("timestamp :: " + timestamp);
-            SkyLog.d("body :: " + body);
-
-            ContractObj obj = new ContractObj("" + messageId ,
-                    "",
-                    address ,
-                    contactId_string ,
-                    "" +timestamp ,
-                    body ,
-                    "1" ,
-                    name ,
-                    "" ,
-                    "" ,
-                    "" ,
-                    "" ,
-                    "" ,
-                    "");
-            dataSet.sqlContractInsert(ChattingRoomActivity.this , obj);
-
-            SkyLog.d("==============SMS==============");
-
-
-            //arrayList.add(msg); //이부분은 제가 arraylist에 담으려고 하기떄문에 추가된부분이며 수정가능합니다.
-
-        }
-        return 0;
-    }
     //버튼 리스너 구현 부분
     View.OnClickListener btnListener = new View.OnClickListener() {
         @SuppressLint("ResourceType")
@@ -391,7 +261,7 @@ public class ChattingRoomActivity extends AppCompatActivity {
                                 msg_edit.setText("");
                                 String[] phone_Arr = new String[1];
                                 phone_Arr[0] = getIntent().getStringExtra("phone");
-                                if(readSMSMessage(phone_Arr , getIntent().getStringExtra("name")) == 0){
+                                if(dataSet.readSMSMessage(ChattingRoomActivity.this , phone_Arr , getIntent().getStringExtra("name")) == 0){
                                     initData();
                                 }
                             }

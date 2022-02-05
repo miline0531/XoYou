@@ -10,10 +10,12 @@ public class Contactobj implements Parcelable {
 
 	String Name;
 	String Number;
+	Boolean relationFlag;
 
-	public Contactobj(String PJT_COD, String PJT_NO) {
+	public Contactobj(String PJT_COD, String PJT_NO, Boolean relationFlag) {
 		this.Name = PJT_COD;
 		this.Number = PJT_NO;
+		this.relationFlag = relationFlag;
 	}
 
 
@@ -31,6 +33,14 @@ public class Contactobj implements Parcelable {
 
 	public void setNumber(String number) {
 		Number = number;
+	}
+
+	public Boolean getRelationFlag() {
+		return relationFlag;
+	}
+
+	public void setRelationFlag(Boolean relationFlag) {
+		this.relationFlag = relationFlag;
 	}
 
 	public Contactobj(Parcel in) {

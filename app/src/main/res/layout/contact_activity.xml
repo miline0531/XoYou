@@ -70,21 +70,30 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="wrap_content">
 
             <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/search_edit"
                 android:hint="검색어를 입력해주세요."
+                android:textColorHint="#96a1ae"
+                android:textColor="@color/white"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="16dp"
+                android:background="@drawable/bg_round_10dp_2e323b"
+                style="@style/text_regular"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="50dp" />
 
         </FrameLayout>
         <ListView
             android:id="@+id/listView1"
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_height="wrap_content"
             android:divider="#C0C0C0"
             android:dividerHeight="1px" >

@@ -60,6 +60,7 @@
 
         <Button
             android:id="@+id/btn_contract"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#00000000" />
@@ -94,9 +95,59 @@
         android:inputType="phone"
         android:textColor="@color/white"
         android:textSize="16dp"
-        android:hint="출생년도"
+        android:hint="출생년도(1986)"
         android:textColorHint="#96a1ae"
         android:background="@drawable/bg_round_10dp_2e323b"/>
+
+    <EditText
+        style="@style/text_regular"
+        android:id="@+id/edt_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="20dp"
+        android:paddingHorizontal="19dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:inputType="number"
+        android:hint="휴대폰번호"
+        android:textColorHint="#96a1ae"
+        android:background="@drawable/bg_round_10dp_2e323b"/>
+
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="20dp"
+        android:paddingHorizontal="19dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:checkedButton="@id/rg_btn1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <RadioButton
+            android:layout_weight="1"
+            android:text="남성"
+            android:id="@+id/rg_btn1"
+            android:textSize="14dp"
+            android:textColor="#96a1ae"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:layout_weight="1"
+            android:text="여성"
+            android:textSize="14dp"
+            android:textColor="#96a1ae"
+            android:id="@+id/rg_btn2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
+
+
     <!--    <RelativeLayout-->
     <!--        android:id="@+id/btn_birthday"-->
     <!--        android:layout_width="match_parent"-->

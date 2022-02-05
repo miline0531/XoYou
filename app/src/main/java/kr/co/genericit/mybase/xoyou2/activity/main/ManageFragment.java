@@ -58,7 +58,7 @@ public class ManageFragment extends Fragment {
         super.onResume();
         SkyLog.d("-- onResume --");
 
-        getWeList();
+
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -71,7 +71,7 @@ public class ManageFragment extends Fragment {
         m_Adapter = new MainFrag2ListAdapter( mContext, weList);
         m_Adapter.setListOnClickListener(mItemClickListener);
         list.setAdapter(m_Adapter);
-
+        getWeList();
         return view;
     }
 

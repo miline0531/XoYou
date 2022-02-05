@@ -17,6 +17,7 @@ import java.util.List;
 import kr.co.genericit.mybase.xoyou2.R;
 import kr.co.genericit.mybase.xoyou2.adapter.RelationRecyclerviewAdapter;
 import kr.co.genericit.mybase.xoyou2.common.CommonActivity;
+import kr.co.genericit.mybase.xoyou2.common.SkyLog;
 import kr.co.genericit.mybase.xoyou2.interfaces.DialogClickListener;
 import kr.co.genericit.mybase.xoyou2.interfaces.RelationRecyclerTouchListener;
 import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
@@ -32,7 +33,7 @@ import kr.co.genericit.mybase.xoyou2.utils.LogUtil;
 
 
 public class RelationListActivity extends CommonActivity {
-    private List<Relation> relationDataList;
+    public static List<Relation> relationDataList;
     private RelationRecyclerviewAdapter relationRecyclerviewAdapter;
     private RelationRecyclerTouchListener touchListener;
     private RecyclerView recyclerView;
@@ -40,7 +41,14 @@ public class RelationListActivity extends CommonActivity {
     private JWSharePreference jwSharePreference;
     private String USER_ID,SEQ,CURRENT_PAGE="0";
     private ImageView btn_plus;
+    private ImageView btn_search;
     private int count = 0;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getListData();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,7 @@ public class RelationListActivity extends CommonActivity {
         super.onCreate(savedInstanceState);
 
         initView();
-        getListData();
+
     }
 
     public void initView(){
@@ -59,6 +67,11 @@ public class RelationListActivity extends CommonActivity {
         btn_plus.setOnClickListener(v ->{
             Intent i = new Intent(RelationListActivity.this, AddRelationActivity.class);
             startActivity(i);
+        });
+        btn_search = findViewById(R.id.btn_search);
+        btn_search.setOnClickListener(v ->{
+            Intent it = new Intent(RelationListActivity.this , ContactActivity.class);
+            startActivity(it);
         });
 
         relationDataList = new ArrayList<>();
@@ -189,6 +202,7 @@ public class RelationListActivity extends CommonActivity {
                     if(result.isSuccess()){
                         //성공
                         if(result.getData()!=null){
+                            SkyLog.d(result.getData());
                            relationDataList.clear();
                            relationDataList.addAll(stringToArrayList(result.getData()));
                            count = relationDataList.size();
@@ -225,6 +239,7 @@ public class RelationListActivity extends CommonActivity {
             relation.setNAME(jsonObject.getString("NAME"));
             relation.setMW(jsonObject.getInt("MW"));
             relation.setBIRTH_DATE(jsonObject.getString("BIRTH_DATE"));
+            relation.setCALL_NUMBER(jsonObject.getString("CALL_NUMBER"));
             relation.setIMAGE_URL(jsonObject.getString("IMAGE_URL"));
             relation.setJUSEO_SEQ(jsonObject.getInt("JUSEO_SEQ"));
             relation.setREG_DATE(jsonObject.getString("REG_DATE"));

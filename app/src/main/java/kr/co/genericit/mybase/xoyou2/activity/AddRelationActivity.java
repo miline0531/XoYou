@@ -9,12 +9,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.IdRes;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import co.kr.sky.AccumThread;
 import kr.co.genericit.mybase.xoyou2.R;
 import kr.co.genericit.mybase.xoyou2.common.CommonActivity;
+import kr.co.genericit.mybase.xoyou2.common.NetInfo;
 import kr.co.genericit.mybase.xoyou2.common.SkyLog;
 import kr.co.genericit.mybase.xoyou2.interfaces.DialogClickListener;
 import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
@@ -31,15 +39,18 @@ import kr.co.genericit.mybase.xoyou2.view.CommonPopupDialog;
 
 public class AddRelationActivity extends CommonActivity implements View.OnClickListener {
     private int updateId = -1,seq = -1;
-    private EditText relationEdt, nameEdt, tv_birthday;
+    private EditText relationEdt, nameEdt, tv_birthday , edt_phone;
     private TextView setupBtn, btn_cancel;
     private ImageView backBtn;
     private RelativeLayout btn_birthday;
-    private String IN_SEQ="",USER_ID="",GWANGYE="",NICK_NAME="",NAME="",MW="1",BIRTH_DATE="",IMAGE_URL="";
+    private String IN_SEQ="",USER_ID="",GWANGYE="",NICK_NAME="",NAME="",MW="1",BIRTH_DATE="",IMAGE_URL="" , callNumber = "";
     private DatePickerDialog datePickerDialog;
     private JWSharePreference jwSharePreference;
     private Button btn_contract;
     private final int CONTRACT_REQUEST_IDX = 3000;
+    private RadioGroup radioGroup;
+    private String gender = "0";
+    private boolean isFinish = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,22 +58,6 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
 
         initView();
-
-
-//        Calendar c = Calendar.getInstance();
-//        int mYear = c.get(Calendar.YEAR);
-//        int mMonth = c.get(Calendar.MONTH);
-//        int mDay = c.get(Calendar.DAY_OF_MONTH);
-//
-//        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-//            @Override
-//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                BIRTH_DATE = changeBirthdayToString(year, month, dayOfMonth);
-//                birthdayText.setText(BIRTH_DATE);
-//            }
-//        }, 1970, 0, 1);
-//
-
     }
 
     private void requestUpdateRelationship(){
@@ -70,11 +65,12 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
             final String YEAR = BIRTH_DATE.substring(0,4);
             final String SEQ = String.valueOf(seq);
 
-
-            ActionRuler.getInstance().addAction(new ActionRequestUpdateRelation(this,SEQ,IN_SEQ,GWANGYE,NICK_NAME,NAME,MW,YEAR,IMAGE_URL, new ActionResultListener<UpdateRelationResult>() {
+            CommandUtil.getInstance().showLoadingDialog(AddRelationActivity.this);
+            ActionRuler.getInstance().addAction(new ActionRequestUpdateRelation(this,SEQ,IN_SEQ,GWANGYE,NICK_NAME,NAME,MW,YEAR,IMAGE_URL,callNumber, new ActionResultListener<UpdateRelationResult>() {
                 @Override
                 public void onResponseResult(UpdateRelationResult response) {
                     try {
+                        CommandUtil.getInstance().dismissLoadingDialog();
                         UpdateRelationResult result = response;
 
                         String message = "";
@@ -109,15 +105,15 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
     }
 
 
-    boolean isFinish = false;
     private void requestAddRelationship(){
         final String year = BIRTH_DATE.substring(0,4);
-
+        CommandUtil.getInstance().showLoadingDialog(AddRelationActivity.this);
         SkyLog.d(""+IN_SEQ+"\t"+USER_ID+"\t"+GWANGYE+"\t"+NICK_NAME+"\t"+NAME+"\t"+MW+"\t"+year+"\t"+IMAGE_URL);
-        ActionRuler.getInstance().addAction(new ActionRequestAddRelation(this,IN_SEQ,USER_ID,GWANGYE,NICK_NAME,NAME,MW,year,IMAGE_URL, new ActionResultListener<AddRelationResult>() {
+        ActionRuler.getInstance().addAction(new ActionRequestAddRelation(this,IN_SEQ,USER_ID,GWANGYE,NICK_NAME,NAME,MW,year,IMAGE_URL,callNumber, new ActionResultListener<AddRelationResult>() {
             @Override
             public void onResponseResult(AddRelationResult response) {
                 try {
+                    CommandUtil.getInstance().dismissLoadingDialog();
                     AddRelationResult result = response;
 
                     String message = "";
@@ -149,22 +145,17 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
 
     }
 
-    public String changeBirthdayToString(int year, int month, int dayOfMonth){
-        String monthText = "";
-        String dayText = "";
-        if(month<9){
-            monthText = "0"+(month+1);
-        }else{
-            monthText = String.valueOf(month+1);
+    //라디오 그룹 클릭 리스너
+    RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+            if(i == R.id.rg_btn1){
+                gender = "0";
+            } else if(i == R.id.rg_btn2){
+                gender = "1";
+            }
         }
-        if(dayOfMonth<10){
-            dayText = "0"+dayOfMonth;
-        }else{
-            dayText = String.valueOf(dayOfMonth);
-        }
-
-        return ""+year+monthText+dayText;
-    }
+    };
 
 
     public void initView(){
@@ -176,6 +167,13 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
         btn_birthday = findViewById(R.id.btn_birthday);
         btn_cancel = findViewById(R.id.btn_cancel);
         btn_contract = findViewById(R.id.btn_contract);
+        radioGroup = findViewById(R.id.radioGroup);
+        edt_phone = findViewById(R.id.edt_phone);
+
+
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
+
 
         jwSharePreference = new JWSharePreference();
 
@@ -200,7 +198,6 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
         btn_cancel.setOnClickListener(this);
         btn_contract.setOnClickListener(this);
         setupBtn.setOnClickListener(this);
-
     }
 
     @Override
@@ -226,11 +223,13 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
                 GWANGYE = relationEdt.getText().toString();
                 NAME = nameEdt.getText().toString();
                 NICK_NAME = NAME;
-                MW = "1";
+                MW = gender;
                 BIRTH_DATE = tv_birthday.getText().toString();
                 IMAGE_URL = "";
+                callNumber = edt_phone.getText().toString();
 
-                if(GWANGYE.equals("")||NAME.equals("")||NICK_NAME.equals("")||BIRTH_DATE.equals("")){
+
+                if(GWANGYE.equals("")||NAME.equals("")||NICK_NAME.equals("")||BIRTH_DATE.equals("")||callNumber.equals("")){
                     //todo 입력오류 얼럿!!
                     Toast.makeText(AddRelationActivity.this , "필수항목을 모두 입력해주세요." , Toast.LENGTH_SHORT).show();
                 }else{
@@ -244,6 +243,7 @@ public class AddRelationActivity extends CommonActivity implements View.OnClickL
                 break;
         }
     }
+
 
     @SuppressLint("MissingSuperCall")
     @Override

@@ -1,57 +1,48 @@
 package kr.co.genericit.mybase.xoyou2.activity.main;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.appbar.AppBarLayout;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
+import co.kr.sky.AccumThread;
 import kr.co.genericit.mybase.xoyou2.R;
 import kr.co.genericit.mybase.xoyou2.activity.MainActivity;
-import kr.co.genericit.mybase.xoyou2.activity.MymongBidActivity;
-import kr.co.genericit.mybase.xoyou2.adapter.ManageHorizontalRecyclerviewAdapter;
-import kr.co.genericit.mybase.xoyou2.adapter.StoreVerticalRecyclerviewAdapter;
-import kr.co.genericit.mybase.xoyou2.model.Mong;
-import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
-import kr.co.genericit.mybase.xoyou2.network.interfaces.ActionResultListener;
-import kr.co.genericit.mybase.xoyou2.network.request.ActionRequestCoinData;
-import kr.co.genericit.mybase.xoyou2.network.request.ActionRequestStoreList;
-import kr.co.genericit.mybase.xoyou2.network.response.CoinDataResult;
-import kr.co.genericit.mybase.xoyou2.network.response.StoreListResult;
+import kr.co.genericit.mybase.xoyou2.adapter.StoreFagmentListAdapter;
+import kr.co.genericit.mybase.xoyou2.common.CommonUtil;
+import kr.co.genericit.mybase.xoyou2.common.NetInfo;
+import kr.co.genericit.mybase.xoyou2.common.SkyLog;
+import kr.co.genericit.mybase.xoyou2.model.SimRiUser;
 import kr.co.genericit.mybase.xoyou2.storage.JWSharePreference;
-import kr.co.genericit.mybase.xoyou2.utils.LogUtil;
-import kr.co.genericit.mybase.xoyou2.utils.RecyclerDecoration;
+import kr.co.genericit.mybase.xoyou2.utils.CommandUtil;
+import kr.co.genericit.mybase.xoyou2.view.CommonPopupDialog;
 
 
 public class StoreFragment extends Fragment {
+    public Context mContext;
 
-    private Context mContext;
-    private TextView txt_date_search,txt_event,txt_bid,txt_store;
-    private LinearLayout btn_date_search;
-    private JWSharePreference jwSharePreference;
-    private ArrayList<Mong> dateList,eventList,auctionList;
+    //SKY
+    private CommonUtil dataSet = CommonUtil.getInstance();
+    private AccumThread mThread;
+    private Map<String, String> map = new HashMap<String, String>();
+    private ArrayList<SimRiUser> listSimRi = new ArrayList<SimRiUser>();
+    private RecyclerView list;
+    private StoreFagmentListAdapter m_Adapter;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -64,306 +55,96 @@ public class StoreFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)getActivity()).visibleFloatingButton(View.VISIBLE);
-        requestStoreList();
+
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_store, container, false);
-
-        rcv_horizontal_1 = v.findViewById(R.id.rcv_manage_list_horizontal1);
-        rcv_horizontal_2 = v.findViewById(R.id.rcv_manage_list_horizontal2);
-        rcv_vertical = v.findViewById(R.id.rcv_manage_list_vertical);
-        btn_date_search = v.findViewById(R.id.btn_date_search);
-        txt_date_search = v.findViewById(R.id.txt_date_search);
-
-        txt_event = v.findViewById(R.id.txt_event);
-        txt_bid = v.findViewById(R.id.txt_bid);
-        txt_store = v.findViewById(R.id.txt_store);
+        View view = inflater.inflate(R.layout.fragment_store, container, false);
+        list = (RecyclerView)view.findViewById(R.id.list);
+        list.setLayoutManager(new LinearLayoutManager(mContext)) ;
 
 
-
-        txt_event.setOnClickListener(view ->{
-            Toast.makeText(mContext, "준비중입니다.", Toast.LENGTH_SHORT).show();
-        });
-        txt_bid.setOnClickListener(view ->{
-            Toast.makeText(mContext, "준비중입니다.", Toast.LENGTH_SHORT).show();
-        });
-        txt_store.setOnClickListener(view ->{
-            Toast.makeText(mContext, "준비중입니다.", Toast.LENGTH_SHORT).show();
-        });
-
-
-
-        datePickerCreate();
-        dateList = new ArrayList<>();
-        eventList = new ArrayList<>();
-        auctionList = new ArrayList<>();
-        setRecycler();
-        requestStoreList();
-
-        v.findViewById(R.id.btn_menu).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity)getActivity()).MainOpenDrawer();
-            }
-        });
-
-
-        btn_date_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                datePickerDialog.show();
-            }
-        });
-
-        AppBarLayout collapsingView = v.findViewById(R.id.collapsingView);
-        collapsingView.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                int visible = 0;
-                if (Math.abs(verticalOffset)-appBarLayout.getTotalScrollRange() == 0){
-                    visible = View.GONE;
-                }else{
-                    visible = View.VISIBLE;
-                }
-                ((MainActivity)getActivity()).visibleFloatingButton(visible);
-            }
-        });
-
-        requestStoreStatInfo();
-
-        return v;
+        m_Adapter = new StoreFagmentListAdapter( MainActivity.mainAc, listSimRi);
+        //m_Adapter.setListOnClickListener(mItemClickListener);
+        list.setAdapter(m_Adapter);
+        getUserList();
+        return view;
     }
-    public void requestStoreStatInfo(){
-        ActionRuler.getInstance().addAction(new ActionRequestCoinData(getActivity(), new ActionResultListener<CoinDataResult>() {
+    private void getUserList(){
+        CommandUtil.getInstance().showLoadingDialog(MainActivity.mainAc);
+        map.clear();
+        map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_USER_SIMLI_LIST);
+        map.put("userId", new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
+        map.put("date", dataSet.FullPatternDate("yyyyMMddHHmmss"));
 
-            @Override
-            public void onResponseResult(CoinDataResult response) {
+        //스레드 생성
+        mThread = new AccumThread(MainActivity.mainAc, mAfterAccum, map, 5, 0, null);
+        mThread.start();        //스레드 시작!!
+    }
+
+
+    Handler mAfterAccum = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            CommandUtil.getInstance().dismissLoadingDialog();
+            if(msg.arg1 == 0) {
+                String res  = (String)msg.obj;
+                SkyLog.d("res 0: " + res);
+
+                //startActivity(new Intent(mContext, AllStepActivity.class));
                 try {
-                    CoinDataResult result = response;
+                    JSONObject jsonObject_succes = new JSONObject(res);                     //SUCCESS
+                    if(jsonObject_succes.getString("success").equals("true")){
+                        JSONArray jsonObject_listSimRi = new JSONArray(jsonObject_succes.getString("data"));
 
-                    if(result!=null) {
-                        Log.d("CHECK", "CoinData : " + result.getResp().toString());
-                        if (result.isResult()) {
-                            CoinDataResult.Resp resp = result.getResp();
-                            String stringInfo = "스토어입장 : " + resp.getNumber_go_store() + "명"
-                                    + "\n거래수 : " + resp.getNumber_transaction() + "개"
-                                    + "\n경매수 : " + resp.getNumber_auction_in_store() + "개"
-                                    + "\n\n신규등록수 : " + resp.getTransaction_register_today() + "개"
-                                    + "\n최고가 : " + Math.round(Float.parseFloat(resp.getMax_price()))
-                                    + "\n최저가 : " + Math.round(Float.parseFloat(resp.getMin_price()));
-                            ((MainActivity)getActivity()).setMainTopText(stringInfo);
+                        SkyLog.d("COUNT :: " + jsonObject_listSimRi.length());
+                        listSimRi.clear();
+                        for (int i = 0; i < jsonObject_listSimRi.length(); i++) {
+                            JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
+                            String[] phone_Arr = new String[1];
 
+                            //NMR 수정해야할곳!!
+//                            if(i == 0){
+//                                phone_Arr[0] = "01033435914";
+//                            }else{
+//                                phone_Arr[0] = "" + i;
+//
+//                            }
+                            phone_Arr[0] = "" + jsonObject.getString("Phone");
+                            listSimRi.add(new SimRiUser(
+                                    jsonObject.getString("Phone") ,
+                                    //phone_Arr[0] ,
+                                    jsonObject.getInt("Id") ,
+                                    jsonObject.getInt("No") ,
+                                    jsonObject.getString("NickName") ,
+                                    jsonObject.getString("Name") ,
+                                    jsonObject.getString("UserInfo") ,
+                                    jsonObject.getString("GwanInfo") ,
+                                    jsonObject.getString("SimRiInfo") ,
+                                    jsonObject.getString("Value") ,
+                                    jsonObject.getDouble("iDou") ,
+                                    jsonObject.getString("Image") ,
+                                    jsonObject.getBoolean("XO")));
+                            dataSet.readSMSMessage(mContext , phone_Arr , jsonObject.getString("Name"));
                         }
+                        m_Adapter.notifyDataSetChanged();
 
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
 
-            @Override
-            public void onResponseError(String message) {
 
-            }
-        }));
-        ActionRuler.getInstance().runNext();
-    }
-    private void requestStoreList(){
-        jwSharePreference = new JWSharePreference();
-        int userId = jwSharePreference.getInt(JWSharePreference.PREFERENCE_SRL,0);
-        ActionRuler.getInstance().addAction(new ActionRequestStoreList(getActivity(),String.valueOf(userId), new ActionResultListener<StoreListResult>() {
 
-            @Override
-            public void onResponseResult(StoreListResult response) {
-                try {
-                    StoreListResult result = response;
-                    Log.d("TEST",result.getData().toString());
-
-                    if(result.isSuccess()){
-                        dateList.clear();
-                        dateList.addAll(stringToArrayList(result.getData(),"date"));
-                        eventList.clear();
-                        eventList.addAll(stringToArrayList(result.getData(),"event"));
-                        auctionList.clear();
-                        auctionList.addAll(stringToArrayList(result.getData(),"auction"));
-                        adapter_vertical.notifyDataSetChanged();
-                        adapter_horizontal1.notifyDataSetChanged();
-                        adapter_horizontal2.notifyDataSetChanged();
-                        Log.v("ifeelbluu", "dateList :: " + dateList.size());
+                        //전화번호부 저장
                     }else{
+                        CommandUtil.getInstance().showCommonOneButtonDialog(MainActivity.mainAc,
+                                jsonObject_succes.getString("error") + getClass().toString(),
+                                MainActivity.mainAc.getResources().getString(R.string.str_cofirm),
+                                CommonPopupDialog.COMMON_DIALOG_OPTION_CLOSE_DIALOG,
+                                null);
                     }
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                }catch (Exception e){
+                    SkyLog.d("e :: " + e);
                 }
             }
-
-            @Override
-            public void onResponseError(String message) {
-                //Toast.makeText(getContext(), "꿈 가져오기 실패.\n잠시 후 다시 시도해주세요.",Toast.LENGTH_SHORT).show();
-                LogUtil.LogD("꿈 가져오기 실패!!!!");
-            }
-        }));
-        ActionRuler.getInstance().runNext();
-    }
-
-    //Manage화면
-    private RecyclerView rcv_horizontal_1,rcv_horizontal_2,rcv_vertical;
-    private ManageHorizontalRecyclerviewAdapter adapter_horizontal1;
-    private ManageHorizontalRecyclerviewAdapter adapter_horizontal2;
-    private StoreVerticalRecyclerviewAdapter adapter_vertical;
-    private ArrayList<String> data = new ArrayList<>();
-    private ArrayList<String> data2 = new ArrayList<>();
-    private ArrayList<String> data3 = new ArrayList<>();
-    public void setRecycler(){
-
-        adapter_horizontal1 = new ManageHorizontalRecyclerviewAdapter(mContext,eventList);
-        adapter_horizontal1.setListOnClickListener(hOnclick);
-        rcv_horizontal_1.setAdapter(adapter_horizontal1);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false);
-        rcv_horizontal_1.setLayoutManager(gridLayoutManager);
-        RecyclerDecoration spaceDecoration = new RecyclerDecoration(10,"singleLineHorizontal");
-        rcv_horizontal_1.addItemDecoration(spaceDecoration);
-
-        adapter_horizontal2 = new ManageHorizontalRecyclerviewAdapter(mContext,auctionList);
-        adapter_horizontal2.setListOnClickListener(hOnclick2);
-        rcv_horizontal_2.setAdapter(adapter_horizontal2);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false);
-        rcv_horizontal_2.setLayoutManager(gridLayoutManager2);
-        RecyclerDecoration spaceDecoration2 = new RecyclerDecoration(10,"singleLineHorizontal");
-        rcv_horizontal_2.addItemDecoration(spaceDecoration2);
-
-
-
-        rcv_vertical.setLayoutManager(new LinearLayoutManager(mContext));
-        adapter_vertical = new StoreVerticalRecyclerviewAdapter(mContext,dateList);
-        adapter_vertical.setListOnClickListener(onClick);
-        rcv_vertical.setAdapter(adapter_vertical);
-
-        RecyclerDecoration spaceDecoration3 = new RecyclerDecoration(10,"vertical");
-        rcv_vertical.addItemDecoration(spaceDecoration3);
-    }
-
-    public ManageHorizontalRecyclerviewAdapter.listOnClickListener hOnclick = new ManageHorizontalRecyclerviewAdapter.listOnClickListener() {
-        @Override
-        public void onClickItem(int id, int action) {
-            Intent i = new Intent(getActivity(), MymongBidActivity.class);
-            Log.v("ifeelbluu","SEQ : " + eventList.get(id).getSTORE_ID() );
-            i.putExtra("SEQ",eventList.get(id).getSTORE_ID()+"");
-            startActivity(i);
         }
     };
-
-    public ManageHorizontalRecyclerviewAdapter.listOnClickListener hOnclick2 = new ManageHorizontalRecyclerviewAdapter.listOnClickListener() {
-        @Override
-        public void onClickItem(int id, int action) {
-            Intent i = new Intent(getActivity(), MymongBidActivity.class);
-            Log.v("ifeelbluu","SEQ : " + auctionList.get(id).getSTORE_ID() );
-            i.putExtra("SEQ",auctionList.get(id).getSTORE_ID()+"");
-            startActivity(i);
-        }
-    };
-
-    public StoreVerticalRecyclerviewAdapter.listOnClickListener onClick = new StoreVerticalRecyclerviewAdapter.listOnClickListener() {
-        @Override
-        public void onClickItem(int id, int action) {
-            Log.v("ifeelbluu","SEQ : " + dateList.get(id).getSTORE_ID() );
-            Intent i = new Intent(getActivity(), MymongBidActivity.class);
-            i.putExtra("SEQ",dateList.get(id).getSTORE_ID()+"");
-            startActivity(i);
-        }
-    };
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    private DatePickerDialog datePickerDialog;
-    private String birthday="";
-
-    public void datePickerCreate(){
-        Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR);
-        int mMonth = c.get(Calendar.MONTH);
-        int mDay = c.get(Calendar.DAY_OF_MONTH);
-
-        datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                birthday = changeBirthdayToString(year, month, dayOfMonth);
-                txt_date_search.setText(birthday);
-            }
-        }, mYear, mMonth, mDay);
-    }
-
-    public String changeBirthdayToString(int year, int month, int dayOfMonth){
-        String monthText = "";
-        String dayText = "";
-        if(month<9){
-            monthText = "0"+(month+1);
-        }else{
-            monthText = String.valueOf(month+1);
-        }
-        if(dayOfMonth<10){
-            dayText = "0"+dayOfMonth;
-        }else{
-            dayText = String.valueOf(dayOfMonth);
-        }
-
-        return ""+year+monthText+dayText;
-    }
-    public ArrayList<Mong> stringToArrayList(String data, String type) throws JSONException {
-        JSONObject object = new JSONObject(data);
-        JSONArray jsonArray = new JSONArray(object.getString("list_"+type+"_store"));
-        ArrayList<Mong> arrayList = new ArrayList<>();
-        for(int i=0; i<jsonArray.length(); i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            Mong mong = new Mong();
-            //TODO 데이터 추가
-
-            mong.setSEQ(jsonObject.getInt("SEQ"));
-            mong.setUSER_ID(jsonObject.getString("USER_ID"));
-            mong.setUSER_NAME(jsonObject.getString("USER_NAME"));
-            mong.setTITLE(jsonObject.getString("TITLE"));
-            mong.setNOTE(jsonObject.getString("NOTE"));
-            mong.setMONG_DATE(jsonObject.getString("MONG_DATE"));
-            mong.setSTATUS_CODE(jsonObject.getInt("STATUS_CODE"));
-            mong.setMONG_TYPE(jsonObject.getString("MONG_TYPE"));
-            mong.setTHEME_TYPE(jsonObject.getString("THEME_TYPE"));
-            mong.setSTART_DATE(jsonObject.getString("START_DATE"));
-            mong.setEND_DATE(jsonObject.getString("END_DATE"));
-            mong.setMAX_PRICE(jsonObject.getString("MAX_PRICE"));
-            mong.setMIN_PRICE(jsonObject.getString("MIN_PRICE"));
-            mong.setMONG_PRICE(jsonObject.getString("MONG_PRICE"));
-            mong.setSTORE_ID(jsonObject.getString("STORE_ID"));
-            mong.setMONG_TOKEN_ID(jsonObject.getString("MONG_TOKEN_ID"));
-            mong.setMONG_CERT(jsonObject.getString("MONG_CERT"));
-            mong.setIMAGE_URL(jsonObject.getString("IMAGE_URL"));
-            mong.setSELL_TYPE(jsonObject.getString("SELL_TYPE"));
-            mong.setBUY_TYPE(jsonObject.getString("BUY_TYPE"));
-            mong.setBID_VALUE(jsonObject.getString("BID_VALUE"));
-            mong.setBID_COUNT(jsonObject.getString("BID_COUNT"));
-            mong.setTRANS_ID(jsonObject.getInt("TRANS_ID"));
-            mong.setTRANS_TYPE(jsonObject.getInt("TRANS_TYPE"));
-            mong.setTRANS_STATUS(jsonObject.getInt("TRANS_STATUS"));
-            mong.setJUSEO_SEQ(jsonObject.getInt("JUSEO_SEQ"));
-            mong.setUSE_YN(jsonObject.getString("USE_YN"));
-            mong.setREG_DATE(jsonObject.getString("REG_DATE"));
-            mong.setUPD_DATE(jsonObject.getString("UPD_DATE"));
-            mong.setJUSEO_DATA(jsonObject.getString("JUSEO_DATA"));
-            mong.setMONG_JST(jsonObject.getString("MONG_JST"));
-            mong.setVIEW_TYPE(jsonObject.getString("VIEW_TYPE"));
-            mong.setCURRENT_PAGE(jsonObject.getInt("CURRENT_PAGE"));
-
-            Log.v("ifeelbluu", "mong :: " +mong.getIMAGE_URL());
-            arrayList.add(mong);
-        }
-
-        return arrayList;
-    }
 }

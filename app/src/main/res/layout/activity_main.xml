@@ -36,8 +36,8 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="50dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="50dp"
                     android:background="@drawable/ic_icon_menu_circle" />
 
                 <TextView
@@ -134,7 +134,7 @@
                 android:id="@+id/btn_2"
                 android:background="#c3c3c3"
                 android:layout_width="wrap_content"
-                android:text="유톡연결"
+                android:text="통화연결"
                 android:textColor="#000"
                 android:padding="10dp"
                 android:layout_margin="5dp"
@@ -147,7 +147,7 @@
                 android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:textColor="#000"
-                android:text="유톡연결"
+                android:text="영상연결"
                 android:layout_height="wrap_content"/>
 
 

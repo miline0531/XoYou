@@ -5,39 +5,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/main_image"
+    <RelativeLayout
+        android:id="@+id/topview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img_store" />
+        android:layout_height="240dp"
+        android:background="@drawable/myyouyopimage4">
 
-    <View
+
+        <TextView
+            android:id="@+id/top_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/gowunbatang_regular"
+            android:gravity="center_vertical"
+            android:text="등록인: 18명\n남성: 12명\n여성: 6명"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_14sp" />
+
+        <TextView
+            android:id="@+id/top_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/gowunbatang_regular"
+            android:gravity="center_vertical"
+            android:text="현시간은 사업운이 좋고 이별운이 나쁩니다."
+            android:textColor="@color/color_yellow"
+            android:textSize="@dimen/text_size_body" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#B3000000" />
-    <TextView
-        android:id="@+id/main_title"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingHorizontal="10dp"
-        android:gravity="right"
-        android:layout_alignParentRight="true"
-        android:text=""
-        android:textColor="#ECECEC"
-        android:textSize="@dimen/text_size_body" />
+        android:layout_below="@+id/topview"
+        android:background="#DD696969"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/mong_main_top_title3"
-        android:textColor="@color/color_yellow"
-        android:textSize="@dimen/text_size_tooltip"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"/>
+        <TextView
+            android:id="@+id/centerTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:text="강 감순님의 관계인들" />
+
+        <Button
+            android:layout_width="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/btn_popup"
+            android:background="@drawable/btn_search"
+            android:layout_alignParentRight="true"
+            android:layout_height="30dp"/>
+
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

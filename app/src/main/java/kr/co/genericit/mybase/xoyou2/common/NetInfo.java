@@ -96,6 +96,7 @@ public class NetInfo {
 
     //xoYou
     public static final String API_SELECT_USER_LIST = "/v2/xoYouUserLoad"; // 나를위한사람들-관계인리스트
+    public static final String API_SELECT_USER_SIMLI_LIST = "/v2/xoYouUserSimRiList"; // 나를위한사람들-관계인리스트
     public static final String API_SELECT_QA_LIST = "/v2/xoYouUserQAList"; // 나를위한사람들-질문항목리스트
     public static final String API_SELECT_QA_SIMRI_LIST = "/v2/xoYouUserQASimRiList"; // 나를위한사람들-질문선택 인연순리스트
     public static final String API_SELECT_QA_SIMRI_DETAIL = "/v2/xoYouUserQASimRiDetail"; //나를위한사람들-관계인 질문항목분석
