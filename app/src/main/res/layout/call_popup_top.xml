@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayoutBg"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
-    android:gravity="center_vertical"
-    android:orientation="vertical">
+    android:background="@color/progress_circle_bg_1"
+    android:padding="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:background="#ffffff"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:background="#FFFFFF"
         android:orientation="horizontal">
 
         <ImageButton
@@ -24,32 +31,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_toLeftOf="@id/btn_close"
+            android:orientation="vertical"
             android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:layout_toLeftOf="@id/btn_close">
 
             <TextView
                 android:id="@+id/tv_call_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:singleLine="true"
                 android:text=""
+                android:typeface="sans"
+                android:singleLine="true"
                 android:textColor="#5D5D5D"
-                android:textSize="20sp"
-                android:typeface="sans" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tv_call_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:singleLine="true"
                 android:text=""
-                android:textColor="@color/black"
-                android:textSize="16sp"
+                android:typeface="sans"
                 android:textStyle="bold"
-                android:typeface="sans" />
+                android:singleLine="true"
+                android:textColor="#5D5D5D"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </RelativeLayout>
@@ -58,170 +65,66 @@
         android:layout_height="1dp"
         android:background="#5D5D5D"/>
 
-    <TextView
-        android:id="@+id/txt_report_count"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#5D5D5D"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        android:typeface="sans"
-        android:visibility="invisible"
-        android:text="피해사례가 등록되어있습니다."/>
-
     <LinearLayout
-        android:id="@+id/middleProgressLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="8dp"
-        android:background="@color/black"
         android:orientation="horizontal">
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/tab1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:layout_weight="1">
-
-            <com.vaibhavlakhera.circularprogressview.CircularProgressView
-                android:id="@+id/progressView1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                app:animate="true"
-                app:animateDuration="600"
-                app:fillColor="@color/progress_circle_bg_1"
-                app:progress="13"
-                app:progressColor="@color/progress_circle_1"
-                app:progressRoundCap="true"
-                app:progressTextColor="#ffffff"
-                app:progressTextEnabled="false"
-                app:progressTextSize="13dp"
-                app:progressTextType="progress"
-                app:progressWidth="5dp"
-                app:startAngle="270"
-                app:total="100"
-                app:totalColor="@color/progress_circle_bg_1"
-                app:totalWidth="5dp" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
             <TextView
-                android:id="@+id/progressTxt1"
+                android:id="@+id/tab1_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="11dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:layout_centerInParent="true"/>
-        </RelativeLayout>
-        <RelativeLayout
+                android:paddingVertical="20dp"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:text="연동그래프"/>
+            <View
+                android:id="@+id/tab1_line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tab2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:layout_weight="1">
-
-            <com.vaibhavlakhera.circularprogressview.CircularProgressView
-                android:id="@+id/progressView2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                app:animate="true"
-                app:animateDuration="600"
-                app:fillColor="@color/progress_circle_bg_2"
-                app:progress="43"
-                app:progressColor="@color/progress_circle_2"
-                app:progressRoundCap="true"
-                app:progressTextColor="#ffffff"
-                app:progressTextEnabled="false"
-                app:progressTextSize="13dp"
-                app:progressTextType="progress"
-                app:progressWidth="5dp"
-                app:startAngle="270"
-                app:total="100"
-                app:totalColor="@color/progress_circle_bg_2"
-                app:totalWidth="5dp" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
             <TextView
-                android:id="@+id/progressTxt2"
+                android:id="@+id/tab2_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="11dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:layout_centerInParent="true"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:layout_weight="1">
-
-            <com.vaibhavlakhera.circularprogressview.CircularProgressView
-                android:id="@+id/progressView3"
-                android:layout_centerInParent="true"
+                android:paddingVertical="20dp"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:text="심리항목그래프"/>
+            <View
+                android:id="@+id/tab2_line"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:animate="true"
-                app:animateDuration="600"
-                app:fillColor="@color/progress_circle_bg_3"
-                app:progress="67"
-                app:progressColor="@color/progress_circle_3"
-                app:progressRoundCap="true"
-                app:progressTextColor="#ffffff"
-                app:progressTextEnabled="false"
-                app:progressTextSize="13dp"
-                app:progressTextType="progress"
-                app:progressWidth="5dp"
-                app:startAngle="270"
-                app:total="100"
-                app:totalColor="@color/progress_circle_bg_3"
-                app:totalWidth="5dp" />
-            <TextView
-                android:id="@+id/progressTxt3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="11dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:layout_centerInParent="true"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:layout_weight="1">
+                android:layout_height="2dp"
+                android:background="#00000000"/>
+        </LinearLayout>
 
-            <com.vaibhavlakhera.circularprogressview.CircularProgressView
-                android:id="@+id/progressView4"
-                android:layout_centerInParent="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:animate="true"
-                app:animateDuration="600"
-                app:fillColor="@color/progress_circle_bg_4"
-                app:progress="100"
-                app:progressColor="@color/progress_circle_4"
-                app:progressRoundCap="true"
-                app:progressTextColor="#ffffff"
-                app:progressTextEnabled="false"
-                app:progressTextSize="13dp"
-                app:progressTextType="progress"
-                app:progressWidth="5dp"
-                app:startAngle="270"
-                app:total="100"
-                app:totalColor="@color/progress_circle_bg_4"
-                app:totalWidth="5dp" />
-            <TextView
-                android:id="@+id/progressTxt4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="11dp"
-                android:textColor="@color/white"
-                android:layout_centerInParent="true"/>
-        </RelativeLayout>
+
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/layout_viewpager"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
 
-
-</LinearLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+    </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
 
