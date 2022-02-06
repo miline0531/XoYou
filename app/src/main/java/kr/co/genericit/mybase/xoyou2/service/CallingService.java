@@ -1,5 +1,6 @@
 package kr.co.genericit.mybase.xoyou2.service;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -51,11 +52,20 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 import kr.co.genericit.mybase.xoyou2.broadcast.IncomingCallBroadcastReceiver;
 import kr.co.genericit.mybase.xoyou2.R;
+import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
+import kr.co.genericit.mybase.xoyou2.network.interfaces.ActionResultListener;
+import kr.co.genericit.mybase.xoyou2.network.model.MyCallChart;
+import kr.co.genericit.mybase.xoyou2.network.request.ActionRequestStoreMongStoryGetLocationColor;
+import kr.co.genericit.mybase.xoyou2.network.requestxo.ActionRequestMycallGetData;
+import kr.co.genericit.mybase.xoyou2.network.response.DefaultResult;
 
 public class CallingService extends Service {
 	private IncomingCallBroadcastReceiver mReceiver = null;
@@ -67,8 +77,10 @@ public class CallingService extends Service {
 	String call_number;
 	WindowManager.LayoutParams params;
 	private WindowManager windowManager;
-
 	IBinder mBinder = new MyBinder();
+
+	//텀 초단위
+	int term = 2;
 
 	class MyBinder extends Binder {
 		CallingService getService() { // 서비스 객체를 리턴
@@ -237,7 +249,11 @@ public class CallingService extends Service {
 			if(position == 0 ){ //라인차트
 				lineChart = holder.itemView.findViewById(R.id.lineChart);
 
-				lineChartInit(lineChart);
+				//lineChartInit(lineChart);
+				for(int i=0;i<11;i++) {
+					setData(lineChart, 0.0, 0.0);
+				}
+
 				startCall();
 			}else{ //바차트
 				barChart = holder.itemView.findViewById(R.id.barchart);
@@ -407,38 +423,12 @@ public class CallingService extends Service {
 	private ArrayList<Entry> yVals2 = new ArrayList<>(); //item2 y
 	private int entry_count = 0; //item x
 
-	private int testCount = 0;
+	//private int testCount = 0;
 	private int sampleColorIndex = 0;
-	private void lineChartInit(LineChart chart1) {
-		testCount++;
-		Log.v("ifeelbluu", "testCount :: " + testCount % 5);
-		if(testCount % 5 == 0){
+	private void lineChartInit(LineChart chart1, MyCallChart data) {
 
-			switch (sampleColorIndex){
-				case 0:
-					rootLayoutBg.setBackgroundColor(ContextCompat.getColor(this, R.color.progress_circle_bg_1));
-					sampleColorIndex = 1;
-					break;
-				case 1:
-					rootLayoutBg.setBackgroundColor(ContextCompat.getColor(this, R.color.progress_circle_bg_2));
-					sampleColorIndex = 2;
-					break;
-				case 2:
-					rootLayoutBg.setBackgroundColor(ContextCompat.getColor(this, R.color.progress_circle_bg_3));
-					sampleColorIndex = 3;
-					break;
-				case 3:
-					rootLayoutBg.setBackgroundColor(ContextCompat.getColor(this, R.color.progress_circle_bg_4));
-					sampleColorIndex = 4;
-					break;
-			}
-
-		}
-
-		Random r = new Random();
-		int val1 = r.nextInt(9) + 1;
-		int val2 = r.nextInt(9) + 1;
-		setData(chart1, val1,val2);
+		rootLayoutBg.setBackgroundColor(data.getIcolor());
+		setData(chart1, data.getLine_data0(), data.getLine_data1());
 
 		chart1.animateX(0); //anim
 		chart1.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -460,10 +450,14 @@ public class CallingService extends Service {
 		chart1.setEnabled(false);
 		setLegends(chart1);
 
+		if(barChart!=null)
+			barChartInit(barChart, data);
+
+		/*
 		if(testCount % 3 == 0){
-			if(barChart!=null)
-				barChartInit(barChart);
+
 		}
+		*/
 	}
 
 	public final int[] BARCHART_COLORS = {
@@ -481,7 +475,23 @@ public class CallingService extends Service {
 		return Color.argb(90,r, g, b);
 	}
 
-	public void barChartInit(BarChart chart){
+	public void barChartInit(BarChart chart,MyCallChart c_data){
+		/*
+		list = new ArrayList<>();
+		for(int i=0; i<6; i++){
+			Random r = new Random();
+			int ran = r.nextInt(9) + 1;
+			list.add(new BarEntry(i, Float.valueOf(ran)));
+		}
+		*/
+		list = new ArrayList<>();
+		list.add(new BarEntry(0, c_data.getWoul().floatValue()));
+		list.add(new BarEntry(1, c_data.getWisim().floatValue()));
+		list.add(new BarEntry(2, c_data.getJaman().floatValue()));
+		list.add(new BarEntry(3, c_data.getJogup().floatValue()));
+		list.add(new BarEntry(4, c_data.getJjazung().floatValue()));
+		list.add(new BarEntry(5, c_data.getChojo().floatValue()));
+
 		String[] labels = {"우울", "의심", "자만", "조급", "짜증", "초조"};
 		chart.setTouchEnabled(false);
 		chart.getDescription().setEnabled(false);
@@ -543,25 +553,18 @@ public class CallingService extends Service {
 
 	}
 
-	public void setData(LineChart chart1, int val1, int val2){
+	public void setData(LineChart chart1, Double val1, Double val2){
 		if(yVals1.size() == 10) {
 			yVals1.remove(0);
 			yVals2.remove(0);
-			yVals1.add(new Entry(entry_count,val1));
-			yVals2.add(new Entry(entry_count,val2));
+			yVals1.add(new Entry(entry_count,val1.floatValue()));
+			yVals2.add(new Entry(entry_count,val2.floatValue()));
 		}else{
-			yVals1.add(new Entry(entry_count,val1));
-			yVals2.add(new Entry(entry_count,val2));
+			yVals1.add(new Entry(entry_count,val1.floatValue()));
+			yVals2.add(new Entry(entry_count,val2.floatValue()));
 		}
 
-		list = new ArrayList<>();
-		for(int i=0; i<6; i++){
-			Random r = new Random();
-			int ran = r.nextInt(9) + 1;
-			list.add(new BarEntry(i, Float.valueOf(ran)));
-		}
-
-		entry_count++;
+		entry_count = entry_count + term;
 
 		LineDataSet set1, set2;
 		set1 = new LineDataSet(yVals1,"진정성");
@@ -650,7 +653,7 @@ public class CallingService extends Service {
 					ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
 					ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 					activityManager.getMemoryInfo(mi);
-					Thread.sleep(1000);
+					Thread.sleep(term * 1000);
 					sWatch++;
 					int min = sWatch / 60;
 					int sec = sWatch % 60;
@@ -684,7 +687,7 @@ public class CallingService extends Service {
 		@Override
 		public boolean handleMessage(Message msg) {
 			if (msg.what == 1111) {
-				lineChartInit(lineChart);
+				getMyCallGetData();
 			}else{
 				try {
 					isWatch = false;
@@ -698,5 +701,82 @@ public class CallingService extends Service {
 			return false;
 		}
 	});
+
+
+	public void getMyCallGetData(){
+		ActionRuler.getInstance().addAction(new ActionRequestMycallGetData( "ifeelbluu12", "01071036707",
+				"진정성", "유혹", "혐오심" , new ActionResultListener<DefaultResult>() {
+			@Override
+			public void onResponseResult(DefaultResult response) {
+				try {
+					String result = response.getData();
+
+					JSONObject jsonObject = new JSONObject(result);
+					JSONObject borderColor = jsonObject.getJSONObject("borderColor");
+					Double R = borderColor.getDouble("R");
+					Double G = borderColor.getDouble("G");
+					Double B = borderColor.getDouble("B");
+					int r = (int) Math.round(255 * R);
+					int g = (int) Math.round(255 * G);
+					int b = (int) Math.round(255 * B);
+					int icolor = Color.argb(255, r, g, b);
+
+					String simri_data = jsonObject.getString("simri_data");
+					Double line_data0 = jsonObject.getDouble("line_data0");
+					Double line_data1 = jsonObject.getDouble("line_data1");
+
+					JSONArray list_col_data = jsonObject.getJSONArray("list_col_data");
+
+					Double woul = 0.0;
+					Double wisim = 0.0;
+					Double jaman = 0.0;
+					Double jogup = 0.0;
+					Double jjazung = 0.0;
+					Double chojo = 0.0;
+
+					for(int i =0; i<list_col_data.length(); i++){
+						JSONObject obj = list_col_data.getJSONObject(i);
+						if(obj.getString("name").equals("우울")){
+							woul = obj.getDouble("dou");
+						}else if(obj.getString("name").equals("의심")){
+							wisim = obj.getDouble("dou");
+						}else if(obj.getString("name").equals("자만")){
+							jaman = obj.getDouble("dou");
+						}else if(obj.getString("name").equals("조급")){
+							jogup = obj.getDouble("dou");
+						}else if(obj.getString("name").equals("짜증")){
+							jjazung = obj.getDouble("dou");
+						}else if(obj.getString("name").equals("초조")){
+							chojo = obj.getDouble("dou");
+						}
+					}
+
+					MyCallChart data = new MyCallChart();
+					data.setIcolor(icolor);
+					data.setSimri_data(simri_data);
+					data.setLine_data0(line_data0);
+					data.setLine_data1(line_data1);
+					data.setWoul(woul);
+					data.setWisim(wisim);
+					data.setJaman(jaman);
+					data.setJogup(jogup);
+					data.setJjazung(jjazung);
+					data.setChojo(chojo);
+
+					tv_call_number.setText(simri_data);
+					lineChartInit(lineChart,data);
+
+				} catch (Exception e) {
+					Log.e("TEST","에러" + e.getMessage());
+					e.printStackTrace();
+				}
+			}
+			@Override
+			public void onResponseError(String message) {
+				Log.d("TEST","에러 : " + message);
+			}
+		}));
+		ActionRuler.getInstance().runNext();
+	}
 }
 

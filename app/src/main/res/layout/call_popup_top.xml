@@ -9,122 +9,129 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:background="#ffffff"
         android:layout_centerInParent="true"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
         android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="#FFFFFF"
-        android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btn_close"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/ic_clear_blue" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_close"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_clear_blue" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_toLeftOf="@id/btn_close"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_call_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="박홍진님에 대해 의심이 생기는 중입니다."
+                    android:textColor="#5D5D5D"
+                    android:textSize="15sp"
+                    android:typeface="sans" />
+
+                <TextView
+                    android:id="@+id/tv_call_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="#5D5D5D"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:typeface="sans" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#5D5D5D" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="vertical"
-            android:gravity="center_vertical"
-            android:layout_toLeftOf="@id/btn_close">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_call_number"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/tab1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text=""
-                android:typeface="sans"
-                android:singleLine="true"
-                android:textColor="#5D5D5D"
-                android:textSize="20sp" />
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_call_name"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tab1_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:text="연동그래프"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+                <View
+                    android:id="@+id/tab1_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tab2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text=""
-                android:typeface="sans"
-                android:textStyle="bold"
-                android:singleLine="true"
-                android:textColor="#5D5D5D"
-                android:textSize="20sp" />
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tab2_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"
+                    android:text="심리항목그래프"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+                <View
+                    android:id="@+id/tab2_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#00000000" />
+            </LinearLayout>
+
 
         </LinearLayout>
-    </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#5D5D5D"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:id="@+id/tab1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tab1_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="20dp"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:text="연동그래프"/>
-            <View
-                android:id="@+id/tab1_line"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/black"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/tab2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tab2_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="20dp"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:text="심리항목그래프"/>
-            <View
-                android:id="@+id/tab2_line"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#00000000"/>
-        </LinearLayout>
-
-
-    </LinearLayout>
-    <RelativeLayout
-        android:id="@+id/layout_viewpager"
-        android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
+        <RelativeLayout
+            android:id="@+id/layout_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
-    </RelativeLayout>
+            android:layout_height="180dp"
+            android:visibility="visible">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="180dp" />
+        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>
 

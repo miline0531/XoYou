@@ -249,4 +249,9 @@ public interface RetrofitInterface {
     @POST(NetInfo.API_SELECT_MEET_YOU_MEET_LIST)
     Call<DefaultResult> requestXoYouMeetYouMeetDataList(@Body ReqXoYouMeetYouMeetDataList info);
 
+    //마이콜
+    @POST(NetInfo.API_SELECT_MYCALL_GET_DATA)
+    Call<DefaultResult> requestMycallGetData(@Body ReqMycallGetData info);
+    @POST(NetInfo.API_SELECT_MYCALL_QA_LIST)
+    Call<DefaultResult> requestMycallQaList(@Body ReqMycallQaList info);
 }

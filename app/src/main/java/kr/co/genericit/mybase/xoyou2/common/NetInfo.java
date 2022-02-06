@@ -110,4 +110,7 @@ public class NetInfo {
     public static final String API_SELECT_MEET_NAME_LIST = "/v2/xoYouMeetNameList"; // 나만을위한약속- 약속항목 리스트
     public static final String API_SELECT_MEET_YOU_MEET_LIST = "/v2/xoYouMeetYouMeetDataList"; // 나만을위한약속- 선택약속 관계인순위리스트
 
+    //마이콜
+    public static final String API_SELECT_MYCALL_GET_DATA = "/v2/xoYouMyCallGetData"; // 콜 실시간 정보조회
+    public static final String API_SELECT_MYCALL_QA_LIST = "/v2/xoYouMyCallQAList"; // QA 리스트 조회
     }
