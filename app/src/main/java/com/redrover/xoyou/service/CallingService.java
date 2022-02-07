@@ -1,4 +1,4 @@
-package kr.co.genericit.mybase.xoyou2.service;
+package com.redrover.xoyou.service;
 
 import android.app.ActivityManager;
 import android.app.NotificationChannel;
@@ -54,13 +54,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import kr.co.genericit.mybase.xoyou2.broadcast.IncomingCallBroadcastReceiver;
-import kr.co.genericit.mybase.xoyou2.R;
-import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
-import kr.co.genericit.mybase.xoyou2.network.interfaces.ActionResultListener;
-import kr.co.genericit.mybase.xoyou2.network.model.MyCallChart;
-import kr.co.genericit.mybase.xoyou2.network.requestxo.ActionRequestMycallGetData;
-import kr.co.genericit.mybase.xoyou2.network.response.DefaultResult;
+import com.redrover.xoyou.broadcast.IncomingCallBroadcastReceiver;
+import com.redrover.xoyou.R;
+import com.redrover.xoyou.network.action.ActionRuler;
+import com.redrover.xoyou.network.interfaces.ActionResultListener;
+import com.redrover.xoyou.network.model.MyCallChart;
+import com.redrover.xoyou.network.requestxo.ActionRequestMycallGetData;
+import com.redrover.xoyou.network.response.DefaultResult;
 
 public class CallingService extends Service {
 	private IncomingCallBroadcastReceiver mReceiver = null;
