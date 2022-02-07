@@ -81,6 +81,7 @@ public class CallingService extends Service {
 
 	//텀 초단위
 	int term = 2;
+	boolean calling = true;
 
 	class MyBinder extends Binder {
 		CallingService getService() { // 서비스 객체를 리턴
@@ -96,8 +97,8 @@ public class CallingService extends Service {
 	private void startForeGround() {
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"default");
 		builder.setSmallIcon(R.drawable.ic_launcher_foreground);
-		builder.setContentTitle("title");
-		builder.setContentText("실행중");
+		builder.setContentTitle("마이콜 심리분석");
+		builder.setContentText("관계인 심리분석 콜 대기중");
 //		Intent notificationIntent = new Intent(this, ServiceActivity.class);
 //		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 //		builder.setContentIntent(pendingIntent);
@@ -367,7 +368,8 @@ public class CallingService extends Service {
 		}
 		call_number = intent.getStringExtra(EXTRA_CALL_NUMBER);
 	}
-	@Override public void onDestroy() {
+	@Override
+	public void onDestroy() {
 		super.onDestroy();
 		removePopup();
 	}

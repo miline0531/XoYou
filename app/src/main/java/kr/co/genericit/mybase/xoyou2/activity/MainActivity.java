@@ -216,6 +216,8 @@ public class MainActivity extends CommonActivity {
 
         findViewById(R.id.popview).setOnClickListener(btnListener);
         findViewById(R.id.btn_1).setOnClickListener(btnListener);
+        findViewById(R.id.btn_2).setOnClickListener(btnListener);
+        findViewById(R.id.btn_3).setOnClickListener(btnListener);
 
 
 
@@ -288,6 +290,19 @@ public class MainActivity extends CommonActivity {
                         it.putExtra("phone" , storeClickObj.getPhone());
                     }
                     startActivity(it);
+                    break;
+                case R.id.btn_2:
+                    popview.setVisibility(View.GONE);
+                    Intent it2 = new Intent(Intent.ACTION_CALL);
+                    it2.setData(Uri.parse("tel:" + homeClickObj.getPhone()));
+                    startActivity(it2);
+                    break;
+                case R.id.btn_3:
+                    popview.setVisibility(View.GONE);
+                    Intent it3 = new Intent(Intent.ACTION_CALL);
+                    it3.setData(Uri.parse("tel:" + homeClickObj.getPhone()));
+                    it3.putExtra("videocall", true);
+                    startActivity(it3);
                     break;
                 case R.id.btn_popup:
                     Intent itPopup = new Intent(MainActivity.this , Fragment2_PopUp1.class);
