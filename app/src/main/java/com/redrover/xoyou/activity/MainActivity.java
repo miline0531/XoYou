@@ -326,17 +326,22 @@ public class MainActivity extends CommonActivity {
 
     public void setViewPager(){
 
-        fragments = new int[]{R.layout.fragment_main_top_1,
-                R.layout.fragment_main_top_3,
-                R.layout.fragment_main_top_2,
-                R.layout.fragment_main_top_4};
+        if(Constants.mobileFreeVersion){
+            fragments = new int[]{R.layout.fragment_main_top_1,};
+        }else{
+            fragments = new int[]{R.layout.fragment_main_top_1,
+                    R.layout.fragment_main_top_3,
+                    R.layout.fragment_main_top_2,
+                    R.layout.fragment_main_top_4};
+            addBottomDots(0);
+        }
 
         mainTopView = new ArrayList<>();
         mAdapter = new ViewsSliderAdapter();
         viewPager.setAdapter(mAdapter);
         viewPager.registerOnPageChangeCallback(pageChangeCallback);
 
-        addBottomDots(0);
+
     }
 
 

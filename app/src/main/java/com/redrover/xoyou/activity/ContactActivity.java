@@ -191,16 +191,15 @@ public class ContactActivity extends CommonActivity {
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             Log.e("SKY",  "position :: " + position);
 
-            Intent it = new Intent(ContactActivity.this , ContractInsertPopUp.class);
-            it.putExtra("obj",contacts_arr.get(position));
-            startActivity(it);
-
-
-//            Intent resultIntent = new Intent();
-//            resultIntent.putExtra("number","" + contacts_arr.get(position).getNumber());
-//            resultIntent.putExtra("name","" + contacts_arr.get(position).getName());
-//            setResult(RESULT_OK,resultIntent);
-//            finish();
+            if(!searchFlag){
+                Intent it = new Intent(ContactActivity.this , ContractInsertPopUp.class);
+                it.putExtra("obj",contacts_arr.get(position));
+                startActivity(it);
+            }else{
+                Intent it = new Intent(ContactActivity.this , ContractInsertPopUp.class);
+                it.putExtra("obj",contacts_arr_copy.get(position));
+                startActivity(it);
+            }
         }
     };
 }

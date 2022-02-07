@@ -32,6 +32,9 @@ public class Constants {
 
     public static boolean isStartService = false;
 
+    public static boolean mobileFreeVersion = false;        //true : 무료버전 , false : 유료(페이지 4개 다 떠야함)
+
+
     public static void setRootUserInit(){
         RootSEQ = "";
         RootNAME = "";
