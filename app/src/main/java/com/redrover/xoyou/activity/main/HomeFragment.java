@@ -44,7 +44,6 @@ public class HomeFragment extends Fragment{
     private CommonUtil dataSet = CommonUtil.getInstance();
     private AccumThread mThread;
     private Map<String, String> map = new HashMap<String, String>();
-    private ArrayList<SimRi> listSimRi = new ArrayList<SimRi>();
     private RecyclerView list;
 
     private MainFrag1ListAdapter m_Adapter;
@@ -97,7 +96,7 @@ public class HomeFragment extends Fragment{
         list_left3.setOnItemClickListener(mItemClickListener3);
         list_left3.setAdapter(m_Left3Adapter);
         */
-        m_Adapter = new MainFrag1ListAdapter( MainActivity.mainAc, listSimRi);
+        m_Adapter = new MainFrag1ListAdapter( MainActivity.mainAc, MainActivity.listSimRi);
         m_Adapter.setListOnClickListener(mItemClickListener);
         list.setAdapter(m_Adapter);
 
@@ -126,9 +125,9 @@ public class HomeFragment extends Fragment{
         public void onClickItem(int id, int action) {
             SkyLog.d("CLACIK id :: "  + id);
             SkyLog.d("CLACIK action :: "  + action);
-            SkyLog.d("CLACIK getPhone :: "  + listSimRi.get(id).getPhone());
+            SkyLog.d("CLACIK getPhone :: "  + MainActivity.listSimRi.get(id).getPhone());
             MainActivity.homeClickPosition = id;
-            MainActivity.homeClickObj = listSimRi.get(id);
+            MainActivity.homeClickObj = MainActivity.listSimRi.get(id);
             MainActivity.fragmentPosionFlag = 0;
 
             ((MainActivity)getContext()).homeFragmentLiskClick();
@@ -194,6 +193,7 @@ public class HomeFragment extends Fragment{
         public void handleMessage(Message msg) {
             m_Adapter.notifyDataSetChanged();
             CommandUtil.getInstance().dismissLoadingDialog();
+            MainActivity.setHomeLeftTopTxt();
         }
     };
 
@@ -214,7 +214,7 @@ public class HomeFragment extends Fragment{
                     JSONArray jsonObject_listSimRi = new JSONArray(jsonObject_data.getString("listSimRi"));
 
                     SkyLog.d("COUNT :: " + jsonObject_listSimRi.length());
-                    listSimRi.clear();
+                    MainActivity.listSimRi.clear();
                     for (int i = 0; i < jsonObject_listSimRi.length(); i++) {
                         JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
                         String[] phone_Arr = new String[1];
@@ -227,7 +227,7 @@ public class HomeFragment extends Fragment{
 //
 //                            }
                         phone_Arr[0] = "" + jsonObject.getString("Phone");
-                        listSimRi.add(new SimRi(
+                        MainActivity.listSimRi.add(new SimRi(
                                 jsonObject.getString("Phone") ,
                                 //phone_Arr[0] ,
                                 jsonObject.getInt("Id") ,

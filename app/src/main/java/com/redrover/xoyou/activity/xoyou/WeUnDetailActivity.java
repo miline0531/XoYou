@@ -3,16 +3,20 @@ package com.redrover.xoyou.activity.xoyou;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.icu.text.DecimalFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -47,11 +51,16 @@ import java.util.Map;
 
 import co.kr.sky.AccumThread;
 import com.redrover.xoyou.R;
+import com.redrover.xoyou.activity.ContactActivity;
+import com.redrover.xoyou.activity.MainActivity;
 import com.redrover.xoyou.adapter.MainFrag2ListAdapter;
 import com.redrover.xoyou.common.CommonUtil;
 import com.redrover.xoyou.common.NetInfo;
 import com.redrover.xoyou.common.SkyLog;
 import com.redrover.xoyou.model.WeYouUnDataListObj;
+import com.redrover.xoyou.popup.ContractInsertPopUp;
+import com.redrover.xoyou.popup.Fragment2_PopUp1;
+import com.redrover.xoyou.popup.WeUnSelectPopUp;
 import com.redrover.xoyou.storage.JWSharePreference;
 import com.redrover.xoyou.utils.CommandUtil;
 import com.redrover.xoyou.view.CommonPopupDialog;
@@ -60,6 +69,8 @@ public class WeUnDetailActivity extends AppCompatActivity {
     private WeYouUnDataListObj obj;
     public Context mContext;
     CommonUtil dataSet = CommonUtil.getInstance();
+
+    private final int POPUP = 1000;
 
     //SKY
     private AccumThread mThread;
@@ -116,13 +127,16 @@ public class WeUnDetailActivity extends AppCompatActivity {
     private FrameLayout view_02_detail;
     private FrameLayout view_03_detail;
     private FrameLayout view_04_detail;
-    private FrameLayout view_05_detail;
+    private LinearLayout view_05_detail;
 
     private TextView view_01;
     private TextView view_02;
     private TextView view_03;
     private TextView view_04;
     private TextView view_05;
+
+    private TextView left_name;
+    private TextView right_name;
 
 
 
@@ -171,10 +185,16 @@ public class WeUnDetailActivity extends AppCompatActivity {
         view_03 = findViewById(R.id.view_03);
         view_04 = findViewById(R.id.view_04);
         view_05 = findViewById(R.id.view_05);
-
+        left_name = findViewById(R.id.left_name);
+        right_name = findViewById(R.id.right_name);
 
         obj = getIntent().getParcelableExtra("obj");
         mContext = this;
+
+        JWSharePreference sharePreference = new JWSharePreference();
+        String name = sharePreference.getString(JWSharePreference.PREFERENCE_LOGIN_NICKNAME,"");
+        left_name.setText(name);
+        right_name.setText(obj.getName());
 
         getUnDataDetail();
 
@@ -184,7 +204,9 @@ public class WeUnDetailActivity extends AppCompatActivity {
         findViewById(R.id.view_03).setOnClickListener(btnListener);
         findViewById(R.id.view_04).setOnClickListener(btnListener);
         findViewById(R.id.view_05).setOnClickListener(btnListener);
-
+        findViewById(R.id.common_left_btn).setOnClickListener(btnListener);
+        findViewById(R.id.common_right_btn).setOnClickListener(btnListener);
+        findViewById(R.id.right_img_view).setOnClickListener(btnListener);
     }
     private void getUnDataDetail(){
         CommandUtil.getInstance().showLoadingDialog(WeUnDetailActivity.this);
@@ -742,25 +764,78 @@ public class WeUnDetailActivity extends AppCompatActivity {
         @SuppressLint("ResourceType")
         public void onClick(View v) {
             switch (v.getId()) {
-
-                case R.id.common_left_btn:
-                    finish();
-                    break;
                 case R.id.view_01:
-//                    if(view_01_detail.getVisibility()){
-//
-//                    }
-                    view_01_detail.setVisibility(View.GONE);
+                    if(view_01_detail.getVisibility() == View.VISIBLE){
+                        view_01_detail.setVisibility(View.GONE);
+                    }else{
+                        view_01_detail.setVisibility(View.VISIBLE);
+                    }
                     break;
                 case R.id.view_02:
+                    if(view_02_detail.getVisibility() == View.VISIBLE){
+                        view_02_detail.setVisibility(View.GONE);
+                    }else{
+                        view_02_detail.setVisibility(View.VISIBLE);
+                    }
                     break;
                 case R.id.view_03:
+                    if(view_03_detail.getVisibility() == View.VISIBLE){
+                        view_03_detail.setVisibility(View.GONE);
+                    }else{
+                        view_03_detail.setVisibility(View.VISIBLE);
+                    }
                     break;
                 case R.id.view_04:
+                    if(view_04_detail.getVisibility() == View.VISIBLE){
+                        view_04_detail.setVisibility(View.GONE);
+                    }else{
+                        view_04_detail.setVisibility(View.VISIBLE);
+                    }
                     break;
                 case R.id.view_05:
+                    if(view_05_detail.getVisibility() == View.VISIBLE){
+                        view_05_detail.setVisibility(View.GONE);
+                    }else{
+                        view_05_detail.setVisibility(View.VISIBLE);
+                    }
+                    break;
+                case R.id.common_left_btn:
+                    Intent it = new Intent(WeUnDetailActivity.this , ChattingRoomActivity.class);
+                    //it.putExtra("phone" , obj.get.getPhone());
+
+                    startActivity(it);
+                    break;
+                case R.id.common_right_btn:
+
+
+                    break;
+                case R.id.right_img_view:
+                    Intent it2 = new Intent(WeUnDetailActivity.this , WeUnSelectPopUp.class);
+                    startActivityForResult(it2 , POPUP);
+
                     break;
             }
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if (requestCode == POPUP) {
+            SkyLog.d("POPUP");
+            if (resultCode == RESULT_OK) {
+                //두번쨰 팝업 실행
+                obj = data.getParcelableExtra("obj");
+                JWSharePreference sharePreference = new JWSharePreference();
+                String name = sharePreference.getString(JWSharePreference.PREFERENCE_LOGIN_NICKNAME,"");
+                left_name.setText("abd");
+                right_name.setText(obj.getName());
+                SkyLog.d(obj.getName());
+
+                getUnDataDetail();
+            }
+        }
+    }
 }

@@ -186,6 +186,11 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity
+            android:name="com.redrover.xoyou.popup.WeUnSelectPopUp"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="adjustResize" />
+
 
         <provider
             android:name="androidx.core.content.FileProvider"

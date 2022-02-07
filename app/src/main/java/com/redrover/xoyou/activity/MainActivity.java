@@ -86,6 +86,8 @@ import com.redrover.xoyou.view.CommonPopupDialog;
 
 public class MainActivity extends CommonActivity {
     public static Activity mainAc;
+    public static ArrayList<SimRi> listSimRi = new ArrayList<SimRi>();
+
     //슬라이드메뉴
     private final int BTN_COIN_SETTING = 0; //코인
     private final int BTN_USER_SETTING = 1; //사용자
@@ -130,6 +132,8 @@ public class MainActivity extends CommonActivity {
     private BackPressFinishHandler mBackPressFinishHandler;
 
     private String id;
+
+    private static TextView top_left;
 
     //20220126
     private ViewPager2 viewPager;
@@ -810,6 +814,7 @@ public class MainActivity extends CommonActivity {
         //FragmentTransactiom를 이용해 프래그먼트를 사용합니다.
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         ((TextView)findViewById(R.id.btn_slide)).setVisibility(View.VISIBLE);
+        top_left = findViewById(R.id.top_left);
         switch (fragment){
             case 0:
                 // 홈 프래그먼트 호출
@@ -883,6 +888,8 @@ public class MainActivity extends CommonActivity {
             String mainText = "";
             switch (position){
                 case 0:
+
+                    top_left = findViewById(R.id.top_left);
                     String name = jwSharePreference.getString(JWSharePreference.PREFERENCE_LOGIN_NICKNAME,"");
                     mainText = CommandUtil.getInstance().getStr(R.string.fragment_home_result).replaceAll("name", name);
                     break;
@@ -911,6 +918,16 @@ public class MainActivity extends CommonActivity {
         mainText.setText(text);
     }
 
+    public static void setHomeLeftTopTxt(){
+        int manCount = 0;
+        for (int i =0; i <listSimRi.size(); i++){
+            if(listSimRi.get(i).getUserInfo().matches(".*남성.*")){
+                manCount++;
+            }
+        }
+        top_left.setText(String.format("등록인: %s명\n남성: %s명\n여성: %s명", ("" + listSimRi.size()) , ("" + manCount) , "" + (listSimRi.size() - manCount)));
+
+    }
     //1번째 프레그먼트클릭
     public void homeFragmentLiskClick() {
         popview.setVisibility(View.VISIBLE);

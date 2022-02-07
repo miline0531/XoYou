@@ -678,7 +678,7 @@ public class CallingService extends Service {
 					int min = sWatch / 60;
 					int sec = sWatch % 60;
 					Message msg = new Message();
-					Log.e("ifeelbluu","startCall ::: sWatch : " + sWatch);
+					//Log.e("ifeelbluu","startCall ::: sWatch : " + sWatch);
 					if(sWatch == 0){
 						isWatch = false;
 						msg.what = 2222;

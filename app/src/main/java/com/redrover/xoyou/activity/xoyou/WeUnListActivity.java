@@ -43,7 +43,7 @@ public class WeUnListActivity extends AppCompatActivity {
     private AccumThread mThread;
     private Map<String, String> map = new HashMap<String, String>();
     private ListView list;
-    private ArrayList<WeYouUnDataListObj> weYouUnDataList = new ArrayList<WeYouUnDataListObj>();
+    public static ArrayList<WeYouUnDataListObj> weYouUnDataList = new ArrayList<WeYouUnDataListObj>();
     private WeUnListAdapter m_Adapter;
 
 
