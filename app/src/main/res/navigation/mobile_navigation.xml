@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_forme"
-        android:name="kr.co.genericit.mybase.xoyou2.activity.main.ManageFragment"
+        android:name="com.redrover.xoyou.activity.main.ManageFragment"
         android:label="@string/title_forme"
         tools:layout="@layout/fragment_manage" />
 
     <fragment
         android:id="@+id/navigation_with"
-        android:name="kr.co.genericit.mybase.xoyou2.activity.main.StoreFragment"
+        android:name="com.redrover.xoyou.activity.main.StoreFragment"
         android:label="@string/title_with"
         tools:layout="@layout/fragment_store" />
 
     <fragment
         android:id="@+id/navigation_mylife"
-        android:name="kr.co.genericit.mybase.xoyou2.activity.main.HomeFragment"
+        android:name="com.redrover.xoyou.activity.main.HomeFragment"
         android:label="@string/title_with"
         tools:layout="@layout/fragment_home" />
 

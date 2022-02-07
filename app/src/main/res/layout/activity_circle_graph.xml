@@ -66,7 +66,7 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="2.2" >
 
-                                <kr.co.genericit.mybase.xoyou2.graph.CustomGauge
+                                <com.redrover.xoyou.graph.CustomGauge
                                     android:id="@+id/detail_graph2"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                                         android:layout_height="0dp"
                                         android:layout_weight="2.1">
 
-                                        <kr.co.genericit.mybase.xoyou2.graph.SeekCircle
+                                        <com.redrover.xoyou.graph.SeekCircle
                                             android:id="@+id/seekCircle"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
