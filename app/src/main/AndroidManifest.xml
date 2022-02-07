@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="kr.co.genericit.mybase.xoyou2">
+    package="com.redrover.xoyou">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -30,7 +30,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:name="kr.co.genericit.mybase.xoyou2.MymongBaseApplication"
+        android:name="com.redrover.xoyou.MymongBaseApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
@@ -39,72 +39,72 @@
         android:theme="@style/Theme.MyBaseJW"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.ManageDetailActivity"
+            android:name="com.redrover.xoyou.activity.ManageDetailActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="false" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.MongListActivity"
+            android:name="com.redrover.xoyou.activity.MongListActivity"
             android:exported="false" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.WebViewActivity"
+            android:name="com.redrover.xoyou.activity.WebViewActivity"
             android:exported="false" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.SellMongActivity"
+            android:name="com.redrover.xoyou.activity.SellMongActivity"
             android:exported="false" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.AddUserActivity"
+            android:name="com.redrover.xoyou.activity.AddUserActivity"
             android:exported="false" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.UserListActivity"
+            android:name="com.redrover.xoyou.activity.UserListActivity"
             android:exported="false" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.detail.MyMongResultActivity"
+            android:name="com.redrover.xoyou.activity.detail.MyMongResultActivity"
             android:exported="false" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.detail.MyMongAuthActivity"
+            android:name="com.redrover.xoyou.activity.detail.MyMongAuthActivity"
             android:exported="false" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.detail.MyMongRegistActivity"
+            android:name="com.redrover.xoyou.activity.detail.MyMongRegistActivity"
             android:exported="false" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.CardActivity"
+            android:name="com.redrover.xoyou.activity.CardActivity"
             android:exported="false" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.MainActivity"
+            android:name="com.redrover.xoyou.activity.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.CircleGraphViewActivity"
+            android:name="com.redrover.xoyou.activity.CircleGraphViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.YourSelfSettingActivity"
+            android:name="com.redrover.xoyou.activity.YourSelfSettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.AddRelationActivity"
+            android:name="com.redrover.xoyou.activity.AddRelationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.RelationListActivity"
+            android:name="com.redrover.xoyou.activity.RelationListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.FamilySettingActivity"
+            android:name="com.redrover.xoyou.activity.FamilySettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.AddLocationActivity"
+            android:name="com.redrover.xoyou.activity.AddLocationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.LocationListActivity"
+            android:name="com.redrover.xoyou.activity.LocationListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.AppSettingActivity"
+            android:name="com.redrover.xoyou.activity.AppSettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.AppGuideActivity"
+            android:name="com.redrover.xoyou.activity.AppGuideActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.IntroActivity"
+            android:name="com.redrover.xoyou.activity.IntroActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.login.LoginActivity"
+            android:name="com.redrover.xoyou.activity.login.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -114,75 +114,75 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.login.SignUpActivity"
+            android:name="com.redrover.xoyou.activity.login.SignUpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.login.FindPwActivity"
+            android:name="com.redrover.xoyou.activity.login.FindPwActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.login.FindIdActivity"
+            android:name="com.redrover.xoyou.activity.login.FindIdActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.login.EmailAuthActivity"
+            android:name="com.redrover.xoyou.activity.login.EmailAuthActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.detail.MymongDetailActivity"
+            android:name="com.redrover.xoyou.activity.detail.MymongDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.CalendarActivity"
+            android:name="com.redrover.xoyou.activity.CalendarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.CardImageActivity"
+            android:name="com.redrover.xoyou.activity.CardImageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.CardImageEditActivity"
+            android:name="com.redrover.xoyou.activity.CardImageEditActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.MymongBidActivity"
+            android:name="com.redrover.xoyou.activity.MymongBidActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.SignView2Activity"
+            android:name="com.redrover.xoyou.activity.SignView2Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.KeywordInputActivity"
+            android:name="com.redrover.xoyou.activity.KeywordInputActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.MongStoreSaveActivity"
+            android:name="com.redrover.xoyou.activity.MongStoreSaveActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.MapViewActivity"
+            android:name="com.redrover.xoyou.activity.MapViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.FingerRegActivity"
+            android:name="com.redrover.xoyou.activity.FingerRegActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.ADevTempActivity"
-            android:screenOrientation="portrait" />
-
-
-        <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.ContactActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.xoyou.ChattingRoomActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.xoyou.WeUnListActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="kr.co.genericit.mybase.xoyou2.activity.xoyou.WeUnDetailActivity"
+            android:name="com.redrover.xoyou.activity.ADevTempActivity"
             android:screenOrientation="portrait" />
 
 
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.popup.Fragment2_PopUp1"
+            android:name="com.redrover.xoyou.activity.ContactActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.redrover.xoyou.activity.xoyou.ChattingRoomActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.redrover.xoyou.activity.xoyou.WeUnListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.redrover.xoyou.activity.xoyou.WeUnDetailActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name="com.redrover.xoyou.popup.Fragment2_PopUp1"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name="kr.co.genericit.mybase.xoyou2.popup.ContractInsertPopUp"
+            android:name="com.redrover.xoyou.popup.ContractInsertPopUp"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="adjustResize" />
 
@@ -205,7 +205,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB8EYJsijsMXyWtXk7j3dUSDtBkYNRq_IU" />
 
-        <receiver android:name=".broadcast.IncomingCallBroadcastReceiver"
+        <receiver android:name="com.redrover.xoyou.broadcast.IncomingCallBroadcastReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE"/>
@@ -217,7 +217,7 @@
 
 
         <receiver
-            android:name="kr.co.genericit.mybase.xoyou2.broad.SMSReceiver"
+            android:name="com.redrover.xoyou.broad.SMSReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -225,11 +225,11 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".service.CallingService"/>
-        <service android:name=".broadcast.CallRegistOutGoingJobService"
+        <service android:name="com.redrover.xoyou.service.CallingService"/>
+        <service android:name="com.redrover.xoyou.broadcast.CallRegistOutGoingJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
 
-        <service android:name=".service.LockScreenTextService" />
+        <service android:name="com.redrover.xoyou.service.LockScreenTextService" />
     </application>
 
 </manifest>

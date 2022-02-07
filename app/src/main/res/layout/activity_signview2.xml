@@ -82,7 +82,7 @@
                 android:adjustViewBounds="true"
                 android:src="@drawable/img_paper" />
 
-            <kr.co.genericit.mybase.xoyou2.view.SignatureView
+            <com.redrover.xoyou.view.SignatureView
                 android:id="@+id/signView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
