@@ -1,6 +1,5 @@
 package kr.co.genericit.mybase.xoyou2.service;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -24,7 +23,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -37,7 +35,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
@@ -56,14 +53,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import kr.co.genericit.mybase.xoyou2.broadcast.IncomingCallBroadcastReceiver;
 import kr.co.genericit.mybase.xoyou2.R;
 import kr.co.genericit.mybase.xoyou2.network.action.ActionRuler;
 import kr.co.genericit.mybase.xoyou2.network.interfaces.ActionResultListener;
 import kr.co.genericit.mybase.xoyou2.network.model.MyCallChart;
-import kr.co.genericit.mybase.xoyou2.network.request.ActionRequestStoreMongStoryGetLocationColor;
 import kr.co.genericit.mybase.xoyou2.network.requestxo.ActionRequestMycallGetData;
 import kr.co.genericit.mybase.xoyou2.network.response.DefaultResult;
 
@@ -97,7 +92,7 @@ public class CallingService extends Service {
 	private void startForeGround() {
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"default");
 		builder.setSmallIcon(R.drawable.ic_launcher_foreground);
-		builder.setContentTitle("마이콜 심리분석");
+		builder.setContentTitle("xoYou 심리분석");
 		builder.setContentText("관계인 심리분석 콜 대기중");
 //		Intent notificationIntent = new Intent(this, ServiceActivity.class);
 //		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
@@ -248,14 +243,12 @@ public class CallingService extends Service {
 		public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
 			if(position == 0 ){ //라인차트
-				lineChart = holder.itemView.findViewById(R.id.lineChart);
-
-				//lineChartInit(lineChart);
-				for(int i=0;i<11;i++) {
-					setData(lineChart, 0.0, 0.0);
+				//팝업 초기화
+				if(lineChart == null){
+					lineChart = holder.itemView.findViewById(R.id.lineChart);
+					//lineChartInit(lineChart);
+					startCall();
 				}
-
-				startCall();
 			}else{ //바차트
 				barChart = holder.itemView.findViewById(R.id.barchart);
 
@@ -316,6 +309,7 @@ public class CallingService extends Service {
 
 	@Override public int onStartCommand(Intent intent, int flags, int startId) {
 		try{
+
 			Log.e("hongjin", "onStartCommandonStartCommandonStartCommand");
 
 			if(intent.getStringExtra(EXTRA_CALL_NUMBER) != null && intent.getStringExtra(EXTRA_CALL_NUMBER).equals("") == false) {
@@ -356,6 +350,19 @@ public class CallingService extends Service {
 					tv_call_number.setText(phoneNumberHyphenAdd(call_number,"N"));
 				}
 			}
+			//#팝업 데이터 초기화
+			yVals1 = new ArrayList<>(); //item1 y
+			yVals2 = new ArrayList<>(); //item2 y
+			entry_count = 0; //item x
+			//testCount = 0;
+			sampleColorIndex = 0;
+			rootView.invalidate();
+			if(lineChart != null){
+				Log.v("ifeelbluu", "startService :: [lineChart] not null" );
+				//lineChartInit(lineChart);
+				startCall();
+			}
+
 		}catch (Exception e){
 			Log.e("ifeelbluu",e.getMessage());
 		}
@@ -373,9 +380,20 @@ public class CallingService extends Service {
 		super.onDestroy();
 		removePopup();
 	}
+
+	//#팝업 닫기
 	public void removePopup() {
 		try{
 			if (rootView != null && windowManager != null) windowManager.removeView(rootView);
+
+			try {
+				isWatch = false;
+				//memory.stop();
+				//memory.destroy();
+				memory = null;
+			} catch (Exception e) {
+				Log.e("ifeelbluu","error :: " + e.getMessage());
+			}
 		}catch (Exception e){
 
 		}
