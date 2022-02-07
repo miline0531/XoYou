@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -38,6 +39,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -109,6 +111,21 @@ public class WeUnDetailActivity extends AppCompatActivity {
     private ArrayList<Float> mGraphData5;
     private String[] labels_5;
 
+
+    private FrameLayout view_01_detail;
+    private FrameLayout view_02_detail;
+    private FrameLayout view_03_detail;
+    private FrameLayout view_04_detail;
+    private FrameLayout view_05_detail;
+
+    private TextView view_01;
+    private TextView view_02;
+    private TextView view_03;
+    private TextView view_04;
+    private TextView view_05;
+
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -129,6 +146,7 @@ public class WeUnDetailActivity extends AppCompatActivity {
 
 
 
+    @SuppressLint("WrongViewCast")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,6 +160,17 @@ public class WeUnDetailActivity extends AppCompatActivity {
         chart_radar3 = findViewById(R.id.chart_radar3);
         chart_radar4 = findViewById(R.id.chart_radar4);
         chart_radar5 = findViewById(R.id.chart_radar5);
+        view_01_detail = findViewById(R.id.view_01_detail);
+        view_02_detail = findViewById(R.id.view_02_detail);
+        view_03_detail = findViewById(R.id.view_03_detail);
+        view_04_detail = findViewById(R.id.view_04_detail);
+        view_05_detail = findViewById(R.id.view_05_detail);
+
+        view_01 = findViewById(R.id.view_01);
+        view_02 = findViewById(R.id.view_02);
+        view_03 = findViewById(R.id.view_03);
+        view_04 = findViewById(R.id.view_04);
+        view_05 = findViewById(R.id.view_05);
 
 
         obj = getIntent().getParcelableExtra("obj");
@@ -150,6 +179,11 @@ public class WeUnDetailActivity extends AppCompatActivity {
         getUnDataDetail();
 
         findViewById(R.id.common_left_btn).setOnClickListener(btnListener);
+        findViewById(R.id.view_01).setOnClickListener(btnListener);
+        findViewById(R.id.view_02).setOnClickListener(btnListener);
+        findViewById(R.id.view_03).setOnClickListener(btnListener);
+        findViewById(R.id.view_04).setOnClickListener(btnListener);
+        findViewById(R.id.view_05).setOnClickListener(btnListener);
 
     }
     private void getUnDataDetail(){
@@ -711,6 +745,20 @@ public class WeUnDetailActivity extends AppCompatActivity {
 
                 case R.id.common_left_btn:
                     finish();
+                    break;
+                case R.id.view_01:
+//                    if(view_01_detail.getVisibility()){
+//
+//                    }
+                    view_01_detail.setVisibility(View.GONE);
+                    break;
+                case R.id.view_02:
+                    break;
+                case R.id.view_03:
+                    break;
+                case R.id.view_04:
+                    break;
+                case R.id.view_05:
                     break;
             }
         }
