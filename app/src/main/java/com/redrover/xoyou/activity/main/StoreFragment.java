@@ -81,7 +81,8 @@ public class StoreFragment extends Fragment {
             MainActivity.homeClickPosition = id;
             MainActivity.storeClickObj = listSimRi.get(id);
             MainActivity.fragmentPosionFlag = 1;
-            ((MainActivity)getContext()).storeFragmentLiskClick();
+            //((MainActivity)getContext()).storeFragmentLiskClick();
+            ((MainActivity)getContext()).homeFragmentLiskClick();
 
             //test
 //            Intent it = new Intent(mContext , ChattingRoomActivity.class);

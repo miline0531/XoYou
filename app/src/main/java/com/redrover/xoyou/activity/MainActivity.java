@@ -299,6 +299,11 @@ public class MainActivity extends CommonActivity {
                     it3.putExtra("videocall", true);
                     startActivity(it3);
                     break;
+                case R.id.btn_popup:
+                    Intent itPopup = new Intent(MainActivity.this , Fragment2_PopUp1.class);
+                    itPopup.putExtra("STEP" , 1);
+                    startActivityForResult(itPopup , POP_STEP_1);
+                    break;
             }
         }
     };
@@ -562,8 +567,8 @@ public class MainActivity extends CommonActivity {
                 //두번쨰 팝업 실행
                 SkyLog.d("POP_STEP_2 position :: " + data.getStringExtra("position"));
                 SkyLog.d("POP_STEP_2 data:: " + data.getStringExtra("data"));
-                storeFragmentPopup();
-                //storeFragment.getQaSimRiList(data.getStringExtra("data"));
+                //storeFragmentPopup();
+                storeFragment.getQaSimRiList(data.getStringExtra("data"));
             }
         }
     }
@@ -815,8 +820,7 @@ public class MainActivity extends CommonActivity {
 
             case 1:
                 // 매니지 프래그먼트 호출
-                ((TextView)findViewById(R.id.btn_slide)).setVisibility(View.GONE);
-
+                //((TextView)findViewById(R.id.btn_slide)).setVisibility(View.GONE);
                 storeFragment = new StoreFragment();
                 transaction.replace(R.id.nav_host_fragment_activity_main, storeFragment);
                 transaction.commit();

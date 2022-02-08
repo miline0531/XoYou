@@ -39,28 +39,28 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/topview"
-        android:background="#DD696969"
-        android:layout_height="wrap_content">
+        android:background="#DD696969">
 
         <TextView
             android:id="@+id/centerTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_centerVertical="true"
+            android:gravity="center"
             android:text="강 감순님의 관계인들" />
 
         <Button
+            android:id="@+id/btn_popup"
             android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/btn_popup"
-            android:background="@drawable/btn_search"
-            android:layout_alignParentRight="true"
-            android:layout_height="30dp"/>
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/btn_search" />
 
 
     </RelativeLayout>
