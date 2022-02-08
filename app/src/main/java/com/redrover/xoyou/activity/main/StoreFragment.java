@@ -126,6 +126,18 @@ public class StoreFragment extends Fragment {
         }
     };
 
+    public void getQaSimRiList(String data){
+        CommandUtil.getInstance().showLoadingDialog(MainActivity.mainAc);
+        map.clear();
+        map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_USER_LIST);
+        map.put("userId", new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
+        map.put("date", dataSet.FullPatternDate("yyyyMMddHHmmss"));
+        map.put("menuSeo", data);
+
+        //스레드 생성
+        mThread = new AccumThread(MainActivity.mainAc, mAfterAccum, map, 5, 1, null);
+        mThread.start();        //스레드 시작!!
+    }
 
     class ContractThread extends Thread {
         private String jsonData = "";

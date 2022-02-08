@@ -108,18 +108,7 @@ public class HomeFragment extends Fragment{
         return view;
     }
 
-    public void getQaSimRiList(String data){
-        CommandUtil.getInstance().showLoadingDialog(MainActivity.mainAc);
-        map.clear();
-        map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_USER_LIST);
-        map.put("userId", new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
-        map.put("date", dataSet.FullPatternDate("yyyyMMddHHmmss"));
-        map.put("menuSeo", data);
 
-        //스레드 생성
-        mThread = new AccumThread(MainActivity.mainAc, mAfterAccum, map, 5, 1, null);
-        mThread.start();        //스레드 시작!!
-    }
     public MainFrag1ListAdapter.listOnClickListener mItemClickListener = new MainFrag1ListAdapter.listOnClickListener() {
         @Override
         public void onClickItem(int id, int action) {
@@ -240,6 +229,8 @@ public class HomeFragment extends Fragment{
                                 jsonObject.getString("Value") ,
                                 jsonObject.getDouble("iDou") ,
                                 jsonObject.getBoolean("XO")));
+
+                        dataSet.sqlPhoneInsert(mContext , jsonObject.getString("Phone"));
                         dataSet.readSMSMessage(mContext , phone_Arr , jsonObject.getString("Name"));
                     }
                     SkyLog.d("readSMSMessage end :: ");

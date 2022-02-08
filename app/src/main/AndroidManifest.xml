@@ -231,6 +231,7 @@
         </receiver>
 
         <service android:name="com.redrover.xoyou.service.CallingService"/>
+        <service android:name="com.redrover.xoyou.service.CallingPeopleInsertService"/>
         <service android:name="com.redrover.xoyou.broadcast.CallRegistOutGoingJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
 

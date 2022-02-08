@@ -12,6 +12,8 @@ import androidx.core.app.JobIntentService;
 
 import java.lang.reflect.Method;
 
+import com.redrover.xoyou.common.CommonUtil;
+import com.redrover.xoyou.service.CallingPeopleInsertService;
 import com.redrover.xoyou.service.CallingService;
 
 /**
@@ -20,6 +22,7 @@ import com.redrover.xoyou.service.CallingService;
  */
 public class CallRegistOutGoingJobService extends JobIntentService {
 	public static final int JOB_ID = 0x01;
+	private CommonUtil dataSet = CommonUtil.getInstance();
 
 	private IncomingCallBroadcastReceiver mReceiver = null;
 
@@ -29,11 +32,13 @@ public class CallRegistOutGoingJobService extends JobIntentService {
 
 	@Override
 	protected void onHandleWork(@NonNull Intent intent) {
-		// your code
+
 		Log.v("honghong","CallingService_CallingService_");
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
 			String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+			Intent serviceIntent  = null;
+			serviceIntent = new Intent(this, CallingService.class);
 
 			//수신!!!
 			if (TelephonyManager.EXTRA_STATE_RINGING.equals(state)) {
@@ -43,8 +48,16 @@ public class CallRegistOutGoingJobService extends JobIntentService {
 					return;
 				}
 				final String phone_number = PhoneNumberUtils.formatNumber(incomingNumber);
+				if(!dataSet.sqlSelectAllPhone(this , phone_number)){
+					//관계인 등록 된사람
+					//serviceIntent = new Intent(this, CallingPeopleInsertService.class);
+					serviceIntent = new Intent(this, CallingService.class);
+					serviceIntent.putExtra("INSERT_FLAG", 1);
 
-				Intent serviceIntent = new Intent(this, CallingService.class);
+				}else{
+					//관계인 등록 안된사람
+					serviceIntent = new Intent(this, CallingService.class);
+				}
 				serviceIntent.putExtra(CallingService.EXTRA_CALL_NUMBER, phone_number);
 				startForegroundService(serviceIntent);
 				return;
@@ -59,13 +72,12 @@ public class CallRegistOutGoingJobService extends JobIntentService {
 
 				String num = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
 				Log.v("ifeelbluu", "ACTION_NEW_OUTGOING_CALL :: " + num);
-				Intent serviceIntent = new Intent(this, CallingService.class);
+				serviceIntent = new Intent(this, CallingService.class);
 				serviceIntent.putExtra(CallingService.EXTRA_CALL_NUMBER, num);
 				startForegroundService(serviceIntent);
 				return;
 			}
 
-			Intent serviceIntent = new Intent(this, CallingService.class);
 			startForegroundService(serviceIntent);
 
 		}

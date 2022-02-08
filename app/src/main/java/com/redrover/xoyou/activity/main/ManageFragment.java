@@ -29,6 +29,7 @@ import com.redrover.xoyou.adapter.MainFrag2ListAdapter;
 import com.redrover.xoyou.common.NetInfo;
 import com.redrover.xoyou.common.SkyLog;
 import com.redrover.xoyou.model.WeListObj;
+import com.redrover.xoyou.popup.Fragment2_PopUp1;
 import com.redrover.xoyou.storage.JWSharePreference;
 import com.redrover.xoyou.utils.CommandUtil;
 import com.redrover.xoyou.view.CommonPopupDialog;
@@ -85,6 +86,7 @@ public class ManageFragment extends Fragment {
             startActivity(it);
         }
     };
+
 
     private void getWeList(){
         CommandUtil.getInstance().showLoadingDialog(MainActivity.mainAc);

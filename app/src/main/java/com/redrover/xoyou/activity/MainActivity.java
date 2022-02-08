@@ -193,6 +193,7 @@ public class MainActivity extends CommonActivity {
         drawerLayout.openDrawer(drawerView);
     }
 
+
     public DrawerLayout drawerLayout;
     public View drawerView;
 
@@ -297,11 +298,6 @@ public class MainActivity extends CommonActivity {
                     it3.setData(Uri.parse("tel:" + homeClickObj.getPhone()));
                     it3.putExtra("videocall", true);
                     startActivity(it3);
-                    break;
-                case R.id.btn_popup:
-                    Intent itPopup = new Intent(MainActivity.this , Fragment2_PopUp1.class);
-                    itPopup.putExtra("STEP" , 1);
-                    startActivityForResult(itPopup , POP_STEP_1);
                     break;
             }
         }
@@ -557,16 +553,17 @@ public class MainActivity extends CommonActivity {
                 SkyLog.d("POP_STEP_1 data:: " + data.getStringExtra("data"));
                 Intent itPopup = new Intent(MainActivity.this , Fragment2_PopUp1.class);
                 itPopup.putExtra("STEP" , 2);
+                itPopup.putExtra("data" , data.getStringExtra("data"));
                 startActivityForResult(itPopup , POP_STEP_2);
             }
         }else if (requestCode == POP_STEP_2) {
             SkyLog.d("POP_STEP_2");
             if (resultCode == RESULT_OK) {
                 //두번쨰 팝업 실행
-                SkyLog.d("POP_STEP_1 position :: " + data.getStringExtra("position"));
-                SkyLog.d("POP_STEP_1 data:: " + data.getStringExtra("data"));
-
-                homeFragment.getQaSimRiList(data.getStringExtra("data"));
+                SkyLog.d("POP_STEP_2 position :: " + data.getStringExtra("position"));
+                SkyLog.d("POP_STEP_2 data:: " + data.getStringExtra("data"));
+                storeFragmentPopup();
+                //storeFragment.getQaSimRiList(data.getStringExtra("data"));
             }
         }
     }
@@ -582,10 +579,6 @@ public class MainActivity extends CommonActivity {
             }
         });
     }
-    public void refreshSlid(){
-
-    }
-
     public void getUserInfo(){ //유저리스트
         ActionRuler.getInstance().addAction(new ActionRequestMainUserInfo(this,id, new ActionResultListener<DefaultResult>() {
             @Override
@@ -655,9 +648,6 @@ public class MainActivity extends CommonActivity {
         }));
         ActionRuler.getInstance().runNext();
     }
-
-
-
     public void requestUserList(){ //유저리스트
         ActionRuler.getInstance().addAction(new ActionRequestUserList(this,id, new ActionResultListener<UserListResult>() {
             @Override
@@ -945,21 +935,13 @@ public class MainActivity extends CommonActivity {
         */
     }
 
-    //1번째 프레그먼트클릭
     public void storeFragmentLiskClick() {
+        Intent itPopup = new Intent(MainActivity.this , Fragment2_PopUp1.class);
+        itPopup.putExtra("STEP" , 1);
+        startActivityForResult(itPopup , POP_STEP_1);
+    }
+    public void storeFragmentPopup() {
         popview.setVisibility(View.VISIBLE);
-        /*
-        rl_root.setVisibility(View.GONE);
-        lb_slide2.setVisibility(View.VISIBLE);
-        lb_slide3.setVisibility(View.GONE);
-        drawerLayout.openDrawer(drawerView);
-        m_LeftAdapter = new MainFrag1LeftListAdapter( MainActivity.this, YouQA_Name);
-        list_left.setOnItemClickListener(mItemClickListener2);
-        list_left.setAdapter(m_LeftAdapter);
-        m_Left3Adapter = new MainFrag1Left3ListAdapter( MainActivity.this, qrList);
-        list_left3.setOnItemClickListener(mItemClickListener3);
-        list_left3.setAdapter(m_Left3Adapter);
-        */
     }
     AdapterView.OnItemClickListener mItemClickListener2 = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View view, int position, long id) {

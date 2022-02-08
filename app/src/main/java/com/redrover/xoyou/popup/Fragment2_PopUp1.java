@@ -81,6 +81,7 @@ public class Fragment2_PopUp1 extends ActivityEx {
         map.clear();
         map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_QA_LIST);
         map.put("userId", new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
+        map.put("qaItem", getIntent().getStringExtra("data"));
 
         //스레드 생성
         mThread = new AccumThread(MainActivity.mainAc, mAfterAccum, map, 5, 1, null);

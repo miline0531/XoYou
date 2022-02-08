@@ -67,7 +67,29 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_semibold"
+                android:id="@+id/btn_insert"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:background="@drawable/button_square_maincolor2_shape"
+                android:text="관계인 등록하기"
+                android:textColor="#FFFFFF"
+                android:textSize="18dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/tab_view"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -132,6 +154,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp" />
         </RelativeLayout>
+
+
     </LinearLayout>
 </RelativeLayout>
 

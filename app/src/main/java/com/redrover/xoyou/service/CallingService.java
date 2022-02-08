@@ -54,6 +54,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import com.redrover.xoyou.activity.AddRelationActivity;
+import com.redrover.xoyou.activity.RelationListActivity;
 import com.redrover.xoyou.broadcast.IncomingCallBroadcastReceiver;
 import com.redrover.xoyou.R;
 import com.redrover.xoyou.network.action.ActionRuler;
@@ -67,12 +69,19 @@ public class CallingService extends Service {
 	public static final String EXTRA_CALL_NUMBER = "call_number";
 	public static boolean RingRing = false;
 	protected View rootView;
-	TextView tv_call_number;
-	TextView tv_call_name;
+	private TextView tv_call_number;
+	private TextView tv_call_name;
+	private TextView btn_insert;
 	String call_number;
 	WindowManager.LayoutParams params;
 	private WindowManager windowManager;
 	IBinder mBinder = new MyBinder();
+
+
+	private LinearLayout tab_view;
+	private RelativeLayout layout_viewpager;
+
+
 
 	//텀 초단위
 	int term = 2;
@@ -148,9 +157,25 @@ public class CallingService extends Service {
 
 		tv_call_number = (TextView)rootView.findViewById(R.id.tv_call_number);
 		tv_call_name = (TextView)rootView.findViewById(R.id.tv_call_name);
+		btn_insert = (TextView)rootView.findViewById(R.id.btn_insert);
+		tab_view = (LinearLayout)rootView.findViewById(R.id.tab_view);
+		layout_viewpager = (RelativeLayout)rootView.findViewById(R.id.layout_viewpager);
+
+
+
 		((ImageButton)rootView.findViewById(R.id.btn_close)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				removePopup();
+			}
+		});
+
+		((TextView)rootView.findViewById(R.id.btn_insert)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent i = new Intent(getApplicationContext(), AddRelationActivity.class);
+				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(i);
 				removePopup();
 			}
 		});
@@ -311,6 +336,13 @@ public class CallingService extends Service {
 		try{
 
 			Log.e("hongjin", "onStartCommandonStartCommandonStartCommand");
+			if(intent.getIntExtra("INSERT_FLAG" , 0) == 1){
+				//관계인 등록 뷰 활성화
+				tab_view.setVisibility(View.GONE);
+				layout_viewpager.setVisibility(View.GONE);
+				btn_insert.setVisibility(View.VISIBLE);
+
+			}
 
 			if(intent.getStringExtra(EXTRA_CALL_NUMBER) != null && intent.getStringExtra(EXTRA_CALL_NUMBER).equals("") == false) {
 				if (intent.getStringExtra(EXTRA_CALL_NUMBER).equals("-99")) {

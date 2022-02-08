@@ -679,7 +679,7 @@ public class CommonUtil {
 
 
     public void sqlContractInsert(Context cv , ContractObj val){
-        Log.e("SKY" , "sqlContractInsert");
+        //Log.e("SKY" , "sqlContractInsert");
         try {
             SQLiteDatabase db = cv.openOrCreateDatabase("xoyou.db", Context.MODE_PRIVATE, null);
             db.beginTransaction(); //sql문을 실행하는 일정구간을 트랜잭션으로 묶어주겠다라는 의미
@@ -912,7 +912,7 @@ public class CommonUtil {
                     "");
             sqlContractInsert(mContext , obj);
 
-            SkyLog.d("==============SMS==============");
+            //SkyLog.d("==============SMS==============");
 
 
             //arrayList.add(msg); //이부분은 제가 arraylist에 담으려고 하기떄문에 추가된부분이며 수정가능합니다.
@@ -974,12 +974,93 @@ public class CommonUtil {
                     "");
             sqlContractInsert(mContext , obj);
 
-            SkyLog.d("==============SMS==============");
+            //SkyLog.d("==============SMS==============");
 
 
             //arrayList.add(msg); //이부분은 제가 arraylist에 담으려고 하기떄문에 추가된부분이며 수정가능합니다.
 
         }
         return 0;
+    }
+
+    public void sqlPhoneInsert(Context cv , String val){
+        Log.e("SKY" , "sqlPhoneInsert");
+        try {
+            SQLiteDatabase db = cv.openOrCreateDatabase("xoyou.db", Context.MODE_PRIVATE, null);
+            db.beginTransaction(); //sql문을 실행하는 일정구간을 트랜잭션으로 묶어주겠다라는 의미
+            // 쿼리로 db의 커서 획득
+            try{
+                String sql ="";
+                sql = "SELECT *  FROM save_phone WHERE phone = '" + val + "'";
+                Log.e("SKY" , "sql :: "  + sql);
+                // 쿼리로 db의 커서 획득
+                Cursor cur = db.rawQuery(sql, null);
+
+                Log.e("SKY" , "COUNT :: "  + cur.getCount());
+                //하나도 없으면 INSERT
+                if (cur.getCount() == 0){
+                    sql ="";
+
+                    sql += "INSERT INTO save_phone (" +
+                            "phone" +
+                            ") VALUES(";
+                    sql += "'" + val+ "')";
+                    Log.e("SKY" , "sql :: "  + sql);
+                    db.execSQL(sql);
+                }
+                cur.close();
+            }catch (Exception e) {
+                Log.e("SKY","onPostExecute error : "+ e.toString());
+            }
+
+            db.setTransactionSuccessful(); //트랜잭션으로 묶어준 일정영역의 SQL문들이 모두 성공적으로 끝났을 지정
+            db.endTransaction(); //트랜잭션을 끝내는 메소드.
+            db.close();
+        }catch (Exception e){
+            Log.e("SKY","SQL_WORKER_FIRST_INSERT error : "+ e.toString());
+        }
+
+    }
+
+    public Boolean sqlSelectAllPhone(Context cv , String phone){
+        Log.e("SKY" , "sqlSelectAllPhone");
+        phone = phone.replace("-" , "");
+        try{
+            SQLiteDatabase db = cv.openOrCreateDatabase("xoyou.db", Context.MODE_PRIVATE, null);
+            //  db파일 읽어오기
+            String sql;
+            sql = "SELECT phone FROM save_phone where phone = '" + phone + "'";
+            // 쿼리로 db의 커서 획득
+            Log.e("SKY" , "sql :: " + sql);
+
+            Cursor cur = db.rawQuery(sql, null);
+            while(cur.moveToNext()){
+
+                // 읽은값 출력
+                @SuppressLint("Range") String key_index 			    = cur.getString( cur.getColumnIndex("key_index"));
+                @SuppressLint("Range") String number 			    = cur.getString( cur.getColumnIndex("number"));
+                @SuppressLint("Range") String date 			    = cur.getString( cur.getColumnIndex("date"));
+                @SuppressLint("Range") String body 			    = cur.getString( cur.getColumnIndex("body"));
+                @SuppressLint("Range") String img 			    = cur.getString( cur.getColumnIndex("img"));
+                @SuppressLint("Range") String sned_recieve 			    = cur.getString( cur.getColumnIndex("sned_recieve"));
+                @SuppressLint("Range") String name 			    = cur.getString( cur.getColumnIndex("name"));
+                @SuppressLint("Range") String suggestion 			    = cur.getString( cur.getColumnIndex("suggestion"));
+
+                @SuppressLint("Range") String po0Val 			    = cur.getString( cur.getColumnIndex("po0Val"));
+                @SuppressLint("Range") String po1Val 			    = cur.getString( cur.getColumnIndex("po1Val"));
+                @SuppressLint("Range") String po2Val 			    = cur.getString( cur.getColumnIndex("po2Val"));
+                @SuppressLint("Range") String po3Val 			    = cur.getString( cur.getColumnIndex("po3Val"));
+                @SuppressLint("Range") String message 			    = cur.getString( cur.getColumnIndex("message"));
+                SkyLog.d("번호 있음!!!!=============");
+                return true;
+
+            }
+            cur.close();
+            db.close();
+        }catch (Exception e) {
+            Log.e("SKY","onPostExecute error : "+ e.toString());
+        }
+        SkyLog.d("번호 XXXXXXXXX!!!!=============");
+        return false;
     }
 }
