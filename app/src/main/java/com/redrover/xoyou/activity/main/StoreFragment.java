@@ -123,6 +123,61 @@ public class StoreFragment extends Fragment {
                 ContractThread thread2 = new ContractThread(res);
                 thread2.start();
                 SkyLog.d("end0 :: ");
+            }else if(msg.arg1 == 1) {
+                String res  = (String)msg.obj;
+                SkyLog.d("res 1: " + res);
+
+                try {
+                    JSONObject jsonObject_succes = new JSONObject(res);                     //SUCCESS
+                    if(jsonObject_succes.getString("success").equals("true")){
+                        JSONArray jsonObject_listSimRi = new JSONArray(jsonObject_succes.getString("data"));
+
+                        SkyLog.d("COUNT :: " + jsonObject_listSimRi.length());
+                        listSimRi.clear();
+                        for (int i = 0; i < jsonObject_listSimRi.length(); i++) {
+                            JSONObject jsonObject = jsonObject_listSimRi.getJSONObject(i);
+                            String[] phone_Arr = new String[1];
+
+                            //NMR 수정해야할곳!!
+//                            if(i == 0){
+//                                phone_Arr[0] = "01033435914";
+//                            }else{
+//                                phone_Arr[0] = "" + i;
+//
+//                            }
+                            phone_Arr[0] = "" + jsonObject.getString("Phone");
+                            listSimRi.add(new SimRiUser(
+                                    jsonObject.getString("Phone") ,
+                                    //phone_Arr[0] ,
+                                    jsonObject.getInt("Id") ,
+                                    jsonObject.getInt("No") ,
+                                    jsonObject.getString("NickName") ,
+                                    jsonObject.getString("Name") ,
+                                    jsonObject.getString("UserInfo") ,
+                                    jsonObject.getString("GwanInfo") ,
+                                    jsonObject.getString("SimRiInfo") ,
+                                    jsonObject.getString("Value") ,
+                                    jsonObject.getDouble("iDou") ,
+                                    jsonObject.getString("Image") ,
+                                    jsonObject.getBoolean("XO")));
+                            dataSet.readSMSMessage(mContext , phone_Arr , jsonObject.getString("Name"));
+                        }
+                        SkyLog.d("readSMSMessage end :: ");
+
+                        //전화번호부 저장
+                        Message msg2 = mEndAfterAccum.obtainMessage();
+                        mEndAfterAccum.sendMessage(msg2);
+                    }else{
+                        CommandUtil.getInstance().showCommonOneButtonDialog(MainActivity.mainAc,
+                                jsonObject_succes.getString("error") + getClass().toString(),
+                                MainActivity.mainAc.getResources().getString(R.string.str_cofirm),
+                                CommonPopupDialog.COMMON_DIALOG_OPTION_CLOSE_DIALOG,
+                                null);
+                    }
+                }catch (Exception e){
+                    SkyLog.d("e :: " + e);
+                }
+
             }
         }
     };
@@ -130,7 +185,7 @@ public class StoreFragment extends Fragment {
     public void getQaSimRiList(String data){
         CommandUtil.getInstance().showLoadingDialog(MainActivity.mainAc);
         map.clear();
-        map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_USER_LIST);
+        map.put("url", NetInfo.SERVER_BASE_URL + NetInfo.API_SELECT_QA_SIMRI_LIST);
         map.put("userId", new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,""));
         map.put("date", dataSet.FullPatternDate("yyyyMMddHHmmss"));
         map.put("menuSeo", data);
@@ -183,7 +238,7 @@ public class StoreFragment extends Fragment {
                                 jsonObject.getDouble("iDou") ,
                                 jsonObject.getString("Image") ,
                                 jsonObject.getBoolean("XO")));
-                        dataSet.readSMSMessage(mContext , phone_Arr , jsonObject.getString("Name"));
+                        //dataSet.readSMSMessage(mContext , phone_Arr , jsonObject.getString("Name"));
                     }
                     SkyLog.d("readSMSMessage end :: ");
 
