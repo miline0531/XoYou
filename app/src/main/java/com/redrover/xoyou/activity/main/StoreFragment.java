@@ -111,6 +111,8 @@ public class StoreFragment extends Fragment {
         public void handleMessage(Message msg) {
             m_Adapter.notifyDataSetChanged();
             CommandUtil.getInstance().dismissLoadingDialog();
+            MainActivity.setStoreLeftTopTxt();
+
         }
     };
     Handler mAfterAccum = new Handler() {

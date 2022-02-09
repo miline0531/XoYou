@@ -134,6 +134,7 @@ public class MainActivity extends CommonActivity {
     private String id;
 
     private static TextView top_left;
+    private static TextView top_left2;
 
     //20220126
     private ViewPager2 viewPager;
@@ -810,6 +811,7 @@ public class MainActivity extends CommonActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         ((TextView)findViewById(R.id.btn_slide)).setVisibility(View.VISIBLE);
         top_left = findViewById(R.id.top_left);
+        top_left2 = findViewById(R.id.top_left2);
         switch (fragment){
             case 0:
                 // 홈 프래그먼트 호출
@@ -888,6 +890,7 @@ public class MainActivity extends CommonActivity {
                     mainText = CommandUtil.getInstance().getStr(R.string.fragment_home_result).replaceAll("name", name);
                     break;
                 case 1:
+                    top_left2 = findViewById(R.id.top_left2);
                     try {
                         mainText = Constants.MainData.getString("ManageTitle");
                     } catch (JSONException e) {
@@ -920,6 +923,16 @@ public class MainActivity extends CommonActivity {
             }
         }
         top_left.setText(String.format("등록인: %s명\n남성: %s명\n여성: %s명", ("" + listSimRi.size()) , ("" + manCount) , "" + (listSimRi.size() - manCount)));
+
+    }
+    public static void setStoreLeftTopTxt(){
+        int manCount = 0;
+        for (int i =0; i <listSimRi.size(); i++){
+            if(listSimRi.get(i).getUserInfo().matches(".*남성.*")){
+                manCount++;
+            }
+        }
+        top_left2.setText(String.format("등록인: %s명\n남성: %s명\n여성: %s명", ("" + listSimRi.size()) , ("" + manCount) , "" + (listSimRi.size() - manCount)));
 
     }
     //1번째 프레그먼트클릭

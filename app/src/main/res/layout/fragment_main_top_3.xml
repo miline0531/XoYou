@@ -13,13 +13,16 @@
 
 
         <TextView
-            android:id="@+id/top_left"
+            android:id="@+id/top_left2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/gowunbatang_regular"
             android:gravity="center_vertical"
-            android:text="등록인: 18명\n남성: 12명\n여성: 6명"
+            android:text=""
             android:textColor="@color/color_white"
             android:textSize="@dimen/text_size_14sp" />
 
