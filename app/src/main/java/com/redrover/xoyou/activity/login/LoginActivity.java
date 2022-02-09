@@ -147,22 +147,23 @@ public class LoginActivity extends CommonActivity {
             init();
             auth();
         }
-//test
-        idEditText.setText("kdh0002");
-        pwEditText.setText("plokijuh1@");
 
-
-        id = idEditText.getText().toString();
-        pw = pwEditText.getText().toString();
-
-        if (id.equals("") || pw.equals("")) {
-            Toast.makeText(getApplicationContext(), CommandUtil.getInstance().getStr(R.string.mong_login_id_pw_input), Toast.LENGTH_SHORT).show();
-        } else {
-//                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-//                    startActivity(i);
-            sendRequestForLogin(false);
-
-        }
+//        //test
+//        idEditText.setText("kdh0002");
+//        pwEditText.setText("plokijuh1@");
+//
+//
+//        id = idEditText.getText().toString();
+//        pw = pwEditText.getText().toString();
+//
+//        if (id.equals("") || pw.equals("")) {
+//            Toast.makeText(getApplicationContext(), CommandUtil.getInstance().getStr(R.string.mong_login_id_pw_input), Toast.LENGTH_SHORT).show();
+//        } else {
+////                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+////                    startActivity(i);
+//            sendRequestForLogin(false);
+//
+//        }
     }
 
     private void showIntroBG(){
