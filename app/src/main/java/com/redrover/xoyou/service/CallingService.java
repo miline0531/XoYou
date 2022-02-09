@@ -63,6 +63,7 @@ import com.redrover.xoyou.network.interfaces.ActionResultListener;
 import com.redrover.xoyou.network.model.MyCallChart;
 import com.redrover.xoyou.network.requestxo.ActionRequestMycallGetData;
 import com.redrover.xoyou.network.response.DefaultResult;
+import com.redrover.xoyou.storage.JWSharePreference;
 
 public class CallingService extends Service {
 	private IncomingCallBroadcastReceiver mReceiver = null;
@@ -739,7 +740,9 @@ public class CallingService extends Service {
 		@Override
 		public boolean handleMessage(Message msg) {
 			if (msg.what == 1111) {
-				getMyCallGetData();
+				String userId = new JWSharePreference().getString(JWSharePreference.PREFERENCE_LOGIN_ID,"");
+
+				getMyCallGetData(userId , call_number.replace("-" , "".replace(" ", "")));
 			}else{
 				try {
 					isWatch = false;
@@ -755,8 +758,8 @@ public class CallingService extends Service {
 	});
 
 
-	public void getMyCallGetData(){
-		ActionRuler.getInstance().addAction(new ActionRequestMycallGetData( "ifeelbluu12", "01071036707",
+	public void getMyCallGetData(String userId , String phoneNumber){
+		ActionRuler.getInstance().addAction(new ActionRequestMycallGetData( userId, phoneNumber,
 				"진정성", "유혹", "혐오심" , new ActionResultListener<DefaultResult>() {
 			@Override
 			public void onResponseResult(DefaultResult response) {
